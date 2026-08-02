@@ -25,7 +25,7 @@ class RumbleDataTests(unittest.TestCase):
         self.temp = tempfile.TemporaryDirectory()
         self.root = Path(self.temp.name)
         (self.root / "clients").mkdir()
-        self.write("engine.json", {"schemaVersion": 1, "behaviorVersion": 1, "gameTypes": {"1v1": {}}})
+        self.write("engine.json", {"schemaVersion": 1, "behaviorVersion": 1, "gameTypes": {"1v1": {"rounds": 35, "battlefield": [800, 600], "participants": 2}}})
         self.write("bans.json", {"schemaVersion": 1, "bannedAccounts": [], "disqualifiedBots": []})
         self.write("exclusions.json", {"schemaVersion": 1, "battleIds": []})
         self.write("clients/alice.json", {"schemaVersion": 1, "account": "alice", "clientIds": ["alice-desktop"]})
@@ -45,13 +45,17 @@ class RumbleDataTests(unittest.TestCase):
 
     def envelope(self, *, battle_id: str = "d290f1ee-6c54-4b01-90e6-d701748f0851", behavior_version: int = 1) -> dict:
         return {"schemaVersion": 1, "clientId": "alice-desktop", "clientVersion": "0.1.0", "results": [{
-            "battleId": battle_id, "completedAt": "2026-08-02T12:00:00Z", "clientId": "alice-desktop", "behaviorVersion": behavior_version, "gameType": "1v1",
-            "participants": [{"name": "Alpha", "version": "1.0", "totalScore": 80}, {"name": "Bravo", "version": "1.0", "totalScore": 20}],
+            "battleId": battle_id, "completedAt": "2026-08-02T12:00:00Z", "clientId": "alice-desktop", "behaviorVersion": behavior_version, "gameType": "1v1", "numberOfRounds": 35, "battlefield": [800, 600],
+            "participants": [self.participant("Alpha", 1, 80, 35), self.participant("Bravo", 2, 20, 0)],
         }]}
 
+    def participant(self, name: str, rank: int, score: int, first_places: int) -> dict:
+        return {"name": name, "version": "1.0", "isTeam": False, "rank": rank, "totalScore": score, "survival": score, "lastSurvivorBonus": 0, "bulletDamage": 0, "bulletKillBonus": 0, "ramDamage": 0, "ramKillBonus": 0, "firstPlaces": first_places, "secondPlaces": 0, "thirdPlaces": 0}
+
     def testRDA001_IntegrationPositive_valid_batch_becomes_immutable_fact_and_projections(self) -> None:
-        paths = ingest(self.root, self.envelope(), account="alice")
+        paths, rejected = ingest(self.root, self.envelope(), account="alice")
         self.assertEqual(1, len(paths))
+        self.assertEqual([], rejected)
         self.assertTrue((self.root / paths[0]).is_file())
         aggregate(self.root)
         leaderboard = json.loads((self.root / "leaderboard/1v1.json").read_text(encoding="utf-8"))
@@ -60,20 +64,31 @@ class RumbleDataTests(unittest.TestCase):
         self.assertIn(["Alpha 1.0", "Charlie 1.0"], [pair["bots"] for pair in needed["priorityPairs"]])
 
     def testRDA002_IntegrationNegative_incompatible_or_duplicate_records_leave_no_new_fact(self) -> None:
-        with self.assertRaisesRegex(ValidationError, "behaviorVersion"):
-            ingest(self.root, self.envelope(behavior_version=2), account="alice")
+        paths, rejected = ingest(self.root, self.envelope(behavior_version=2), account="alice")
+        self.assertEqual([], paths)
+        self.assertTrue(any("behaviorVersion" in item for item in rejected))
         self.assertFalse((self.root / "results/raw").exists())
         ingest(self.root, self.envelope(), account="alice")
-        with self.assertRaisesRegex(ValidationError, "duplicate battleId"):
-            ingest(self.root, self.envelope(), account="alice")
+        _, rejected = ingest(self.root, self.envelope(), account="alice")
+        self.assertTrue(any("duplicate battleId" in item for item in rejected))
+
+    def testRDA001_IntegrationPositive_mixed_batch_retains_valid_record_and_reports_invalid_record(self) -> None:
+        envelope = self.envelope()
+        invalid = self.envelope(battle_id="00000000-0000-0000-0000-000000000001")["results"][0]
+        invalid["participants"][0]["totalScore"] = 999
+        envelope["results"].append(invalid)
+        paths, rejected = ingest(self.root, envelope, account="alice")
+        self.assertEqual(1, len(paths))
+        self.assertEqual(1, len(rejected))
+        self.assertIn("totalScore", rejected[0])
 
     def testRDA003_IntegrationPositive_compaction_preserves_deterministic_projection(self) -> None:
         ingest(self.root, self.envelope(), account="alice")
         aggregate(self.root)
         before = (self.root / "leaderboard/1v1.json").read_text(encoding="utf-8")
-        compact(self.root, before="2026-09-01")
-        shutil.rmtree(self.root / "results/raw")
-        aggregate(self.root)
+        archive = self.root / "archive"
+        compact(self.root, before="2026-09-01", archive_root=archive)
+        self.assertTrue((archive / "results/raw/2026/08").exists())
         after = (self.root / "leaderboard/1v1.json").read_text(encoding="utf-8")
         self.assertEqual(before, after)
 
@@ -83,6 +98,8 @@ class RumbleDataTests(unittest.TestCase):
         self.assertIn("game-type", page)
         self.assertIn("data/leaderboard/${gameType}.json", script)
         self.assertIn("data/bots/", script)
+        self.assertIn("data-sort", page)
+        self.assertIn("renderEntries", script)
 
 
 if __name__ == "__main__":

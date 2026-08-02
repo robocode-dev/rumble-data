@@ -1,6 +1,6 @@
 # Governance and operations
 
-The `robocode-dev` organization owns this repository. Moderators review client registrations, catalog updates, bans, and exclusions through ordinary pull requests. CI is the only writer of accepted raw facts and generated projections on `main`.
+The `robocode-dev` organization owns this repository. Moderators review client registrations, catalog updates, bans, exclusions, and all ordinary code or policy changes through pull requests with the Verify Rumble data workflow green. CI is the only writer of accepted raw facts and generated projections on `main`. GitHub cannot distinguish the built-in Actions writer from human collaborators in a repository ruleset without a secret-bearing organization app, so this boundary is a documented governance convention for V1.
 
 ## Moderation
 
