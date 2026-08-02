@@ -96,6 +96,7 @@ class RumbleDataTests(unittest.TestCase):
             ("e290f1ee-6c54-4b01-90e6-d701748f0851", lambda record: record["participants"][0].update({"totalScore": 1.5}), "totalScore"),
             ("f290f1ee-6c54-4b01-90e6-d701748f0851", lambda record: record["participants"][1].update({"rank": 3}), "1224"),
             ("0290f1ee-6c54-4b01-90e6-d701748f0851", lambda record: record["participants"][0].update({"firstPlaces": 36}), "firstPlaces"),
+            ("1290f1ee-6c54-4b01-90e6-d701748f0851", lambda record: (record["participants"][0].update({"secondPlaces": 1}), record["participants"][1].update({"secondPlaces": 34})), "participant place counts"),
         )
         for battle_id, mutate, expected_error in cases:
             record = self.envelope(battle_id=battle_id)["results"][0]

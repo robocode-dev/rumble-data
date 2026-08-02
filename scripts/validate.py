@@ -156,6 +156,7 @@ def validate_result(root: Path, record: Any, *, account: str, client_ids: set[st
     require(isinstance(participants, list) and len(participants) == expected_entries, f"{game_type} requires {expected_entries} result entries")
     identities: set[tuple[str, str]] = set()
     expected_is_team = team_size > 1
+    completed_rounds = settings["rounds"] * team_size
     for participant in participants:
         require(isinstance(participant, dict), "each participant must be an object")
         name = require_string(participant.get("name"), "participant name must be a non-empty string")
@@ -167,9 +168,12 @@ def validate_result(root: Path, record: Any, *, account: str, client_ids: set[st
         require(type(participant.get("isTeam")) is bool and participant["isTeam"] is expected_is_team, f"isTeam must be {str(expected_is_team).lower()} for `{game_type}`")
         for field in SCORE_FIELDS:
             require_int32(participant.get(field), f"{field} must be a non-negative signed 32-bit integer")
+        for field in PLACE_FIELDS:
+            require(participant[field] <= completed_rounds, f"{field} exceeds completed rounds")
 
     validate_ranks(participants)
-    completed_rounds = settings["rounds"] * team_size
+    for participant in participants:
+        require(sum(participant[field] for field in PLACE_FIELDS) <= completed_rounds, "participant place counts exceed completed rounds")
     for field in PLACE_FIELDS:
         total = sum(participant[field] for participant in participants)
         require(total <= completed_rounds, f"{field} total exceeds completed rounds")
