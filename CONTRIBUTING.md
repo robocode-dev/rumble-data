@@ -6,9 +6,11 @@ Open a pull request that adds `clients/<your-forge-account>.json`. Its `account`
 
 ## Submit a ranked batch
 
-Create an issue titled `[result] <client-id> <UTC timestamp>`, apply the `result-submission` label, and place exactly one JSON envelope in a fenced `json` block. The envelope has `schemaVersion: 1`, `clientId`, `clientVersion`, and 1–60 `results`. Each result supplies a UUID `battleId`, `completedAt`, the pinned `behaviorVersion`, a supported game type, and one participant record per required bot with `name`, `version`, and non-negative `totalScore`.
+Create an issue titled `[result] <client-id> <UTC timestamp>`, apply the `result-submission` label, and place exactly one JSON envelope in a fenced `json` block. The envelope has `schemaVersion: 1`, `clientId`, `clientVersion`, and 1–60 `results`. Each result supplies a UUID `battleId`, `completedAt`, nested `client.id` and `client.version` matching the envelope, nested `engine.behaviorVersion` matching the engine pin, game type, pinned rounds and arena dimensions, and the complete Battle Runner participant result model.
 
-The submitting issue account and `clientId` must be registered. Every bot must be active in `catalog.json`; the catalog is synchronized from the reviewed Rumble bot catalog by maintainers. The drain workflow closes every processed issue with accepted and rejected record diagnostics.
+Each participant supplies cataloged `name` and `version`, `isTeam`, a 1224-system `rank`, `totalScore`, `survival`, `lastSurvivorBonus`, `bulletDamage`, `bulletKillBonus`, `ramDamage`, `ramKillBonus`, `firstPlaces`, `secondPlaces`, and `thirdPlaces`. Scores and place counts are non-negative signed 32-bit integers. `isTeam`, result-entry count, rank placement, and place-count totals must match the selected ranked game type.
+
+The submitting issue account and `clientId` must be registered. Every bot must be active in `catalog.json`; the catalog is synchronized from the reviewed Rumble bot catalog by maintainers. The drain workflow validates each record independently, keeps valid records when neighboring records are rejected, and closes every processed issue with a receipt line for every record.
 
 ## Rules
 

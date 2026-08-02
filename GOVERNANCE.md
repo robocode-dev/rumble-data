@@ -8,7 +8,7 @@ Keep facts immutable. To exclude a disputed result, add its `battleId` to `exclu
 
 ## Ingestion
 
-The workflow is triggered by labelled issues and a modest schedule. It serializes runs, validates every issue batch, commits all accepted facts in one commit, regenerates projections, comments on the issue, and closes it. If scheduled workflows are disabled after inactivity, re-enable the workflow; an incoming labelled issue also wakes the system.
+The workflow is triggered by labelled issues and a modest schedule. It serializes runs, validates every record in an issue batch independently, commits all accepted facts in one commit, regenerates projections, comments with one receipt line per record, and closes the issue. Aggregation applies the current registrations, bans, disqualified bots, and exclusions to immutable facts, so later moderation immediately changes projections without rewriting history. If scheduled workflows are disabled after inactivity, re-enable the workflow; an incoming labelled issue also wakes the system.
 
 ## Compaction and fork drill
 
