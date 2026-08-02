@@ -37,11 +37,11 @@ jobs:
             account=$(jq -r .author.login .inbox/issue.json)
             jq -r .body .inbox/issue.json > .inbox/body.md
             if python scripts/extract_envelope.py --body .inbox/body.md --output .inbox/envelope.json && python scripts/ingest.py --root . --account "$account" --input .inbox/envelope.json > .inbox/outcome.txt 2>&1; then
-              printf 'Accepted result batch:\n\n```text\n' > .inbox/comment.md
+              printf 'Processed result batch:\n\n```text\n' > .inbox/comment.md
               cat .inbox/outcome.txt >> .inbox/comment.md
               printf '\n```\n' >> .inbox/comment.md
             else
-              printf 'Rejected result batch:\n\n```text\n' > .inbox/comment.md
+              printf 'Rejected result batch before individual records could be read:\n\n```text\n' > .inbox/comment.md
               cat .inbox/outcome.txt >> .inbox/comment.md
               printf '\n```\n' >> .inbox/comment.md
             fi
