@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tank Royale Rumble</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <h1>Tank Royale Rumble</h1>
+    <p>Reproducible rankings from immutable community-run battle facts.</p>
+    <label>Game type <select id="game-type"><option value="1v1">1v1</option><option value="twinduel">TwinDuel</option><option value="melee">Melee</option></select></label>
+    <p id="status" aria-live="polite">Loading leaderboard…</p>
+    <table>
+      <thead><tr><th>Rank</th><th>Bot</th><th>APS</th><th>Battles</th><th>Pairings</th></tr></thead>
+      <tbody id="leaderboard"></tbody>
+    </table>
+    <p><a href="https://github.com/robocode-dev/rumble-data/blob/main/CONTRIBUTING.md">Contribute ranked battles</a></p>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

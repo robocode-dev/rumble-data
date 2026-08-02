@@ -1,0 +1,5 @@
+:root { color-scheme: light dark; font-family: system-ui, sans-serif; }
+body { margin: 2rem auto; max-width: 64rem; padding: 0 1rem; }
+table { border-collapse: collapse; margin-top: 1rem; width: 100%; }
+th, td { border-bottom: 1px solid #888; padding: .55rem; text-align: left; }
+th { font-weight: 700; }

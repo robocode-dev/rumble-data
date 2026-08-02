@@ -1,0 +1,15 @@
+name: Result submission
+description: Submit a batch of ranked Tank Royale Rumble battle results.
+title: "[result] "
+labels: [result-submission]
+body:
+  - type: markdown
+    attributes:
+      value: Paste exactly one fenced JSON batch envelope below. Your account and client ID must first be registered under `clients/`.
+  - type: textarea
+    id: envelope
+    attributes:
+      label: Batch envelope
+      description: Use a fenced `json` block containing schemaVersion, clientId, clientVersion, and results.
+    validations:
+      required: true

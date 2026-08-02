@@ -1,0 +1,5 @@
+{
+  "schemaVersion": 1,
+  "account": "example-contributor",
+  "clientIds": ["example-contributor-local"]
+}

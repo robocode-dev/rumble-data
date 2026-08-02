@@ -1,0 +1,58 @@
+name: Ingest Rumble results
+
+on:
+  issues:
+    types: [opened, labeled]
+  schedule:
+    - cron: '17,47 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: rumble-result-ingestion
+  cancel-in-progress: false
+
+jobs:
+  drain:
+    if: github.event_name != 'issues' || github.event.label.name == 'result-submission'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Drain labelled issue inbox
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p .inbox
+          gh issue list --repo "$GITHUB_REPOSITORY" --label result-submission --state open --limit 100 --json number,author,body --jq '.[] | @base64' > .inbox/issues
+          while read -r encoded; do
+            [ -z "$encoded" ] && continue
+            printf '%s' "$encoded" | base64 --decode > .inbox/issue.json
+            number=$(jq -r .number .inbox/issue.json)
+            account=$(jq -r .author.login .inbox/issue.json)
+            jq -r .body .inbox/issue.json > .inbox/body.md
+            if python scripts/extract_envelope.py --body .inbox/body.md --output .inbox/envelope.json && python scripts/ingest.py --root . --account "$account" --input .inbox/envelope.json > .inbox/outcome.txt 2>&1; then
+              printf 'Accepted result batch:\n\n```text\n' > .inbox/comment.md
+              cat .inbox/outcome.txt >> .inbox/comment.md
+              printf '\n```\n' >> .inbox/comment.md
+            else
+              printf 'Rejected result batch:\n\n```text\n' > .inbox/comment.md
+              cat .inbox/outcome.txt >> .inbox/comment.md
+              printf '\n```\n' >> .inbox/comment.md
+            fi
+            gh issue comment "$number" --repo "$GITHUB_REPOSITORY" --body-file .inbox/comment.md
+            gh issue close "$number" --repo "$GITHUB_REPOSITORY"
+          done < .inbox/issues
+      - name: Regenerate projections and commit accepted facts
+        run: |
+          python scripts/aggregate.py --root .
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add results leaderboard matchmaking clients.json site/data
+          git diff --cached --quiet || git commit -m 'chore: ingest Rumble result batch'
+          git push

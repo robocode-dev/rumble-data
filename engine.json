@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "behaviorVersion": 1,
+  "tankRoyaleVersion": "unreleased",
+  "image": "ghcr.io/robocode-dev/tank-royale:unreleased",
+  "gameTypes": {
+    "1v1": { "rounds": 35, "battlefield": [800, 600], "participants": 2 },
+    "twinduel": { "rounds": 75, "battlefield": [800, 800], "participants": 4 },
+    "melee": { "rounds": 35, "battlefield": [1000, 1000], "participants": 10 }
+  }
+}
