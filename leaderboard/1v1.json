@@ -1,7 +1,19 @@
 {
   "behaviorVersion": 1,
-  "entries": [],
+  "entries": [
+    {
+      "aps": 0.0,
+      "battles": 0,
+      "bot": "Orbit 1.0.2",
+      "epoch": 1,
+      "name": "Orbit",
+      "owner": "flemming-n-larsen",
+      "pairings": 0,
+      "platform": "Python",
+      "version": "1.0.2"
+    }
+  ],
   "gameType": "1v1",
-  "projectionId": "cd37104818ec54159fc51791c76a882498cc4f4bd35882656dc154b69a334eff",
+  "projectionId": "9f3e49dfac935fe42da4d43ec1cfe58290d95dc964af6eee41c79132f1682948",
   "schemaVersion": 1
 }

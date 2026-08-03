@@ -74,11 +74,14 @@ def aggregate_game_type(records: list[dict[str, Any]], catalog: list[dict[str, A
     relevant = [record for record in records if record.get("gameType") == game_type and record.get("engine", {}).get("behaviorVersion") == behavior_version]
     shares: dict[tuple[str, str], dict[tuple[tuple[str, str], ...], list[float]]] = defaultdict(lambda: defaultdict(list))
     pairing_counts: dict[tuple[tuple[str, str], ...], int] = defaultdict(int)
+    pair_sample_counts: dict[tuple[tuple[str, str], tuple[str, str]], int] = defaultdict(int)
     for record in relevant:
         participants = record["participants"]
         total = sum(float(participant["totalScore"]) for participant in participants)
         bots = tuple(sorted(identity(participant) for participant in participants))
         pairing_counts[bots] += 1
+        for pair in combinations(bots, 2):
+            pair_sample_counts[pair] += 1
         for participant in participants:
             bot = identity(participant)
             if bot in eligible:
@@ -98,12 +101,10 @@ def aggregate_game_type(records: list[dict[str, Any]], catalog: list[dict[str, A
     pairs = [{"bots": [f"{name} {version}" for name, version in pair], "battles": count} for pair, count in sorted(pairing_counts.items())]
     pairings = {"schemaVersion": 1, "projectionId": projection_id, "gameType": game_type, "pairings": pairs}
     priority_pairs = []
-    if game_type == "1v1":
-        for first, second in combinations(sorted(eligible), 2):
-            pair = tuple(sorted((first, second)))
-            count = pairing_counts.get(pair, 0)
-            if count < TARGET_SAMPLES_PER_PAIRING:
-                priority_pairs.append({"bots": [f"{name} {version}" for name, version in pair], "have": count, "reason": "new-bot" if count == 0 else "under-sampled"})
+    for pair in combinations(sorted(eligible), 2):
+        count = pair_sample_counts.get(pair, 0)
+        if count < TARGET_SAMPLES_PER_PAIRING:
+            priority_pairs.append({"bots": [f"{name} {version}" for name, version in pair], "have": count, "reason": "new-bot" if count == 0 else "under-sampled"})
     needed = {"schemaVersion": 1, "projectionId": projection_id, "gameType": game_type, "targetSamplesPerPairing": TARGET_SAMPLES_PER_PAIRING, "priorityPairs": priority_pairs}
     return leaderboard, pairings, needed
 

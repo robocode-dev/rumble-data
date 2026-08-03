@@ -1,5 +1,21 @@
 {
+  "bots": [
+    {
+      "addedAt": "2026-08-02",
+      "authors": [
+        "Tank Royale Rumble maintainers"
+      ],
+      "name": "Orbit",
+      "owner": "flemming-n-larsen",
+      "path": "bots/python/Orbit",
+      "platform": "Python",
+      "sourceHash": "sha256:86b63e60f231c8f736ec7dc7867c93966a59a63bb3409326516879236555cf36",
+      "status": "active",
+      "version": "1.0.2"
+    }
+  ],
   "schemaVersion": 1,
-  "source": "https://github.com/robocode-dev/rumble-bots/blob/main/bots/index.json",
-  "bots": []
+  "source": "https://raw.githubusercontent.com/robocode-dev/rumble-bots/main/bots/index.json",
+  "sourceCommit": "c735e6ff422e8795ffdfb0e65ec7910e9b3f943e",
+  "sourceGeneratedAt": "2026-08-02T15:27:36Z"
 }

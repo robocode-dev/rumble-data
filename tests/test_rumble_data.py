@@ -12,9 +12,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from aggregate import aggregate
+from aggregate import aggregate, aggregate_game_type
 from compact import compact
 from ingest import ingest
+from sync_catalog import synchronized_catalog
 
 
 class RumbleDataTests(unittest.TestCase):
@@ -122,6 +123,33 @@ class RumbleDataTests(unittest.TestCase):
             {**self.participant("Bravo Team", rank=2, total_score=20, second_places=150), "isTeam": True},
         ]})
         self.assertTrue(ingest(self.root, {**self.envelope(), "results": [record]}, account="alice")[0].accepted)
+
+    def testRDA001_IntegrationPositive_every_ranked_type_advises_under_sampled_pairs(self) -> None:
+        catalog = json.loads((self.root / "catalog.json").read_text(encoding="utf-8"))["bots"]
+        record = self.envelope()["results"][0]
+        for game_type in ("1v1", "twinduel", "melee"):
+            _, _, needed = aggregate_game_type([record | {"gameType": game_type}], catalog, game_type, behavior_version=1)
+            alpha_bravo = next(pair for pair in needed["priorityPairs"] if pair["bots"] == ["Alpha 1.0", "Bravo 1.0"])
+            self.assertEqual(1, alpha_bravo["have"])
+            self.assertEqual("under-sampled", alpha_bravo["reason"])
+
+    def testRDA001_IntegrationPositive_catalog_sync_admits_published_bot_results(self) -> None:
+        source = {
+            "schemaVersion": 1,
+            "generatedAt": "2026-08-03T12:00:00Z",
+            "commit": "source-commit",
+            "bots": [
+                {"name": "Orbit", "version": "1.0.2", "platform": "Python", "owner": "orbit-owner", "status": "active"},
+                {"name": "Bravo", "version": "1.0", "platform": "Python", "owner": "bravo-owner", "status": "active"},
+            ],
+        }
+        self.write("catalog.json", {"schemaVersion": 1, "source": "https://example.test/bots/index.json", "bots": []})
+        synchronized = synchronized_catalog(json.loads((self.root / "catalog.json").read_text(encoding="utf-8")), lambda _: json.dumps(source).encode("utf-8"))
+        self.write("catalog.json", synchronized)
+        record = self.envelope()["results"][0]
+        record["participants"][0].update({"name": "Orbit", "version": "1.0.2"})
+        outcome = ingest(self.root, {**self.envelope(), "results": [record]}, account="alice")[0]
+        self.assertTrue(outcome.accepted)
 
     def testRDA003_IntegrationPositive_compaction_preserves_deterministic_projection(self) -> None:
         ingest(self.root, self.envelope(), account="alice")
