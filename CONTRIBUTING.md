@@ -10,7 +10,7 @@ Create an issue titled `[result] <client-id> <UTC timestamp>`, apply the `result
 
 Each participant supplies cataloged `name` and `version`, `isTeam`, a 1224-system `rank`, `totalScore`, `survival`, `lastSurvivorBonus`, `bulletDamage`, `bulletKillBonus`, `ramDamage`, `ramKillBonus`, `firstPlaces`, `secondPlaces`, and `thirdPlaces`. Scores and place counts are non-negative signed 32-bit integers. `isTeam`, result-entry count, rank placement, and place-count totals must match the selected ranked game type.
 
-The submitting issue account and `clientId` must be registered. Every bot must be active in `catalog.json`; the hourly synchronization workflow copies the reviewed Rumble bot catalog declared by that file. The drain workflow validates each record independently, keeps valid records when neighboring records are rejected, and closes every processed issue with a receipt line for every record.
+The submitting issue account and `clientId` must be registered. Every bot must be active in `catalog.json`; the hourly synchronization workflow copies the reviewed Rumble bot catalog declared by that file. The drain workflow validates each record independently, keeps valid records when neighboring records are rejected, pushes accepted facts, and then closes every processed issue with a receipt line for every record. Retrying an identical retained result returns the same successful outcome without creating another fact; reusing a battle ID for different content is rejected.
 
 ## Rules
 
