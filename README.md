@@ -12,7 +12,7 @@ Run the focused suite with `python -m unittest discover -s tests -v`. It uses on
 
 Before a client can submit ranked results, its forge account must be registered through a reviewed pull request adding `clients/<account>.json`. The client then creates an issue labelled `result-submission`, with a `[result]` title and exactly one fenced JSON batch envelope. See [CONTRIBUTING.md](CONTRIBUTING.md) for the contract and limits.
 
-Issue bodies are transport receipts, never durable storage. The only authoritative accepted result is a content-addressed JSON fact under `results/raw/`; projections are disposable and reproducible.
+Issue bodies are transport, never durable storage. The only authoritative accepted result is a content-addressed JSON fact under `results/raw/`; projections are disposable and reproducible. Successful receipt comments are published only after accepted facts are pushed, and identical retries are acknowledged idempotently.
 
 ## Forking and operations
 

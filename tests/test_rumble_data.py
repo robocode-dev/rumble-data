@@ -75,17 +75,48 @@ class RumbleDataTests(unittest.TestCase):
         self.assertIn("rank", outcomes[1].error)
         self.assertEqual(1, len(list((self.root / "results/raw").rglob("*.json"))))
 
-    def testRDA002_IntegrationNegative_structural_and_duplicate_records_never_persist(self) -> None:
+    def testRDA002_IntegrationNegative_structural_records_never_persist(self) -> None:
         malformed = self.envelope()["results"][0]
         malformed.pop("rounds")
         outcome = ingest(self.root, {**self.envelope(), "results": [malformed]}, account="alice")[0]
         self.assertIsNone(outcome.accepted)
         self.assertIn("rounds", outcome.error)
         self.assertFalse((self.root / "results/raw").exists())
+
+    def testRDA001_IntegrationPositive_identical_retry_is_idempotently_accepted(self) -> None:
         self.assertTrue(ingest(self.root, self.envelope(), account="alice")[0].accepted)
-        duplicate = ingest(self.root, self.envelope(), account="alice")[0]
+        retry = ingest(self.root, self.envelope(), account="alice")[0]
+        self.assertTrue(retry.accepted)
+        self.assertEqual(1, len(list((self.root / "results/raw").rglob("*.json"))))
+
+    def testRDA001_IntegrationPositive_identical_retry_survives_current_pin_change(self) -> None:
+        self.assertTrue(ingest(self.root, self.envelope(), account="alice")[0].accepted)
+        self.write("engine.json", {"schemaVersion": 1, "behaviorVersion": 2, "gameTypes": {"1v1": {"rounds": 35, "battlefield": [800, 600], "participants": 2}}})
+        retry = ingest(self.root, self.envelope(), account="alice")[0]
+        self.assertTrue(retry.accepted)
+        self.assertEqual(1, len(list((self.root / "results/raw").rglob("*.json"))))
+
+    def testRDA002_IntegrationNegative_conflicting_battle_id_is_rejected(self) -> None:
+        self.assertTrue(ingest(self.root, self.envelope(), account="alice")[0].accepted)
+        conflicting = self.envelope()
+        conflicting["results"][0]["completedAt"] = "2026-08-02T12:01:00Z"
+        duplicate = ingest(self.root, conflicting, account="alice")[0]
         self.assertIsNone(duplicate.accepted)
         self.assertIn("duplicate battleId", duplicate.error)
+        self.assertEqual(1, len(list((self.root / "results/raw").rglob("*.json"))))
+
+    def testRDA002_IntegrationNegative_duplicate_within_one_batch_is_rejected(self) -> None:
+        envelope = self.envelope()
+        envelope["results"].append(dict(envelope["results"][0]))
+        outcomes = ingest(self.root, envelope, account="alice")
+        self.assertTrue(outcomes[0].accepted)
+        self.assertIsNone(outcomes[1].accepted)
+        self.assertIn("duplicate battleId", outcomes[1].error)
+        self.assertEqual(1, len(list((self.root / "results/raw").rglob("*.json"))))
+
+    def testArch_successful_receipts_follow_fact_publication(self) -> None:
+        workflow = (ROOT / ".github/workflows/ingest.yml").read_text(encoding="utf-8")
+        self.assertLess(workflow.index("git push"), workflow.index("gh issue comment"))
 
     def testRDA002_IntegrationNegative_rejects_each_documented_structural_violation(self) -> None:
         invalid_records = []
