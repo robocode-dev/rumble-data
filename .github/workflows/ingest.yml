@@ -29,7 +29,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           mkdir -p .inbox
-          gh issue list --repo "$GITHUB_REPOSITORY" --label result-submission --state open --limit 100 --json number,author,body --jq '.[] | @base64' > .inbox/issues
+          gh api --paginate "repos/$GITHUB_REPOSITORY/issues?labels=result-submission&state=open&per_page=100" --jq '.[] | select(.pull_request == null) | {number,author,body} | @base64' > .inbox/issues
           while read -r encoded; do
             [ -z "$encoded" ] && continue
             printf '%s' "$encoded" | base64 --decode > .inbox/issue.json
@@ -53,6 +53,7 @@ jobs:
           python scripts/aggregate.py --root .
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          rm -rf .inbox
           for path in results leaderboard matchmaking clients.json site/data; do
             [ -e "$path" ] && git add -- "$path"
           done

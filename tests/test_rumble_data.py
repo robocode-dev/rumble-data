@@ -155,9 +155,9 @@ class RumbleDataTests(unittest.TestCase):
         ingest(self.root, self.envelope(), account="alice")
         aggregate(self.root)
         before = (self.root / "leaderboard/1v1.json").read_text(encoding="utf-8")
-        compact(self.root, before="2026-09-01")
-        shutil.rmtree(self.root / "results/raw")
-        aggregate(self.root)
+        archive = self.root / "archive"
+        compact(self.root, before="2026-09-01", archive_root=archive)
+        self.assertTrue((archive / "results/raw/2026/08").exists())
         after = (self.root / "leaderboard/1v1.json").read_text(encoding="utf-8")
         self.assertEqual(before, after)
 
@@ -179,6 +179,8 @@ class RumbleDataTests(unittest.TestCase):
         self.assertIn("game-type", page)
         self.assertIn("data/leaderboard/${gameType}.json", script)
         self.assertIn("data/bots/", script)
+        self.assertIn("data-sort", page)
+        self.assertIn("renderEntries", script)
 
 
 if __name__ == "__main__":

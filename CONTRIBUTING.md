@@ -14,6 +14,6 @@ The submitting issue account and `clientId` must be registered. Every bot must b
 
 ## Rules
 
-Do not edit raw facts, generated projections, or the static dashboard data in a pull request. Do not submit replays; retain replay evidence locally. Duplicate battle IDs, engine mismatches, unknown bots, unregistered clients, banned accounts, malformed batches, and implausible score sets are rejected.
+Do not edit raw facts, generated projections, or the static dashboard data in a pull request. Do not submit replays; retain replay evidence locally. Duplicate battle IDs, engine mismatches, preset mismatches, unknown bots, unregistered clients, banned accounts, malformed batches, and inconsistent score components are rejected. Fork-pull-request result submission is not supported in V1.
 
 All contributions are made under Apache-2.0 and must follow the project code of conduct and governance process.
