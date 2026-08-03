@@ -14,6 +14,34 @@ from common import content_hash, read_json, repository_files, write_json
 TARGET_SAMPLES_PER_PAIRING = 6
 
 
+def registered_clients(root: Path) -> dict[str, set[str]]:
+    """Return current client registrations indexed by forge account."""
+    registrations: dict[str, set[str]] = {}
+    for path in repository_files(root, "clients"):
+        registration = read_json(path)
+        account, client_ids = registration.get("account"), registration.get("clientIds")
+        if isinstance(account, str) and isinstance(client_ids, list) and all(isinstance(client_id, str) and client_id for client_id in client_ids):
+            registrations[account] = set(client_ids)
+    return registrations
+
+
+def record_client_id(record: dict[str, Any]) -> str | None:
+    """Return a record's V1 nested client identifier."""
+    client = record.get("client")
+    return client.get("id") if isinstance(client, dict) and isinstance(client.get("id"), str) else None
+
+
+def eligible_fact(record: dict[str, Any], *, registrations: dict[str, set[str]], banned_accounts: set[str], disqualified_bots: set[tuple[str, str]], exclusions: set[str]) -> bool:
+    """Select a fact against every current moderation and registration input."""
+    account = record.get("submittedBy")
+    if not isinstance(account, str) or account in banned_accounts or record.get("battleId") in exclusions:
+        return False
+    client_id = record_client_id(record)
+    if client_id not in registrations.get(account, set()):
+        return False
+    return not any(identity(participant) in disqualified_bots for participant in record.get("participants", []) if isinstance(participant, dict))
+
+
 def facts(root: Path) -> list[dict[str, Any]]:
     """Load raw facts and compacted rollups in a deterministic order."""
     records: list[dict[str, Any]] = []
@@ -23,7 +51,11 @@ def facts(root: Path) -> list[dict[str, Any]]:
         rollup = read_json(path)
         records.extend(rollup.get("results", []))
     exclusions = set(read_json(root / "exclusions.json").get("battleIds", []))
-    return sorted((record for record in records if record.get("battleId") not in exclusions), key=lambda item: (str(item.get("completedAt")), str(item.get("payloadHash"))))
+    bans = read_json(root / "bans.json")
+    banned_accounts = set(bans.get("bannedAccounts", []))
+    disqualified_bots = {(str(item.get("name")), str(item.get("version"))) for item in bans.get("disqualifiedBots", [])}
+    registrations = registered_clients(root)
+    return sorted((record for record in records if eligible_fact(record, registrations=registrations, banned_accounts=banned_accounts, disqualified_bots=disqualified_bots, exclusions=exclusions)), key=lambda item: (str(item.get("completedAt")), str(item.get("payloadHash"))))
 
 
 def active_catalog(root: Path) -> list[dict[str, Any]]:
@@ -39,18 +71,21 @@ def identity(participant: dict[str, Any]) -> tuple[str, str]:
 def aggregate_game_type(records: list[dict[str, Any]], catalog: list[dict[str, Any]], game_type: str, behavior_version: int) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
     """Produce leaderboard, pairings, and matchmaking advice for one game type."""
     eligible = {(str(bot["name"]), str(bot["version"])): bot for bot in catalog}
-    relevant = [record for record in records if record.get("gameType") == game_type and record.get("behaviorVersion") == behavior_version]
+    relevant = [record for record in records if record.get("gameType") == game_type and record.get("engine", {}).get("behaviorVersion") == behavior_version]
     shares: dict[tuple[str, str], dict[tuple[tuple[str, str], ...], list[float]]] = defaultdict(lambda: defaultdict(list))
     pairing_counts: dict[tuple[tuple[str, str], ...], int] = defaultdict(int)
+    pair_sample_counts: dict[tuple[tuple[str, str], tuple[str, str]], int] = defaultdict(int)
     for record in relevant:
         participants = record["participants"]
         total = sum(float(participant["totalScore"]) for participant in participants)
         bots = tuple(sorted(identity(participant) for participant in participants))
         pairing_counts[bots] += 1
+        for pair in combinations(bots, 2):
+            pair_sample_counts[pair] += 1
         for participant in participants:
             bot = identity(participant)
             if bot in eligible:
-                shares[bot][bots].append(float(participant["totalScore"]) / total)
+                shares[bot][bots].append(float(participant["totalScore"]) / total if total else 0.0)
     entries = []
     for bot, catalog_entry in eligible.items():
         bot_pairings = shares.get(bot, {})
@@ -66,12 +101,10 @@ def aggregate_game_type(records: list[dict[str, Any]], catalog: list[dict[str, A
     pairs = [{"bots": [f"{name} {version}" for name, version in pair], "battles": count} for pair, count in sorted(pairing_counts.items())]
     pairings = {"schemaVersion": 1, "projectionId": projection_id, "gameType": game_type, "pairings": pairs}
     priority_pairs = []
-    if game_type == "1v1":
-        for first, second in combinations(sorted(eligible), 2):
-            pair = tuple(sorted((first, second)))
-            count = pairing_counts.get(pair, 0)
-            if count < TARGET_SAMPLES_PER_PAIRING:
-                priority_pairs.append({"bots": [f"{name} {version}" for name, version in pair], "have": count, "reason": "new-bot" if count == 0 else "under-sampled"})
+    for pair in combinations(sorted(eligible), 2):
+        count = pair_sample_counts.get(pair, 0)
+        if count < TARGET_SAMPLES_PER_PAIRING:
+            priority_pairs.append({"bots": [f"{name} {version}" for name, version in pair], "have": count, "reason": "new-bot" if count == 0 else "under-sampled"})
     needed = {"schemaVersion": 1, "projectionId": projection_id, "gameType": game_type, "targetSamplesPerPairing": TARGET_SAMPLES_PER_PAIRING, "priorityPairs": priority_pairs}
     return leaderboard, pairings, needed
 
@@ -92,7 +125,9 @@ def aggregate(root: Path) -> None:
             write_json(root / "site" / "data" / "bots" / f"{entry['name']}-{entry['version']}.json", {"schemaVersion": 1, "projectionId": leaderboard["projectionId"], "gameType": game_type, "entry": entry})
     client_totals: dict[str, int] = defaultdict(int)
     for record in records:
-        client_totals[str(record.get("clientId"))] += 1
+        client_id = record_client_id(record)
+        if client_id is not None:
+            client_totals[client_id] += 1
     write_json(root / "clients.json", {"schemaVersion": 1, "clients": [{"clientId": client_id, "battles": battles} for client_id, battles in sorted(client_totals.items())]})
     write_json(root / "site" / "data" / "clients.json", {"schemaVersion": 1, "clients": [{"clientId": client_id, "battles": battles} for client_id, battles in sorted(client_totals.items())]})
 
