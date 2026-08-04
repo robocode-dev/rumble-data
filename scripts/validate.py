@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import re
 import uuid
 from dataclasses import dataclass
 from datetime import datetime
@@ -29,6 +30,7 @@ SCORE_FIELDS = (
     "thirdPlaces",
 )
 PLACE_FIELDS = ("firstPlaces", "secondPlaces", "thirdPlaces")
+CLIENT_IMAGE = re.compile(r"ghcr\.io/[a-z0-9._/-]+@sha256:[0-9a-f]{64}")
 
 
 class ValidationError(ValueError):
@@ -90,9 +92,19 @@ def active_bots(root: Path) -> dict[tuple[str, str], dict[str, Any]]:
     return {(str(bot.get("name")), str(bot.get("version"))): bot for bot in bots if bot.get("status") == "active"}
 
 
+def engine_pin(root: Path) -> dict[str, Any]:
+    """Return the engine pin after validating its additive client image guidance."""
+    engine = read_json(root / "engine.json")
+    require(engine.get("schemaVersion") == SCHEMA_VERSION, "engine.json has an unsupported schemaVersion")
+    client_image = engine.get("clientImage")
+    require(client_image is None or (isinstance(client_image, str) and CLIENT_IMAGE.fullmatch(client_image) is not None),
+            "engine.json.clientImage must be an immutable GHCR SHA-256 reference")
+    return engine
+
+
 def game_settings(root: Path, game_type: str) -> tuple[dict[str, Any], int]:
     """Return validated V1 settings and the number of bots represented by each result entry."""
-    engine = read_json(root / "engine.json")
+    engine = engine_pin(root)
     games = engine.get("gameTypes")
     require(isinstance(games, dict) and game_type in games, f"unsupported gameType `{game_type}`")
     settings = games[game_type]
@@ -143,7 +155,7 @@ def validate_result(root: Path, record: Any, *, account: str, client_ids: set[st
     engine = record["engine"]
     require(isinstance(engine, dict), "engine must be an object")
     behavior_version = require_int32(engine.get("behaviorVersion"), "engine.behaviorVersion must be a positive signed 32-bit integer", minimum=1)
-    configured_engine = read_json(root / "engine.json")
+    configured_engine = engine_pin(root)
     require(behavior_version == configured_engine.get("behaviorVersion"), "engine.behaviorVersion does not match engine.json")
 
     game_type = require_string(record["gameType"], "gameType must be a non-empty string")

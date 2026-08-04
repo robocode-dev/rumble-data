@@ -16,6 +16,7 @@ from aggregate import aggregate, aggregate_game_type
 from compact import compact
 from ingest import ingest
 from sync_catalog import synchronized_catalog
+from validate import ValidationError, engine_pin
 
 
 class RumbleDataTests(unittest.TestCase):
@@ -63,6 +64,21 @@ class RumbleDataTests(unittest.TestCase):
         self.assertEqual("Alpha", leaderboard["entries"][0]["name"])
         needed = json.loads((self.root / "matchmaking/matches_needed-1v1.json").read_text(encoding="utf-8"))
         self.assertIn(["Alpha 1.0", "Charlie 1.0"], [pair["bots"] for pair in needed["priorityPairs"]])
+
+    def testUnitPositive_engine_pin_accepts_optional_immutable_client_image(self) -> None:
+        configured = json.loads((self.root / "engine.json").read_text(encoding="utf-8"))
+        configured["clientImage"] = "ghcr.io/robocode-dev/rumble-client@sha256:" + "a" * 64
+        self.write("engine.json", configured)
+
+        self.assertEqual(configured["clientImage"], engine_pin(self.root)["clientImage"])
+
+    def testUnitNegative_engine_pin_rejects_mutable_client_image_tag(self) -> None:
+        configured = json.loads((self.root / "engine.json").read_text(encoding="utf-8"))
+        configured["clientImage"] = "ghcr.io/robocode-dev/rumble-client:latest"
+        self.write("engine.json", configured)
+
+        with self.assertRaisesRegex(ValidationError, "immutable GHCR"):
+            engine_pin(self.root)
 
     def testRDA001_IntegrationPositive_valid_records_survive_invalid_batch_neighbors(self) -> None:
         envelope = self.envelope()
