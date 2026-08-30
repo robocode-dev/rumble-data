@@ -169,6 +169,7 @@ def validate_result(root: Path, record: Any, *, account: str, client_ids: set[st
     expected_entries = settings["participants"] // team_size
     require(isinstance(participants, list) and len(participants) == expected_entries, f"{game_type} requires {expected_entries} result entries")
     identities: set[tuple[str, str]] = set()
+    team_member_identities: set[str] = set()
     expected_is_team = team_size > 1
     completed_rounds = settings["rounds"] * team_size
     for participant in participants:
@@ -182,6 +183,10 @@ def validate_result(root: Path, record: Any, *, account: str, client_ids: set[st
         require(type(participant.get("isTeam")) is bool and participant["isTeam"] is expected_is_team, f"isTeam must be {str(expected_is_team).lower()} for `{game_type}`")
         catalog_is_team = bool(known_bots[identity]["teamMembers"])
         require(catalog_is_team is expected_is_team, f"catalog identity `{name} {version}` is not eligible for `{game_type}`")
+        if expected_is_team:
+            members = set(known_bots[identity]["teamMembers"])
+            require(not team_member_identities.intersection(members), "TwinDuel teams must not share a catalog member")
+            team_member_identities.update(members)
         for field in SCORE_FIELDS:
             require_int32(participant.get(field), f"{field} must be a non-negative signed 32-bit integer")
         for field in PLACE_FIELDS:

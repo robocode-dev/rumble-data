@@ -214,6 +214,79 @@ class RumbleDataTests(unittest.TestCase):
         outcome = ingest(self.root, {**self.envelope(), "results": [record]}, account="alice")[0]
         self.assertTrue(outcome.accepted)
 
+    def testRDA005_IntegrationPositive_catalog_membership_controls_result_validation_and_matchmaking(self) -> None:
+        self.write("engine.json", {"schemaVersion": 1, "behaviorVersion": 1, "gameTypes": {
+            "1v1": {"rounds": 35, "battlefield": [800, 600], "participants": 2},
+            "melee": {"rounds": 35, "battlefield": [800, 600], "participants": 2},
+            "twinduel": {"rounds": 75, "battlefield": [800, 800], "participants": 4},
+        }})
+        catalog = json.loads((self.root / "catalog.json").read_text(encoding="utf-8"))["bots"]
+        catalog.extend([
+            {"name": "Delta", "version": "1.0", "platform": "Python", "owner": "delta-owner", "status": "active"},
+            {"name": "Alpha Team", "version": "1.0", "platform": "Python", "owner": "alpha-owner", "status": "active", "teamMembers": ["Alpha 1.0", "Bravo 1.0"]},
+            {"name": "Bravo Team", "version": "1.0", "platform": "Python", "owner": "bravo-owner", "status": "active", "teamMembers": ["Charlie 1.0", "Delta 1.0"]},
+        ])
+        self.write("catalog.json", {"schemaVersion": 1, "bots": catalog})
+
+        individual = self.envelope()["results"][0]
+        melee = self.envelope(battle_id="a290f1ee-6c54-4b01-90e6-d701748f0851")["results"][0] | {"gameType": "melee"}
+        twinduel = self.envelope(battle_id="b290f1ee-6c54-4b01-90e6-d701748f0851")["results"][0] | {
+            "gameType": "twinduel", "rounds": 75, "arenaWidth": 800, "arenaHeight": 800,
+            "participants": [
+                {**self.participant("Alpha Team", rank=1, total_score=80, first_places=150), "isTeam": True},
+                {**self.participant("Bravo Team", rank=2, total_score=20, second_places=150), "isTeam": True},
+            ],
+        }
+        outcomes = ingest(self.root, {**self.envelope(), "results": [individual, melee, twinduel]}, account="alice")
+
+        self.assertTrue(all(outcome.accepted for outcome in outcomes))
+        _, _, individual_needed = aggregate_game_type([], catalog, "1v1", behavior_version=1)
+        _, _, melee_needed = aggregate_game_type([], catalog, "melee", behavior_version=1)
+        _, _, team_needed = aggregate_game_type([], catalog, "twinduel", behavior_version=1)
+        self.assertEqual({"Alpha 1.0", "Bravo 1.0", "Charlie 1.0", "Delta 1.0"}, {bot for pair in individual_needed["priorityPairs"] for bot in pair["bots"]})
+        self.assertEqual({"Alpha 1.0", "Bravo 1.0", "Charlie 1.0", "Delta 1.0"}, {bot for pair in melee_needed["priorityPairs"] for bot in pair["bots"]})
+        self.assertEqual([["Alpha Team 1.0", "Bravo Team 1.0"]], [pair["bots"] for pair in team_needed["priorityPairs"]])
+
+    def testRDA005_IntegrationNegative_rejects_ineligible_or_overlapping_team_entries(self) -> None:
+        self.write("engine.json", {"schemaVersion": 1, "behaviorVersion": 1, "gameTypes": {
+            "1v1": {"rounds": 35, "battlefield": [800, 600], "participants": 2},
+            "twinduel": {"rounds": 75, "battlefield": [800, 800], "participants": 4},
+        }})
+        catalog = json.loads((self.root / "catalog.json").read_text(encoding="utf-8"))["bots"]
+        catalog.extend([
+            {"name": "Alpha Team", "version": "1.0", "platform": "Python", "owner": "alpha-owner", "status": "active", "teamMembers": ["Alpha 1.0", "Bravo 1.0"]},
+            {"name": "Bravo Team", "version": "1.0", "platform": "Python", "owner": "bravo-owner", "status": "active", "teamMembers": ["Bravo 1.0", "Charlie 1.0"]},
+        ])
+        self.write("catalog.json", {"schemaVersion": 1, "bots": catalog})
+        team_in_individual = self.envelope()["results"][0]
+        team_in_individual["participants"][0].update({"name": "Alpha Team", "isTeam": False})
+        individual_in_team = self.envelope(battle_id="c290f1ee-6c54-4b01-90e6-d701748f0851")["results"][0] | {
+            "gameType": "twinduel", "rounds": 75, "arenaWidth": 800, "arenaHeight": 800,
+            "participants": [
+                {**self.participant("Alpha", rank=1, total_score=80, first_places=150), "isTeam": True},
+                {**self.participant("Bravo", rank=2, total_score=20, second_places=150), "isTeam": True},
+            ],
+        }
+        overlapping_teams = self.envelope(battle_id="d290f1ee-6c54-4b01-90e6-d701748f0851")["results"][0] | {
+            "gameType": "twinduel", "rounds": 75, "arenaWidth": 800, "arenaHeight": 800,
+            "participants": [
+                {**self.participant("Alpha Team", rank=1, total_score=80, first_places=150), "isTeam": True},
+                {**self.participant("Bravo Team", rank=2, total_score=20, second_places=150), "isTeam": True},
+            ],
+        }
+
+        outcomes = ingest(self.root, {**self.envelope(), "results": [team_in_individual, individual_in_team, overlapping_teams]}, account="alice")
+
+        self.assertEqual([False, False, False], [outcome.accepted is not None for outcome in outcomes])
+        self.assertIn("not eligible", outcomes[0].error)
+        self.assertIn("not eligible", outcomes[1].error)
+        self.assertIn("must not share", outcomes[2].error)
+
+        catalog[-1]["teamMembers"] = ["Bravo 1.0", "Missing 1.0"]
+        self.write("catalog.json", {"schemaVersion": 1, "bots": catalog})
+        with self.assertRaisesRegex(ValidationError, "unknown or inactive team member"):
+            ingest(self.root, self.envelope(), account="alice")
+
     def testRBC004_IntegrationNegative_teams_sharing_a_member_are_never_advised(self) -> None:
         catalog = json.loads((self.root / "catalog.json").read_text(encoding="utf-8"))["bots"]
         catalog.extend([

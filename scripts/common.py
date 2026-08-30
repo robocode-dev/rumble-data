@@ -55,8 +55,8 @@ def normalized_catalog_bots(value: Any) -> list[dict[str, Any]]:
         if not isinstance(entry, dict):
             raise ValueError("each catalog entry must be an object")
         team_members = entry.get("teamMembers", [])
-        if not isinstance(team_members, list) or len(team_members) not in (0, 2) or not all(isinstance(member, str) and member for member in team_members):
-            raise ValueError("catalog teamMembers must be empty or contain exactly two identities")
+        if not isinstance(team_members, list) or len(team_members) not in (0, 2) or not all(isinstance(member, str) and member for member in team_members) or len(set(team_members)) != len(team_members):
+            raise ValueError("catalog teamMembers must be empty or contain exactly two distinct identities")
         bots.append(entry | {"teamMembers": list(team_members)})
 
     active: dict[str, dict[str, Any]] = {}
