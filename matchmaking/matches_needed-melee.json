@@ -1,7 +1,16 @@
 {
   "gameType": "melee",
-  "priorityPairs": [],
-  "projectionId": "edbe2d5f2b2ef4139b78c9842f3b743f3a78220f5827781e61ef33a3f0fc522a",
+  "priorityPairs": [
+    {
+      "bots": [
+        "Orbit 1.0.2",
+        "Vector 1.0.0"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    }
+  ],
+  "projectionId": "eedd03b88bf2ad2efdb8f80277b513202160428012a47332dbda042fb2233595",
   "schemaVersion": 1,
   "targetSamplesPerPairing": 6
 }

@@ -2,13 +2,13 @@
   "entry": {
     "aps": 0.0,
     "battles": 0,
-    "bot": "Orbit 1.0.2",
+    "bot": "Vector 1.0.0",
     "epoch": 1,
-    "name": "Orbit",
+    "name": "Vector",
     "owner": "flemming-n-larsen",
     "pairings": 0,
     "platform": "Python",
-    "version": "1.0.2"
+    "version": "1.0.0"
   },
   "gameType": "melee",
   "projectionId": "eedd03b88bf2ad2efdb8f80277b513202160428012a47332dbda042fb2233595",

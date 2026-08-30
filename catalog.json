@@ -11,11 +11,26 @@
       "platform": "Python",
       "sourceHash": "sha256:86b63e60f231c8f736ec7dc7867c93966a59a63bb3409326516879236555cf36",
       "status": "active",
+      "teamMembers": [],
       "version": "1.0.2"
+    },
+    {
+      "addedAt": "2026-08-30",
+      "authors": [
+        "Tank Royale Rumble maintainers"
+      ],
+      "name": "Vector",
+      "owner": "flemming-n-larsen",
+      "path": "bots/python/Vector",
+      "platform": "Python",
+      "sourceHash": "sha256:2704786593814706f62968f21432411ecf7da2569dcd4eb3310a956c9f259429",
+      "status": "active",
+      "teamMembers": [],
+      "version": "1.0.0"
     }
   ],
   "schemaVersion": 1,
   "source": "https://raw.githubusercontent.com/robocode-dev/rumble-bots/main/bots/index.json",
-  "sourceCommit": "bd8b57af87b4ee5c57f8f2df426abfe633a9b675",
-  "sourceGeneratedAt": "2026-08-03T16:20:56Z"
+  "sourceCommit": "564aabbbddce226097c73ccd60717f822f4e095b",
+  "sourceGeneratedAt": "2026-08-30T21:00:45Z"
 }
