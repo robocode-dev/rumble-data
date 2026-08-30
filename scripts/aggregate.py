@@ -70,7 +70,12 @@ def identity(participant: dict[str, Any]) -> tuple[str, str]:
 
 def aggregate_game_type(records: list[dict[str, Any]], catalog: list[dict[str, Any]], game_type: str, behavior_version: int) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
     """Produce leaderboard, pairings, and matchmaking advice for one game type."""
-    eligible = {(str(bot["name"]), str(bot["version"])): bot for bot in catalog}
+    expects_team = game_type == "twinduel"
+    eligible = {
+        (str(bot["name"]), str(bot["version"])): bot
+        for bot in catalog
+        if bool(bot.get("teamMembers", [])) is expects_team
+    }
     relevant = [record for record in records if record.get("gameType") == game_type and record.get("engine", {}).get("behaviorVersion") == behavior_version]
     shares: dict[tuple[str, str], dict[tuple[tuple[str, str], ...], list[float]]] = defaultdict(lambda: defaultdict(list))
     pairing_counts: dict[tuple[tuple[str, str], ...], int] = defaultdict(int)

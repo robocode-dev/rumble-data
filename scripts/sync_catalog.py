@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Callable, Any
 from urllib.request import Request, urlopen
 
-from common import read_json, write_json
+from common import normalized_catalog_bots, read_json, write_json
 
 Fetch = Callable[[str], bytes]
 
@@ -27,8 +27,9 @@ def source_catalog(url: str, fetch: Fetch) -> dict[str, Any]:
         source = json.loads(fetch(url).decode("utf-8"))
     except (OSError, UnicodeDecodeError, json.JSONDecodeError) as error:
         raise ValueError(f"could not load catalog source `{url}`: {error}") from error
-    if not isinstance(source, dict) or source.get("schemaVersion") != 1 or not isinstance(source.get("bots"), list):
+    if not isinstance(source, dict) or source.get("schemaVersion") != 1:
         raise ValueError("catalog source has an unsupported schema")
+    source["bots"] = normalized_catalog_bots(source.get("bots"))
     return source
 
 

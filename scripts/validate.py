@@ -11,7 +11,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
-from common import content_hash, read_json
+from common import content_hash, normalized_catalog_bots, read_json
 
 SCHEMA_VERSION = 1
 INT32_MIN = -(2**31)
@@ -87,8 +87,11 @@ def registered_client_ids(root: Path, account: str) -> set[str]:
 def active_bots(root: Path) -> dict[tuple[str, str], dict[str, Any]]:
     """Return the active catalog entries indexed by immutable bot identity."""
     catalog = read_json(root / "catalog.json")
-    bots = catalog.get("bots")
-    require(catalog.get("schemaVersion") == SCHEMA_VERSION and isinstance(bots, list), "catalog.json is invalid")
+    require(catalog.get("schemaVersion") == SCHEMA_VERSION, "catalog.json is invalid")
+    try:
+        bots = normalized_catalog_bots(catalog.get("bots"))
+    except ValueError as error:
+        raise ValidationError(f"catalog.json is invalid: {error}") from error
     return {(str(bot.get("name")), str(bot.get("version"))): bot for bot in bots if bot.get("status") == "active"}
 
 
@@ -178,6 +181,8 @@ def validate_result(root: Path, record: Any, *, account: str, client_ids: set[st
         require(identity not in identities, f"bot `{name} {version}` appears more than once")
         identities.add(identity)
         require(type(participant.get("isTeam")) is bool and participant["isTeam"] is expected_is_team, f"isTeam must be {str(expected_is_team).lower()} for `{game_type}`")
+        catalog_is_team = bool(known_bots[identity]["teamMembers"])
+        require(catalog_is_team is expected_is_team, f"catalog identity `{name} {version}` is not eligible for `{game_type}`")
         for field in SCORE_FIELDS:
             require_int32(participant.get(field), f"{field} must be a non-negative signed 32-bit integer")
         for field in PLACE_FIELDS:
