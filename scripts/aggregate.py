@@ -9,7 +9,7 @@ from itertools import combinations
 from pathlib import Path
 from typing import Any
 
-from common import content_hash, read_json, repository_files, write_json
+from common import content_hash, read_json, repository_files, team_size, write_json
 
 TARGET_SAMPLES_PER_PAIRING = 6
 
@@ -70,7 +70,12 @@ def identity(participant: dict[str, Any]) -> tuple[str, str]:
 
 def aggregate_game_type(records: list[dict[str, Any]], catalog: list[dict[str, Any]], game_type: str, behavior_version: int) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
     """Produce leaderboard, pairings, and matchmaking advice for one game type."""
-    eligible = {(str(bot["name"]), str(bot["version"])): bot for bot in catalog}
+    expects_team = team_size(game_type) > 1
+    eligible = {
+        (str(bot["name"]), str(bot["version"])): bot
+        for bot in catalog
+        if bool(bot.get("teamMembers", [])) is expects_team
+    }
     relevant = [record for record in records if record.get("gameType") == game_type and record.get("engine", {}).get("behaviorVersion") == behavior_version]
     shares: dict[tuple[str, str], dict[tuple[tuple[str, str], ...], list[float]]] = defaultdict(lambda: defaultdict(list))
     pairing_counts: dict[tuple[tuple[str, str], ...], int] = defaultdict(int)
@@ -102,6 +107,8 @@ def aggregate_game_type(records: list[dict[str, Any]], catalog: list[dict[str, A
     pairings = {"schemaVersion": 1, "projectionId": projection_id, "gameType": game_type, "pairings": pairs}
     priority_pairs = []
     for pair in combinations(sorted(eligible), 2):
+        if expects_team and set(eligible[pair[0]]["teamMembers"]) & set(eligible[pair[1]]["teamMembers"]):
+            continue
         count = pair_sample_counts.get(pair, 0)
         if count < TARGET_SAMPLES_PER_PAIRING:
             priority_pairs.append({"bots": [f"{name} {version}" for name, version in pair], "have": count, "reason": "new-bot" if count == 0 else "under-sampled"})

@@ -1,18 +1,6 @@
 {
   "behaviorVersion": 1,
-  "entries": [
-    {
-      "aps": 0.0,
-      "battles": 0,
-      "bot": "Orbit 1.0.2",
-      "epoch": 1,
-      "name": "Orbit",
-      "owner": "flemming-n-larsen",
-      "pairings": 0,
-      "platform": "Python",
-      "version": "1.0.2"
-    }
-  ],
+  "entries": [],
   "gameType": "twinduel",
   "projectionId": "5b01446a5e4d7b6db3b7477213caad8e118b5f74f558f615096607a464be9984",
   "schemaVersion": 1

@@ -11,12 +11,11 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
-from common import content_hash, read_json
+from common import TEAM_SIZE, content_hash, normalized_catalog_bots, read_json
 
 SCHEMA_VERSION = 1
 INT32_MIN = -(2**31)
 INT32_MAX = 2**31 - 1
-TEAM_SIZE = {"1v1": 1, "twinduel": 2, "melee": 1}
 SCORE_FIELDS = (
     "totalScore",
     "survival",
@@ -87,8 +86,11 @@ def registered_client_ids(root: Path, account: str) -> set[str]:
 def active_bots(root: Path) -> dict[tuple[str, str], dict[str, Any]]:
     """Return the active catalog entries indexed by immutable bot identity."""
     catalog = read_json(root / "catalog.json")
-    bots = catalog.get("bots")
-    require(catalog.get("schemaVersion") == SCHEMA_VERSION and isinstance(bots, list), "catalog.json is invalid")
+    require(catalog.get("schemaVersion") == SCHEMA_VERSION, "catalog.json is invalid")
+    try:
+        bots = normalized_catalog_bots(catalog.get("bots"))
+    except ValueError as error:
+        raise ValidationError(f"catalog.json is invalid: {error}") from error
     return {(str(bot.get("name")), str(bot.get("version"))): bot for bot in bots if bot.get("status") == "active"}
 
 
@@ -167,6 +169,7 @@ def validate_result(root: Path, record: Any, *, account: str, client_ids: set[st
     expected_entries = settings["participants"] // team_size
     require(isinstance(participants, list) and len(participants) == expected_entries, f"{game_type} requires {expected_entries} result entries")
     identities: set[tuple[str, str]] = set()
+    team_member_identities: set[str] = set()
     expected_is_team = team_size > 1
     completed_rounds = settings["rounds"] * team_size
     for participant in participants:
@@ -178,6 +181,12 @@ def validate_result(root: Path, record: Any, *, account: str, client_ids: set[st
         require(identity not in identities, f"bot `{name} {version}` appears more than once")
         identities.add(identity)
         require(type(participant.get("isTeam")) is bool and participant["isTeam"] is expected_is_team, f"isTeam must be {str(expected_is_team).lower()} for `{game_type}`")
+        catalog_is_team = bool(known_bots[identity]["teamMembers"])
+        require(catalog_is_team is expected_is_team, f"catalog identity `{name} {version}` is not eligible for `{game_type}`")
+        if expected_is_team:
+            members = set(known_bots[identity]["teamMembers"])
+            require(not team_member_identities.intersection(members), "TwinDuel teams must not share a catalog member")
+            team_member_identities.update(members)
         for field in SCORE_FIELDS:
             require_int32(participant.get(field), f"{field} must be a non-negative signed 32-bit integer")
         for field in PLACE_FIELDS:
