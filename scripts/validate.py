@@ -11,12 +11,11 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
-from common import content_hash, normalized_catalog_bots, read_json
+from common import TEAM_SIZE, content_hash, normalized_catalog_bots, read_json
 
 SCHEMA_VERSION = 1
 INT32_MIN = -(2**31)
 INT32_MAX = 2**31 - 1
-TEAM_SIZE = {"1v1": 1, "twinduel": 2, "melee": 1}
 SCORE_FIELDS = (
     "totalScore",
     "survival",

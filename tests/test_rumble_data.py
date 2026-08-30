@@ -178,8 +178,9 @@ class RumbleDataTests(unittest.TestCase):
     def testRDA001_IntegrationPositive_every_ranked_type_advises_under_sampled_pairs(self) -> None:
         catalog = json.loads((self.root / "catalog.json").read_text(encoding="utf-8"))["bots"]
         catalog.extend([
+            {"name": "Delta", "version": "1.0", "platform": "Python", "owner": "delta-owner", "status": "active", "teamMembers": []},
             {"name": "Alpha Team", "version": "1.0", "platform": "Python", "owner": "alpha-owner", "status": "active", "teamMembers": ["Alpha 1.0", "Bravo 1.0"]},
-            {"name": "Bravo Team", "version": "1.0", "platform": "Python", "owner": "bravo-owner", "status": "active", "teamMembers": ["Bravo 1.0", "Charlie 1.0"]},
+            {"name": "Bravo Team", "version": "1.0", "platform": "Python", "owner": "bravo-owner", "status": "active", "teamMembers": ["Charlie 1.0", "Delta 1.0"]},
         ])
         record = self.envelope()["results"][0]
         for game_type in ("1v1", "twinduel", "melee"):
@@ -212,6 +213,17 @@ class RumbleDataTests(unittest.TestCase):
         record["participants"][0].update({"name": "Orbit", "version": "1.0.2"})
         outcome = ingest(self.root, {**self.envelope(), "results": [record]}, account="alice")[0]
         self.assertTrue(outcome.accepted)
+
+    def testRBC004_IntegrationNegative_teams_sharing_a_member_are_never_advised(self) -> None:
+        catalog = json.loads((self.root / "catalog.json").read_text(encoding="utf-8"))["bots"]
+        catalog.extend([
+            {"name": "Alpha Team", "version": "1.0", "platform": "Python", "owner": "alpha-owner", "status": "active", "teamMembers": ["Alpha 1.0", "Bravo 1.0"]},
+            {"name": "Bravo Team", "version": "1.0", "platform": "Python", "owner": "bravo-owner", "status": "active", "teamMembers": ["Bravo 1.0", "Charlie 1.0"]},
+        ])
+
+        _, _, needed = aggregate_game_type([], catalog, "twinduel", behavior_version=1)
+
+        self.assertEqual([], needed["priorityPairs"])
 
     def testRBC004_IntegrationPositive_catalog_sync_preserves_valid_team_membership(self) -> None:
         source = {

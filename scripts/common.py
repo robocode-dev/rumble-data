@@ -35,6 +35,17 @@ def repository_files(root: Path, relative: str) -> list[Path]:
     return sorted(path for path in directory.rglob("*.json") if path.is_file()) if directory.exists() else []
 
 
+TEAM_SIZE = {"1v1": 1, "twinduel": 2, "melee": 1}
+
+
+def team_size(game_type: str) -> int:
+    """Return the number of bots each result entry of a game type represents."""
+    size = TEAM_SIZE.get(game_type)
+    if size is None:
+        raise ValueError(f"unsupported gameType `{game_type}`")
+    return size
+
+
 def normalized_catalog_bots(value: Any) -> list[dict[str, Any]]:
     """Return catalog entries with validated additive team membership."""
     if not isinstance(value, list):
