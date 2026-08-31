@@ -65,6 +65,13 @@ class RumbleDataTests(unittest.TestCase):
         needed = json.loads((self.root / "matchmaking/matches_needed-1v1.json").read_text(encoding="utf-8"))
         self.assertIn(["Alpha 1.0", "Charlie 1.0"], [pair["bots"] for pair in needed["priorityPairs"]])
 
+    def testRDA001_IntegrationPositive_issue_inbox_uses_GitHub_submitter_account(self) -> None:
+        workflow = (ROOT / ".github" / "workflows" / "ingest.yml").read_text(encoding="utf-8")
+
+        self.assertIn("{number,user,body}", workflow)
+        self.assertIn("account=$(jq -r .user.login .inbox/issue.json)", workflow)
+        self.assertNotIn(".author.login", workflow)
+
     def testUnitPositive_engine_pin_accepts_optional_immutable_client_image(self) -> None:
         configured = json.loads((self.root / "engine.json").read_text(encoding="utf-8"))
         configured["clientImage"] = "ghcr.io/robocode-dev/rumble-client@sha256:" + "a" * 64
