@@ -1,4 +1,9 @@
 {
-  "clients": [],
+  "clients": [
+    {
+      "battles": 2,
+      "clientId": "flemming-rumble-01"
+    }
+  ],
   "schemaVersion": 1
 }

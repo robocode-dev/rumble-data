@@ -1,0 +1,53 @@
+{
+  "arenaHeight": 600,
+  "arenaWidth": 800,
+  "battleId": "4d15bd13-0014-4737-b4b5-ce8f55d85769",
+  "client": {
+    "id": "flemming-rumble-01",
+    "version": "development"
+  },
+  "completedAt": "2026-08-30T21:21:42.590555600Z",
+  "engine": {
+    "behaviorVersion": 1
+  },
+  "gameType": "1v1",
+  "participants": [
+    {
+      "bulletDamage": 947,
+      "bulletKillBonus": 156,
+      "firstPlaces": 10,
+      "isTeam": false,
+      "lastSurvivorBonus": 100,
+      "name": "Vector",
+      "ramDamage": 240,
+      "ramKillBonus": 0,
+      "rank": 1,
+      "secondPlaces": 25,
+      "survival": 500,
+      "thirdPlaces": 0,
+      "totalScore": 1943,
+      "version": "1.0.0"
+    },
+    {
+      "bulletDamage": 0,
+      "bulletKillBonus": 0,
+      "firstPlaces": 25,
+      "isTeam": false,
+      "lastSurvivorBonus": 250,
+      "name": "Orbit",
+      "ramDamage": 0,
+      "ramKillBonus": 0,
+      "rank": 2,
+      "secondPlaces": 10,
+      "survival": 1250,
+      "thirdPlaces": 0,
+      "totalScore": 1500,
+      "version": "1.0.2"
+    }
+  ],
+  "payloadHash": "4b026de93afbb47b6582f80517fefab18924130a8dd079cf34dcd72e0f581abc",
+  "replayHash": "sha256:9318ff19a91d99ebbe1c3bd699eb3870405143e33d8326ea06294f09522d3c0c",
+  "rounds": 35,
+  "selectionSeed": -7903638987721193797,
+  "submittedBy": "flemming-n-larsen"
+}

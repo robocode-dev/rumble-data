@@ -6,11 +6,11 @@
         "Orbit 1.0.2",
         "Vector 1.0.0"
       ],
-      "have": 0,
-      "reason": "new-bot"
+      "have": 2,
+      "reason": "under-sampled"
     }
   ],
-  "projectionId": "c8642090d7c9608aa83d418c01a7a0bee6680fde3913f4daf6fc86206b0daac9",
+  "projectionId": "f30cb10af8064b8a3b65e769b76f55a591c0159c2e90ea99a16365845e0f5ce3",
   "schemaVersion": 1,
   "targetSamplesPerPairing": 6
 }
