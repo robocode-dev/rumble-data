@@ -29,12 +29,12 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           mkdir -p .inbox
-          gh api --paginate "repos/$GITHUB_REPOSITORY/issues?labels=result-submission&state=open&per_page=100" --jq '.[] | select(.pull_request == null) | {number,author,body} | @base64' > .inbox/issues
+          gh api --paginate "repos/$GITHUB_REPOSITORY/issues?labels=result-submission&state=open&per_page=100" --jq '.[] | select(.pull_request == null) | {number,user,body} | @base64' > .inbox/issues
           while read -r encoded; do
             [ -z "$encoded" ] && continue
             printf '%s' "$encoded" | base64 --decode > .inbox/issue.json
             number=$(jq -r .number .inbox/issue.json)
-            account=$(jq -r .author.login .inbox/issue.json)
+            account=$(jq -r .user.login .inbox/issue.json)
             jq -r .body .inbox/issue.json > .inbox/body.md
             : > .inbox/outcome.txt
             if python scripts/extract_envelope.py --body .inbox/body.md --output .inbox/envelope.json >> .inbox/outcome.txt 2>&1 && python scripts/ingest.py --root . --account "$account" --input .inbox/envelope.json >> .inbox/outcome.txt 2>&1; then
