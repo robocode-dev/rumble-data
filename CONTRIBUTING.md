@@ -1,19 +1,41 @@
-# Contributing result data
+# Contributing Rumble result data
 
-## Register a contributor client
+Battle contributors should register once, then let the Rumble Client create and track result submissions. Follow [Run ranked Rumble battles](https://robocode.dev/rumble/client-guide) for the complete setup. Do not handcraft an issue unless you are testing or developing the transport contract.
 
-Open a pull request that adds `clients/<your-forge-account>.json`. Its `account` must equal the filename, and `clientIds` must be a non-empty list of stable client identifiers you control. A moderator reviews this once before any issue submission is accepted.
+## Register a client
 
-## Submit a ranked batch
+Open a pull request that adds `clients/<your-github-account>.json`:
 
-Create an issue titled `[result] <client-id> <UTC timestamp>`, apply the `result-submission` label, and place exactly one JSON envelope in a fenced `json` block. The envelope has `schemaVersion: 1`, `clientId`, `clientVersion`, and 1–60 `results`. Each result supplies a UUID `battleId`, `completedAt`, nested `client.id` and `client.version` matching the envelope, nested `engine.behaviorVersion` matching the engine pin, game type, pinned rounds and arena dimensions, and the complete Battle Runner participant result model.
+```json
+{
+  "schemaVersion": 1,
+  "account": "your-github-account",
+  "clientIds": ["your-github-account-desktop-01"]
+}
+```
 
-Each participant supplies cataloged `name` and `version`, `isTeam`, a 1224-system `rank`, `totalScore`, `survival`, `lastSurvivorBonus`, `bulletDamage`, `bulletKillBonus`, `ramDamage`, `ramKillBonus`, `firstPlaces`, `secondPlaces`, and `thirdPlaces`. Scores and place counts are non-negative signed 32-bit integers. `isTeam`, result-entry count, rank placement, and place-count totals must match the selected ranked game type.
+The filename and `account` must match the submitting GitHub account. `clientIds` must be a non-empty list of stable identifiers you control. A moderator reviews the registration before results from that account and client ID can be accepted.
 
-The submitting issue account and `clientId` must be registered. Every bot must be active in `catalog.json`; the hourly synchronization workflow copies the reviewed Rumble bot catalog declared by that file. The drain workflow validates each record independently, keeps valid records when neighboring records are rejected, pushes accepted facts, and then closes every processed issue with a receipt line for every record. Retrying an identical retained result returns the same successful outcome without creating another fact; reusing a battle ID for different content is rejected.
+## Result submission contract
 
-## Rules
+The client creates an issue titled `[result] <client-id> <UTC timestamp>`, applies the `result-submission` label, and puts exactly one JSON batch envelope in a fenced `json` block. The envelope contains `schemaVersion: 1`, `clientId`, `clientVersion`, and between 1 and 60 `results`.
 
-Do not edit raw facts, generated projections, or the static dashboard data in a pull request. Do not submit replays; retain replay evidence locally. Duplicate battle IDs, engine mismatches, preset mismatches, unknown bots, unregistered clients, banned accounts, malformed batches, and inconsistent score components are rejected. Fork-pull-request result submission is not supported in V1.
+Each result contains a UUID `battleId`, `completedAt`, matching nested client identity, the pinned engine behavior version, game type, rounds, arena dimensions, and the complete Battle Runner participant results.
 
-All contributions are made under Apache-2.0 and must follow the project code of conduct and governance process.
+Each participant contains the cataloged `name` and `version`, `isTeam`, 1224-system `rank`, `totalScore`, `survival`, `lastSurvivorBonus`, `bulletDamage`, `bulletKillBonus`, `ramDamage`, `ramKillBonus`, `firstPlaces`, `secondPlaces`, and `thirdPlaces`. Scores and place counts are non-negative signed 32-bit integers. Team flags, entry counts, ranks, and place-count totals must match the selected game type.
+
+The issue author and `clientId` must match a current registration. Every participant must be active in the synchronized catalog, and the result must match the current engine and game-type pin.
+
+## Processing and retries
+
+The drain validates every record independently, so one rejected neighbor does not discard valid records in the same batch. Accepted facts are pushed before the workflow publishes per-record receipts and closes the issue.
+
+Retrying an identical retained result returns the same successful outcome without creating another fact. Reusing a battle ID for different content is rejected.
+
+## Protected data
+
+Do not edit raw facts, generated projections, synchronized catalog data, or dashboard data in a pull request. Do not submit replays; contributors retain replay evidence locally.
+
+Malformed batches, unknown or disqualified bots, unregistered clients, banned accounts, duplicate battle IDs, engine mismatches, preset mismatches, and inconsistent scores are rejected. Fork-pull-request result submission is not supported in V1.
+
+All contributions are made under Apache-2.0 and must follow the project code of conduct and [GOVERNANCE.md](GOVERNANCE.md).
