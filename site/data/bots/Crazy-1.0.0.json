@@ -2,12 +2,12 @@
   "entry": {
     "aps": 0.0,
     "battles": 0,
-    "bot": "Vector 1.0.0",
+    "bot": "Crazy 1.0.0",
     "epoch": 1,
-    "name": "Vector",
+    "name": "Crazy",
     "owner": "flemming-n-larsen",
     "pairings": 0,
-    "platform": "Python",
+    "platform": "JVM",
     "version": "1.0.0"
   },
   "gameType": "melee",

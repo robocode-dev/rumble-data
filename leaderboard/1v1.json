@@ -22,9 +22,42 @@
       "pairings": 1,
       "platform": "Python",
       "version": "1.0.2"
+    },
+    {
+      "aps": 0.0,
+      "battles": 0,
+      "bot": "Corners 1.0.0",
+      "epoch": 1,
+      "name": "Corners",
+      "owner": "flemming-n-larsen",
+      "pairings": 0,
+      "platform": "JVM",
+      "version": "1.0.0"
+    },
+    {
+      "aps": 0.0,
+      "battles": 0,
+      "bot": "Crazy 1.0.0",
+      "epoch": 1,
+      "name": "Crazy",
+      "owner": "flemming-n-larsen",
+      "pairings": 0,
+      "platform": "JVM",
+      "version": "1.0.0"
+    },
+    {
+      "aps": 0.0,
+      "battles": 0,
+      "bot": "SpinBot 1.0.0",
+      "epoch": 1,
+      "name": "SpinBot",
+      "owner": "flemming-n-larsen",
+      "pairings": 0,
+      "platform": "JVM",
+      "version": "1.0.0"
     }
   ],
   "gameType": "1v1",
-  "projectionId": "f30cb10af8064b8a3b65e769b76f55a591c0159c2e90ea99a16365845e0f5ce3",
+  "projectionId": "882857550ddf569cea231d9ac7e53bae95e676c1fe4d42f47af3488a486279d5",
   "schemaVersion": 1
 }

@@ -4,6 +4,28 @@
     {
       "aps": 0.0,
       "battles": 0,
+      "bot": "Corners 1.0.0",
+      "epoch": 1,
+      "name": "Corners",
+      "owner": "flemming-n-larsen",
+      "pairings": 0,
+      "platform": "JVM",
+      "version": "1.0.0"
+    },
+    {
+      "aps": 0.0,
+      "battles": 0,
+      "bot": "Crazy 1.0.0",
+      "epoch": 1,
+      "name": "Crazy",
+      "owner": "flemming-n-larsen",
+      "pairings": 0,
+      "platform": "JVM",
+      "version": "1.0.0"
+    },
+    {
+      "aps": 0.0,
+      "battles": 0,
       "bot": "Orbit 1.0.2",
       "epoch": 1,
       "name": "Orbit",
@@ -11,6 +33,17 @@
       "pairings": 0,
       "platform": "Python",
       "version": "1.0.2"
+    },
+    {
+      "aps": 0.0,
+      "battles": 0,
+      "bot": "SpinBot 1.0.0",
+      "epoch": 1,
+      "name": "SpinBot",
+      "owner": "flemming-n-larsen",
+      "pairings": 0,
+      "platform": "JVM",
+      "version": "1.0.0"
     },
     {
       "aps": 0.0,
@@ -25,6 +58,6 @@
     }
   ],
   "gameType": "melee",
-  "projectionId": "eedd03b88bf2ad2efdb8f80277b513202160428012a47332dbda042fb2233595",
+  "projectionId": "637b218831c22de1bfc2dcc62bc8f7ac29c1f8821b79359e66128cac13ec1d28",
   "schemaVersion": 1
 }

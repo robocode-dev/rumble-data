@@ -1,6 +1,36 @@
 {
   "bots": [
     {
+      "addedAt": "2026-09-04",
+      "authors": [
+        "Mathew Nelson",
+        "Flemming N. Larsen"
+      ],
+      "name": "Corners",
+      "owner": "flemming-n-larsen",
+      "path": "bots/java/Corners",
+      "platform": "JVM",
+      "sourceHash": "sha256:404ca740fec5bb93fe5b19fd9dcc6b138a9c5aa8d876513159258ae72aeb91ec",
+      "status": "active",
+      "teamMembers": [],
+      "version": "1.0.0"
+    },
+    {
+      "addedAt": "2026-09-04",
+      "authors": [
+        "Mathew Nelson",
+        "Flemming N. Larsen"
+      ],
+      "name": "Crazy",
+      "owner": "flemming-n-larsen",
+      "path": "bots/java/Crazy",
+      "platform": "JVM",
+      "sourceHash": "sha256:bc813c792d71e227c5993fb26acfff036da5f46d56d0381ca443a8706041a156",
+      "status": "active",
+      "teamMembers": [],
+      "version": "1.0.0"
+    },
+    {
       "addedAt": "2026-08-02",
       "authors": [
         "Tank Royale Rumble maintainers"
@@ -13,6 +43,21 @@
       "status": "active",
       "teamMembers": [],
       "version": "1.0.2"
+    },
+    {
+      "addedAt": "2026-09-04",
+      "authors": [
+        "Mathew Nelson",
+        "Flemming N. Larsen"
+      ],
+      "name": "SpinBot",
+      "owner": "flemming-n-larsen",
+      "path": "bots/java/SpinBot",
+      "platform": "JVM",
+      "sourceHash": "sha256:5a346701b5d65c11d5e691ea9d272da33bce5eca8c67d252c0db710faba9a695",
+      "status": "active",
+      "teamMembers": [],
+      "version": "1.0.0"
     },
     {
       "addedAt": "2026-08-30",
@@ -31,6 +76,6 @@
   ],
   "schemaVersion": 1,
   "source": "https://raw.githubusercontent.com/robocode-dev/rumble-bots/main/bots/index.json",
-  "sourceCommit": "564aabbbddce226097c73ccd60717f822f4e095b",
-  "sourceGeneratedAt": "2026-08-30T21:00:45Z"
+  "sourceCommit": "84019c58e2a3423f08631dd4b3b6b3b48dd66a77",
+  "sourceGeneratedAt": "2026-09-04T15:45:48Z"
 }

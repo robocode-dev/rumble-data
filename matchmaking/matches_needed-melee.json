@@ -3,14 +3,86 @@
   "priorityPairs": [
     {
       "bots": [
+        "Corners 1.0.0",
+        "Crazy 1.0.0"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "Corners 1.0.0",
+        "Orbit 1.0.2"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "Corners 1.0.0",
+        "SpinBot 1.0.0"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "Corners 1.0.0",
+        "Vector 1.0.0"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "Crazy 1.0.0",
+        "Orbit 1.0.2"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "Crazy 1.0.0",
+        "SpinBot 1.0.0"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "Crazy 1.0.0",
+        "Vector 1.0.0"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
         "Orbit 1.0.2",
+        "SpinBot 1.0.0"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "Orbit 1.0.2",
+        "Vector 1.0.0"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "SpinBot 1.0.0",
         "Vector 1.0.0"
       ],
       "have": 0,
       "reason": "new-bot"
     }
   ],
-  "projectionId": "eedd03b88bf2ad2efdb8f80277b513202160428012a47332dbda042fb2233595",
+  "projectionId": "637b218831c22de1bfc2dcc62bc8f7ac29c1f8821b79359e66128cac13ec1d28",
   "schemaVersion": 1,
   "targetSamplesPerPairing": 6
 }
