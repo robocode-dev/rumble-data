@@ -2,28 +2,6 @@
   "behaviorVersion": 1,
   "entries": [
     {
-      "aps": 53.5741,
-      "battles": 2,
-      "bot": "Vector 1.0.0",
-      "epoch": 1,
-      "name": "Vector",
-      "owner": "flemming-n-larsen",
-      "pairings": 1,
-      "platform": "Python",
-      "version": "1.0.0"
-    },
-    {
-      "aps": 46.4259,
-      "battles": 2,
-      "bot": "Orbit 1.0.2",
-      "epoch": 1,
-      "name": "Orbit",
-      "owner": "flemming-n-larsen",
-      "pairings": 1,
-      "platform": "Python",
-      "version": "1.0.2"
-    },
-    {
       "aps": 0.0,
       "battles": 0,
       "bot": "Corners 1.0.0",
@@ -48,6 +26,17 @@
     {
       "aps": 0.0,
       "battles": 0,
+      "bot": "Orbit 1.0.3",
+      "epoch": 1,
+      "name": "Orbit",
+      "owner": "flemming-n-larsen",
+      "pairings": 0,
+      "platform": "Python",
+      "version": "1.0.3"
+    },
+    {
+      "aps": 0.0,
+      "battles": 0,
       "bot": "SpinBot 1.0.0",
       "epoch": 1,
       "name": "SpinBot",
@@ -55,9 +44,20 @@
       "pairings": 0,
       "platform": "JVM",
       "version": "1.0.0"
+    },
+    {
+      "aps": 0.0,
+      "battles": 0,
+      "bot": "Vector 1.1.1",
+      "epoch": 1,
+      "name": "Vector",
+      "owner": "flemming-n-larsen",
+      "pairings": 0,
+      "platform": "Python",
+      "version": "1.1.1"
     }
   ],
   "gameType": "1v1",
-  "projectionId": "882857550ddf569cea231d9ac7e53bae95e676c1fe4d42f47af3488a486279d5",
+  "projectionId": "d40ed7bbaed6c93f494cdf6e4aac78dd26a7a9b2ff24395f137dc6f4b3fcb293",
   "schemaVersion": 1
 }

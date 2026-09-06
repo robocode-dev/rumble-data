@@ -2,13 +2,13 @@
   "entry": {
     "aps": 0.0,
     "battles": 0,
-    "bot": "Crazy 1.0.0",
+    "bot": "Orbit 1.0.3",
     "epoch": 1,
-    "name": "Crazy",
+    "name": "Orbit",
     "owner": "flemming-n-larsen",
     "pairings": 0,
-    "platform": "JVM",
-    "version": "1.0.0"
+    "platform": "Python",
+    "version": "1.0.3"
   },
   "gameType": "melee",
   "projectionId": "b73b2e7697000964e97a9fac8bc3b8731e861f85e12f2ad03eced5e69cd674ab",
