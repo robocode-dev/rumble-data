@@ -1,21 +1,62 @@
 # Tank Royale Rumble data
 
-`rumble-data` is the immutable result store and static ranking dashboard for Tank Royale Rumble. Contributors submit ranked-battle batches through labelled issues; the serialized ingestion workflow validates them, commits only accepted JSON facts, and regenerates every projection from Git-tracked input.
+`rumble-data` is the public result store and ranking dashboard for the Tank Royale Rumble. It accepts ranked battle batches from registered clients, keeps accepted results as immutable Git-tracked facts, and rebuilds the leaderboard from those facts.
 
-## Local verification
+- [Open the live rankings](https://robocode-dev.github.io/rumble-data/)
+- [Learn what the Rumble is](https://robocode.dev/rumble/)
+- [Register and run a battle client](https://robocode.dev/rumble/client-guide)
 
-Run the focused suite with `python -m unittest discover -s tests -v`. It uses only Python's standard library. Run `python scripts/aggregate.py --root .` to regenerate projections from the current facts.
+Most battle contributors should use the Rumble Client rather than create result issues by hand. This README describes the data repository for maintainers, auditors, and coding agents.
 
-`catalog.json` is a local, reviewed copy of the generated Rumble bot catalog. Run `python scripts/sync_catalog.py --root .` to refresh it from its declared HTTPS source; the scheduled workflow performs the same synchronization hourly.
+## When the dashboard updates
 
-`engine.json.clientImage` is optional installation guidance for the recommended Rumble Client Docker distribution. Once an eligible Tank Royale release and client image exist, it contains an immutable `ghcr.io/...@sha256:...` reference; ranked compatibility continues to use `behaviorVersion`.
+A result issue normally starts ingestion as soon as GitHub applies the `result-submission` label. A scheduled fallback runs at 17 and 47 minutes past every UTC hour. Each successful drain commits accepted facts, regenerates the projections, and triggers a Pages deployment when dashboard data changed.
 
-## Submit results
+The reviewed bot catalog synchronizes at 23 minutes past every UTC hour. A newly merged bot appears after that synchronization and starts with no ranked samples.
 
-Before a client can submit ranked results, its forge account must be registered through a reviewed pull request adding `clients/<account>.json`. The client then creates an issue labelled `result-submission`, with a `[result]` title and exactly one fenced JSON batch envelope. See [CONTRIBUTING.md](CONTRIBUTING.md) for the contract and limits.
+GitHub Actions schedules may run late, so these times describe the automation cadence rather than a delivery guarantee.
 
-Issue bodies are transport, never durable storage. The only authoritative accepted result is a content-addressed JSON fact under `results/raw/`; projections are disposable and reproducible. Successful receipt comments are published only after accepted facts are pushed, and identical retries are acknowledged idempotently.
+## How results become rankings
 
-## Forking and operations
+Submitted issue bodies are transport, not durable storage. The ingestion workflow validates each result independently and writes accepted records under `results/raw/` using content-addressed filenames. It publishes a receipt only after the accepted fact has been pushed.
 
-There are no secrets or external services. `scripts/` contains the portable implementation and GitHub Actions is a thin wrapper. `wellknown/rumble.json` identifies the canonical repository and allows an eventual move. Governance, moderation, compaction, and the quarterly fork drill are recorded in [GOVERNANCE.md](GOVERNANCE.md).
+`scripts/aggregate.py` derives the leaderboard, pairing statistics, matchmaking advice, client totals, and dashboard data from repository-tracked inputs. The generated projections are disposable; accepted facts are the source of truth.
+
+The current dashboard ranks each game type by APS, or Average Percentage Score. It also shows how many battles and distinct matchups contribute to each entry.
+
+## Repository map
+
+| Path | Purpose |
+|------|---------|
+| `results/raw/` | Immutable accepted battle facts. |
+| `leaderboard/` | Generated rankings and per-entry details. |
+| `matchmaking/` | Generated pairing counts and under-sampled matchup advice. |
+| `clients/` | Reviewed battle-contributor registrations. |
+| `catalog.json` | Synchronized copy of the reviewed Rumble bot catalog. |
+| `engine.json` | Pinned game behavior and ranked presets. |
+| `site/` | Static dashboard published through GitHub Pages. |
+| `wellknown/rumble.json` | Canonical repository pointer used by clients. |
+
+`engine.json.clientImage` is optional while no production Rumble Client image is published. When added, it must use an immutable image digest. Ranked compatibility is determined by `behaviorVersion`, not by the presence of an image.
+
+## Verify locally
+
+Run the test suite:
+
+```shell
+python -m unittest discover -s tests -v
+```
+
+Regenerate projections:
+
+```shell
+python scripts/aggregate.py --root .
+```
+
+Refresh `catalog.json` from its declared HTTPS source:
+
+```shell
+python scripts/sync_catalog.py --root .
+```
+
+The scripts use only Python's standard library. Read [CONTRIBUTING.md](CONTRIBUTING.md) for registration and result-envelope contracts, and [GOVERNANCE.md](GOVERNANCE.md) for moderation, compaction, and recovery procedures.
