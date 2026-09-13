@@ -393,6 +393,7 @@ class RumbleDataTests(unittest.TestCase):
         identities = {(entry["name"], entry["version"]): entry for entry in leaderboard["entries"]}
         self.assertNotIn(("Alpha", "1.0"), identities)
         self.assertEqual(0.0, identities[("Alpha", "2.0")]["aps"])
+        self.assertEqual(0.0, identities[("Bravo", "1.0")]["aps"])
 
     def testRDA007_IntegrationPositive_visible_ranking_change_advances_publication_time(self) -> None:
         self.write("site/data/history.json", {"schemaVersion": 1, "currentMonth": "2026-09", "lastUpdatedAt": "2026-09-01T00:00:00Z", "snapshots": []})
@@ -455,6 +456,18 @@ class RumbleDataTests(unittest.TestCase):
         manifest = json.loads((self.root / "site/data/history.json").read_text(encoding="utf-8"))
         self.assertEqual("2026-09", manifest["currentMonth"])
         self.assertEqual([], manifest["snapshots"])
+
+    def testRDA008_IntegrationPositive_rollover_recovers_an_identical_partial_copy(self) -> None:
+        aggregate(self.root)
+        self.write("site/data/history.json", {"schemaVersion": 1, "currentMonth": "2026-08", "lastUpdatedAt": "2026-08-20T12:00:00Z", "snapshots": []})
+        source = self.root / "site/data/leaderboard/1v1.json"
+        partial = self.root / "site/data/snapshots/2026-08/leaderboard/1v1.json"
+        partial.parent.mkdir(parents=True)
+        partial.write_bytes(source.read_bytes())
+
+        self.assertTrue(rollover(self.root, datetime(2026, 9, 1, tzinfo=timezone.utc)))
+
+        self.assertTrue((self.root / "site/data/snapshots/2026-08/bots/Alpha-1.0.json").is_file())
 
     def testRDA008_IntegrationNegative_rollover_refuses_to_overwrite_a_snapshot(self) -> None:
         aggregate(self.root)

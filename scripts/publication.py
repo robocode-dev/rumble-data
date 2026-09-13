@@ -93,8 +93,8 @@ def rollover(root: Path, at: datetime) -> bool:
         snapshot_root = root / "site" / "data" / "snapshots" / current_month
         expected_paths = {snapshot_root / relative for relative in relative_files}
         existing_paths = set(snapshot_root.rglob("*.json")) if snapshot_root.exists() else set()
-        if existing_paths and existing_paths != expected_paths:
-            raise ValueError(f"snapshot {current_month} is immutable: existing files differ")
+        if not existing_paths.issubset(expected_paths):
+            raise ValueError(f"snapshot {current_month} is immutable: unexpected files exist")
         for relative, content in relative_files.items():
             destination = snapshot_root / relative
             if destination.exists() and destination.read_bytes() != content:

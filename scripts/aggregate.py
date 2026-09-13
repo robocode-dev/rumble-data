@@ -76,7 +76,13 @@ def aggregate_game_type(records: list[dict[str, Any]], catalog: list[dict[str, A
         for bot in catalog
         if bot.get("status") == "active" and bool(bot.get("teamMembers", [])) is expects_team
     }
-    relevant = [record for record in records if record.get("gameType") == game_type and record.get("engine", {}).get("behaviorVersion") == behavior_version]
+    relevant = [
+        record
+        for record in records
+        if record.get("gameType") == game_type
+        and record.get("engine", {}).get("behaviorVersion") == behavior_version
+        and all(identity(participant) in eligible for participant in record.get("participants", []))
+    ]
     shares: dict[tuple[str, str], dict[tuple[tuple[str, str], ...], list[float]]] = defaultdict(lambda: defaultdict(list))
     pairing_counts: dict[tuple[tuple[str, str], ...], int] = defaultdict(int)
     pair_sample_counts: dict[tuple[tuple[str, str], tuple[str, str]], int] = defaultdict(int)

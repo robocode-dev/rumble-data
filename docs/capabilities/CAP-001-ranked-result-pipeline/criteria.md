@@ -150,6 +150,7 @@ Evidence:
 
 - `testRDA008_IntegrationPositive_rollover_copies_each_missing_month_byte_for_byte`
 - `testRDA008_IntegrationPositive_first_rollover_initializes_without_backfill`
+- `testRDA008_IntegrationPositive_rollover_recovers_an_identical_partial_copy`
 - `testRDA008_IntegrationNegative_rollover_refuses_to_overwrite_a_snapshot`
 
 ```gherkin
