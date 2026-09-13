@@ -9,9 +9,9 @@ ac-prefix: RDA
 
 # CAP-001 — acceptance criteria
 
-Criterion IDs are preserved verbatim from the existing test tags in `tests/test_rumble_data.py` (`test<PREFIX><digits>_<Type><Direction>_<description>`), canonicalized with a hyphen after the numeric portion (`RDA001` → `RDA-001`).
+Each test method in `tests/test_rumble_data.py` embeds its criterion ID, declared type, and direction in its name (`test<PREFIX><digits>_<Type><Direction>_<description>`); this file's IDs canonicalize that embedded number with a hyphen (`RDA001` → `RDA-001`).
 
-Python is not one of `clue validate`'s auto-classified evidence languages (Go, JVM, Cucumber), so each scenario's evidence is cited below as a direct reference rather than a tool-verified one.
+`clue validate` auto-classifies test evidence only in Go, JVM, or Cucumber, so it cannot verify these Python references directly; each scenario cites its test methods below as a direct reference instead.
 
 ```gherkin
 @RDA-001

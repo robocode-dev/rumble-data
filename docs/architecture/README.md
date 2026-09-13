@@ -1,6 +1,6 @@
 # Architecture
 
-> Drafted from repository evidence (scripts, workflows, config files, `README.md`, `GOVERNANCE.md`) rather than a human interview; treat as `provenance: inferred` until confirmed. See `CAP-001`/`CAP-002` for capability-local design.
+> Capability-local design lives in `CAP-001`/`CAP-002`; this page covers only system-wide structure.
 
 `rumble-data` has no application server and no database. Git is the store, GitHub Actions is the runtime, and generated JSON is the only interchange format. Everything is Python standard-library scripts plus static HTML/JS.
 

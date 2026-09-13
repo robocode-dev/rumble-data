@@ -1,6 +1,6 @@
 # Design
 
-> Drafted from repository evidence (workflows, scripts, `GOVERNANCE.md`) rather than a human interview; treat as `provenance: inferred` until confirmed. Capability-local detail lives in `CAP-001`/`CAP-002`'s `design.md`; this page covers only what crosses capability and workflow boundaries.
+> Capability-local detail lives in `CAP-001`/`CAP-002`'s `design.md`; this page covers only what crosses capability and workflow boundaries.
 
 ## Runtime flows
 

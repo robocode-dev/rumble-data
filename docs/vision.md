@@ -10,8 +10,6 @@ title: Public, verifiable Tank Royale Rumble rankings
 
 # VIS-001 — Public, verifiable Tank Royale Rumble rankings
 
-Drafted from repository evidence (`README.md`, `CONTRIBUTING.md`, `GOVERNANCE.md`, `wellknown/rumble.json`, and the ingestion/aggregation scripts) rather than a human interview. Confirm or correct it, then remove `status: draft` / `provenance: inferred` / `reversal-cost`.
-
 `rumble-data` is the public result store and ranking dashboard for the Tank Royale Rumble: a continuous, community-run bot tournament for the Robocode Tank Royale engine. It serves battle contributors who run ranked battles against a registered client, bot authors and owners who want to see how their bots rank, and moderators and auditors who need to trust and, if necessary, correct what is published.
 
 The problem it addresses: a ranked leaderboard that many independent, untrusted parties contribute battle results to needs a record of what happened that nobody can quietly rewrite, and a ranking that anyone can regenerate from that record rather than take on faith. The value it creates is a transparent, audit-friendly leaderboard (ranked by Average Percentage Score, or APS) plus matchmaking advice that tells contributors which bot pairings are under-sampled.

@@ -9,7 +9,7 @@ ac-prefix: RBC
 
 # CAP-002 — acceptance criteria
 
-Criterion ID preserved verbatim from the existing test tag (`RBC004` → `RBC-004`); see `../CAP-001-ranked-result-pipeline/criteria.md` for the same evidence-language note.
+This capability's criterion ID canonicalizes its test tag the same way `CAP-001`'s do (`RBC004` → `RBC-004`); see `../CAP-001-ranked-result-pipeline/criteria.md` for the evidence-language note.
 
 The `RBC-001`..`RBC-003` numbers are not used by any current test or corpus artifact — this is a normal gap, not a missing criterion; a future one would mint `RBC-005` next.
 
