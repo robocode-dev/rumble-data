@@ -3,19 +3,21 @@
 from __future__ import annotations
 
 import json
-import shutil
 import sys
 import tempfile
 import unittest
+from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from aggregate import aggregate, aggregate_game_type
+from check_snapshots import changed_manifest_entries
 from compact import compact
 from ingest import ingest
-from sync_catalog import synchronized_catalog
+from publication import publish_current, rollover
+from sync_catalog import sync, synchronized_catalog
 from validate import ValidationError, engine_pin
 
 
@@ -362,10 +364,193 @@ class RumbleDataTests(unittest.TestCase):
         page = (ROOT / "site/index.html").read_text(encoding="utf-8")
         script = (ROOT / "site/app.js").read_text(encoding="utf-8")
         self.assertIn("game-type", page)
-        self.assertIn("data/leaderboard/${gameType}.json", script)
-        self.assertIn("data/bots/", script)
+        self.assertIn("${prefix}/leaderboard/${gameType}.json", script)
+        self.assertIn("${entriesPrefix}/bots/", script)
         self.assertIn("data-sort", page)
         self.assertIn("renderEntries", script)
+
+    def testRDA006_IntegrationPositive_aps_weights_each_distinct_pairing_equally(self) -> None:
+        catalog = json.loads((self.root / "catalog.json").read_text(encoding="utf-8"))["bots"]
+        records = []
+        for _ in range(9):
+            records.append({"gameType": "1v1", "engine": {"behaviorVersion": 1}, "participants": [self.participant("Alpha", rank=1, total_score=100), self.participant("Bravo", rank=2, total_score=0)]})
+        records.append({"gameType": "1v1", "engine": {"behaviorVersion": 1}, "participants": [self.participant("Alpha", rank=2, total_score=0), self.participant("Charlie", rank=1, total_score=100)]})
+
+        leaderboard, _, _ = aggregate_game_type(records, catalog, "1v1", behavior_version=1)
+
+        alpha = next(entry for entry in leaderboard["entries"] if entry["name"] == "Alpha")
+        self.assertEqual(50.0, alpha["aps"])
+        self.assertEqual(10, alpha["battles"])
+        self.assertEqual(2, alpha["pairings"])
+
+    def testRDA006_IntegrationNegative_live_ranking_excludes_superseded_and_wrong_epoch_results(self) -> None:
+        catalog = json.loads((self.root / "catalog.json").read_text(encoding="utf-8"))["bots"]
+        catalog[0]["status"] = "superseded"
+        catalog.append({"name": "Alpha", "version": "2.0", "platform": "Python", "owner": "alpha-owner", "status": "active"})
+        wrong_epoch = {"gameType": "1v1", "engine": {"behaviorVersion": 2}, "participants": [self.participant("Alpha", rank=1, total_score=100), self.participant("Bravo", rank=2, total_score=0)]}
+
+        leaderboard, _, _ = aggregate_game_type([wrong_epoch], catalog, "1v1", behavior_version=1)
+
+        identities = {(entry["name"], entry["version"]): entry for entry in leaderboard["entries"]}
+        self.assertNotIn(("Alpha", "1.0"), identities)
+        self.assertEqual(0.0, identities[("Alpha", "2.0")]["aps"])
+        self.assertEqual(0.0, identities[("Bravo", "1.0")]["aps"])
+
+    def testRDA006_IntegrationPositive_equal_aps_uses_total_identity_order(self) -> None:
+        catalog = [
+            {"name": "alpha", "version": "1.0", "status": "active"},
+            {"name": "Alpha", "version": "1.0", "status": "active"},
+        ]
+
+        leaderboard, _, _ = aggregate_game_type([], catalog, "1v1", behavior_version=1)
+
+        self.assertEqual(["Alpha 1.0", "alpha 1.0"], [entry["bot"] for entry in leaderboard["entries"]])
+
+    def testRDA007_IntegrationPositive_visible_ranking_change_advances_publication_time(self) -> None:
+        self.write("site/data/history.json", {"schemaVersion": 1, "currentMonth": "2026-09", "lastUpdatedAt": "2026-09-01T00:00:00Z", "snapshots": []})
+        published_at = datetime(2026, 9, 13, 10, 30, tzinfo=timezone.utc)
+
+        self.assertTrue(publish_current(self.root, published_at))
+
+        manifest = json.loads((self.root / "site/data/history.json").read_text(encoding="utf-8"))
+        self.assertEqual("2026-09-13T10:30:00Z", manifest["lastUpdatedAt"])
+
+    def testRDA007_IntegrationNegative_unchanged_ranking_preserves_publication_time(self) -> None:
+        self.write("site/data/history.json", {"schemaVersion": 1, "currentMonth": "2026-09", "lastUpdatedAt": "2026-09-01T00:00:00Z", "snapshots": []})
+        publish_current(self.root, datetime(2026, 9, 13, 10, 30, tzinfo=timezone.utc))
+
+        self.assertFalse(publish_current(self.root, datetime(2026, 9, 13, 11, 30, tzinfo=timezone.utc)))
+
+        manifest = json.loads((self.root / "site/data/history.json").read_text(encoding="utf-8"))
+        self.assertEqual("2026-09-13T10:30:00Z", manifest["lastUpdatedAt"])
+
+    def testRDA007_IntegrationPositive_changed_writers_explicitly_dispatch_pages(self) -> None:
+        ingest_workflow = (ROOT / ".github/workflows/ingest.yml").read_text(encoding="utf-8")
+        catalog_workflow = (ROOT / ".github/workflows/sync-catalog.yml").read_text(encoding="utf-8")
+        pages_workflow = (ROOT / ".github/workflows/pages.yml").read_text(encoding="utf-8")
+
+        for workflow in (ingest_workflow, catalog_workflow):
+            self.assertIn("actions: write", workflow)
+            self.assertIn("gh workflow run pages.yml --ref main", workflow)
+            self.assertIn("site_changed", workflow)
+        self.assertIn("cron: '41 * * * *'", pages_workflow)
+        self.assertIn("git diff --quiet", pages_workflow)
+        self.assertIn("deploy=false", pages_workflow)
+
+    def testRDA007_IntegrationNegative_snapshot_alone_preserves_publication_time(self) -> None:
+        aggregate(self.root)
+        self.write("site/data/history.json", {"schemaVersion": 1, "currentMonth": "2026-08", "lastUpdatedAt": "2026-08-20T12:00:00Z", "snapshots": []})
+
+        rollover(self.root, datetime(2026, 9, 1, tzinfo=timezone.utc))
+
+        manifest = json.loads((self.root / "site/data/history.json").read_text(encoding="utf-8"))
+        self.assertEqual("2026-08-20T12:00:00Z", manifest["lastUpdatedAt"])
+
+    def testRDA007_IntegrationPositive_detects_ranking_regenerated_outside_publication(self) -> None:
+        self.write("site/data/history.json", {"schemaVersion": 1, "currentMonth": "2026-09", "currentDataHash": None, "lastUpdatedAt": "2026-09-01T00:00:00Z", "snapshots": []})
+        publish_current(self.root, datetime(2026, 9, 1, tzinfo=timezone.utc))
+        catalog = json.loads((self.root / "catalog.json").read_text(encoding="utf-8"))
+        catalog["bots"].append({"name": "Delta", "version": "1.0", "platform": "Python", "owner": "delta-owner", "status": "active"})
+        self.write("catalog.json", catalog)
+        aggregate(self.root)
+
+        self.assertTrue(publish_current(self.root, datetime(2026, 9, 13, 12, tzinfo=timezone.utc)))
+
+        manifest = json.loads((self.root / "site/data/history.json").read_text(encoding="utf-8"))
+        self.assertEqual("2026-09-13T12:00:00Z", manifest["lastUpdatedAt"])
+
+    def testRDA008_IntegrationPositive_rollover_copies_each_missing_month_byte_for_byte(self) -> None:
+        aggregate(self.root)
+        self.write("site/data/history.json", {"schemaVersion": 1, "currentMonth": "2026-08", "lastUpdatedAt": "2026-08-20T12:00:00Z", "snapshots": []})
+        source = (self.root / "site/data/leaderboard/1v1.json").read_bytes()
+
+        self.assertTrue(rollover(self.root, datetime(2026, 10, 1, tzinfo=timezone.utc)))
+
+        self.assertEqual(source, (self.root / "site/data/snapshots/2026-08/leaderboard/1v1.json").read_bytes())
+        self.assertEqual(source, (self.root / "site/data/snapshots/2026-09/leaderboard/1v1.json").read_bytes())
+        manifest = json.loads((self.root / "site/data/history.json").read_text(encoding="utf-8"))
+        self.assertEqual(["2026-08", "2026-09"], [item["month"] for item in manifest["snapshots"]])
+        self.assertEqual("2026-08-20T12:00:00Z", manifest["lastUpdatedAt"])
+
+    def testRDA008_IntegrationPositive_first_rollover_initializes_without_backfill(self) -> None:
+        self.write("site/data/history.json", {"schemaVersion": 1, "currentMonth": None, "lastUpdatedAt": "2026-09-01T00:00:00Z", "snapshots": []})
+
+        self.assertTrue(rollover(self.root, datetime(2026, 9, 13, tzinfo=timezone.utc)))
+
+        manifest = json.loads((self.root / "site/data/history.json").read_text(encoding="utf-8"))
+        self.assertEqual("2026-09", manifest["currentMonth"])
+        self.assertEqual([], manifest["snapshots"])
+
+    def testRDA008_IntegrationPositive_rollover_recovers_an_identical_partial_copy(self) -> None:
+        aggregate(self.root)
+        self.write("site/data/history.json", {"schemaVersion": 1, "currentMonth": "2026-08", "lastUpdatedAt": "2026-08-20T12:00:00Z", "snapshots": []})
+        source = self.root / "site/data/leaderboard/1v1.json"
+        partial = self.root / "site/data/snapshots/2026-08/leaderboard/1v1.json"
+        partial.parent.mkdir(parents=True)
+        partial.write_bytes(source.read_bytes())
+
+        self.assertTrue(rollover(self.root, datetime(2026, 9, 1, tzinfo=timezone.utc)))
+
+        self.assertTrue((self.root / "site/data/snapshots/2026-08/bots/Alpha-1.0.json").is_file())
+
+    def testRDA008_IntegrationNegative_rollover_refuses_to_overwrite_a_snapshot(self) -> None:
+        aggregate(self.root)
+        self.write("site/data/history.json", {"schemaVersion": 1, "currentMonth": "2026-08", "lastUpdatedAt": "2026-08-20T12:00:00Z", "snapshots": []})
+        self.write("site/data/snapshots/2026-08/leaderboard/1v1.json", {"different": True})
+
+        with self.assertRaisesRegex(ValueError, "immutable"):
+            rollover(self.root, datetime(2026, 9, 1, tzinfo=timezone.utc))
+
+    def testUnitPositive_snapshot_check_accepts_additive_manifest_entries(self) -> None:
+        august = {"month": "2026-08", "updatedAt": "2026-08-20T12:00:00Z", "path": "data/snapshots/2026-08"}
+        september = {"month": "2026-09", "updatedAt": "2026-09-20T12:00:00Z", "path": "data/snapshots/2026-09"}
+
+        self.assertEqual([], changed_manifest_entries(None, [august]))
+        self.assertEqual([], changed_manifest_entries([august], [august, september]))
+
+    def testUnitNegative_snapshot_check_rejects_edited_or_removed_manifest_entries(self) -> None:
+        august = {"month": "2026-08", "updatedAt": "2026-08-20T12:00:00Z", "path": "data/snapshots/2026-08"}
+        september = {"month": "2026-09", "updatedAt": "2026-09-20T12:00:00Z", "path": "data/snapshots/2026-09"}
+        edited = {**august, "updatedAt": "2026-08-21T12:00:00Z"}
+
+        self.assertEqual(["site/data/history.json snapshot entry 2026-08"], changed_manifest_entries([august, september], [september]))
+        self.assertEqual(["site/data/history.json snapshot entry 2026-08"], changed_manifest_entries([august], [edited]))
+        self.assertEqual(["site/data/history.json snapshot entry 2026-08"], changed_manifest_entries([august], None))
+
+    def testRDA009_E2EPositive_dashboard_selects_current_or_archived_data(self) -> None:
+        page = (ROOT / "site/index.html").read_text(encoding="utf-8")
+        script = (ROOT / "site/app.js").read_text(encoding="utf-8")
+
+        self.assertIn('id="ranking-period"', page)
+        self.assertIn("data/history.json", script)
+        self.assertIn("snapshot.path", script)
+        self.assertIn("ranking data last updated", script)
+        self.assertIn("if (request !== latestLeaderboardRequest) return;", script)
+
+    def testRDA009_E2ENegative_dashboard_marks_archived_rankings_read_only(self) -> None:
+        page = (ROOT / "site/index.html").read_text(encoding="utf-8")
+        script = (ROOT / "site/app.js").read_text(encoding="utf-8")
+
+        self.assertIn("read-only month-end snapshot", page)
+        self.assertIn("archiveNotice.hidden = !snapshot", script)
+
+    def testRBC005_IntegrationPositive_changed_catalog_is_written_for_publication(self) -> None:
+        source = {"schemaVersion": 1, "generatedAt": "2026-09-13T12:00:00Z", "commit": "new", "bots": [{"name": "Alpha", "version": "2.0", "status": "active"}]}
+        self.write("catalog.json", {"schemaVersion": 1, "source": "https://example.test/bots/index.json", "sourceCommit": "old", "sourceGeneratedAt": "2026-09-01T00:00:00Z", "bots": []})
+
+        self.assertTrue(sync(self.root, lambda _: json.dumps(source).encode("utf-8")))
+
+        self.assertEqual("new", json.loads((self.root / "catalog.json").read_text(encoding="utf-8"))["sourceCommit"])
+
+    def testRBC005_IntegrationNegative_unchanged_catalog_skips_rewrite_and_aggregation(self) -> None:
+        source = {"schemaVersion": 1, "generatedAt": "2026-09-13T12:00:00Z", "commit": "same", "bots": [{"name": "Alpha", "version": "1.0", "status": "active", "teamMembers": []}]}
+        self.write("catalog.json", {"schemaVersion": 1, "source": "https://example.test/bots/index.json", "sourceCommit": "same", "sourceGeneratedAt": "2026-09-13T12:00:00Z", "bots": source["bots"]})
+
+        self.assertFalse(sync(self.root, lambda _: json.dumps(source).encode("utf-8")))
+
+        workflow = (ROOT / ".github/workflows/sync-catalog.yml").read_text(encoding="utf-8")
+        self.assertIn("skipping aggregation", workflow)
+        self.assertIn("rumble-publication-writer", workflow)
 
 
 if __name__ == "__main__":

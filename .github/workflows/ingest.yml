@@ -8,11 +8,12 @@ on:
   workflow_dispatch:
 
 permissions:
+  actions: write
   contents: write
   issues: write
 
 concurrency:
-  group: rumble-result-ingestion
+  group: rumble-publication-writer
   cancel-in-progress: false
 
 jobs:
@@ -21,9 +22,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Snapshot completed UTC months before accepting results
+        run: python scripts/publication.py --root . --rollover-only
       - name: Stage labelled issue inbox
         env:
           GH_TOKEN: ${{ github.token }}
@@ -49,15 +54,22 @@ jobs:
             printf '%s\n' "$number" >> .inbox/processed-issues
           done < .inbox/issues
       - name: Regenerate projections and commit accepted facts
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          python scripts/aggregate.py --root .
+          python scripts/publication.py --root .
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          site_changed=false
+          [ -n "$(git status --porcelain -- site)" ] && site_changed=true
           for path in results leaderboard matchmaking clients.json site/data; do
             [ -e "$path" ] && git add -- "$path"
           done
-          git diff --cached --quiet || git commit -m 'chore: ingest Rumble result batch'
-          git push
+          if ! git diff --cached --quiet; then
+            git commit -m 'chore: ingest Rumble result batch'
+            git push
+            [ "$site_changed" = false ] || gh workflow run pages.yml --ref main
+          fi
       - name: Publish durable receipts
         env:
           GH_TOKEN: ${{ github.token }}

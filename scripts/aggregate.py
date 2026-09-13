@@ -60,7 +60,10 @@ def facts(root: Path) -> list[dict[str, Any]]:
 
 def active_catalog(root: Path) -> list[dict[str, Any]]:
     """Return active bot versions in stable identity order."""
-    return sorted((bot for bot in read_json(root / "catalog.json").get("bots", []) if bot.get("status") == "active"), key=lambda item: (str(item.get("name")).casefold(), str(item.get("version"))))
+    return sorted(
+        (bot for bot in read_json(root / "catalog.json").get("bots", []) if bot.get("status") == "active"),
+        key=lambda item: (str(item.get("name")).casefold(), str(item.get("name")), str(item.get("version")).casefold(), str(item.get("version"))),
+    )
 
 
 def identity(participant: dict[str, Any]) -> tuple[str, str]:
@@ -74,9 +77,15 @@ def aggregate_game_type(records: list[dict[str, Any]], catalog: list[dict[str, A
     eligible = {
         (str(bot["name"]), str(bot["version"])): bot
         for bot in catalog
-        if bool(bot.get("teamMembers", [])) is expects_team
+        if bot.get("status") == "active" and bool(bot.get("teamMembers", [])) is expects_team
     }
-    relevant = [record for record in records if record.get("gameType") == game_type and record.get("engine", {}).get("behaviorVersion") == behavior_version]
+    relevant = [
+        record
+        for record in records
+        if record.get("gameType") == game_type
+        and record.get("engine", {}).get("behaviorVersion") == behavior_version
+        and all(identity(participant) in eligible for participant in record.get("participants", []))
+    ]
     shares: dict[tuple[str, str], dict[tuple[tuple[str, str], ...], list[float]]] = defaultdict(lambda: defaultdict(list))
     pairing_counts: dict[tuple[tuple[str, str], ...], int] = defaultdict(int)
     pair_sample_counts: dict[tuple[tuple[str, str], tuple[str, str]], int] = defaultdict(int)
@@ -100,7 +109,7 @@ def aggregate_game_type(records: list[dict[str, Any]], catalog: list[dict[str, A
             "aps": round((sum(per_pairing) / len(per_pairing) * 100) if per_pairing else 0.0, 4), "battles": sum(len(values) for values in bot_pairings.values()),
             "pairings": len(bot_pairings), "epoch": behavior_version,
         })
-    entries.sort(key=lambda item: (-float(item["aps"]), str(item["bot"]).casefold()))
+    entries.sort(key=lambda item: (-float(item["aps"]), str(item["bot"]).casefold(), str(item["bot"])))
     projection_id = content_hash({"gameType": game_type, "behaviorVersion": behavior_version, "records": relevant, "catalog": catalog})
     leaderboard = {"schemaVersion": 1, "projectionId": projection_id, "gameType": game_type, "behaviorVersion": behavior_version, "entries": entries}
     pairs = [{"bots": [f"{name} {version}" for name, version in pair], "battles": count} for pair, count in sorted(pairing_counts.items())]
@@ -121,6 +130,10 @@ def aggregate(root: Path) -> None:
     engine = read_json(root / "engine.json")
     behavior_version = int(engine["behaviorVersion"])
     records, catalog = facts(root), active_catalog(root)
+    for directory in (root / "leaderboard" / "bots", root / "site" / "data" / "bots"):
+        if directory.exists():
+            for path in directory.glob("*.json"):
+                path.unlink()
     for game_type in sorted(engine["gameTypes"]):
         leaderboard, pairings, needed = aggregate_game_type(records, catalog, game_type, behavior_version)
         write_json(root / "leaderboard" / f"{game_type}.json", leaderboard)

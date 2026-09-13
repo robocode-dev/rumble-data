@@ -9,11 +9,15 @@
 <body>
   <main>
     <h1>Tank Royale Rumble</h1>
-    <p>Reproducible rankings from immutable community-run battle facts.</p>
-    <label>Game type <select id="game-type"><option value="1v1">1v1</option><option value="twinduel">TwinDuel</option><option value="melee">Melee</option></select></label>
+    <p>Reproducible rankings from immutable community-run battle facts. <a href="https://robocode.dev/rumble/rankings">How APS and rankings work</a>.</p>
+    <div class="filters">
+      <label>Ranking period <select id="ranking-period"><option value="current">Current</option></select></label>
+      <label>Game type <select id="game-type"><option value="1v1">1v1</option><option value="twinduel">TwinDuel</option><option value="melee">Melee</option></select></label>
+    </div>
+    <p id="archive-notice" class="notice" hidden>This is a read-only month-end snapshot. Later results and bot versions do not change it.</p>
     <p id="status" aria-live="polite">Loading leaderboard…</p>
     <table>
-      <thead><tr><th>Rank</th><th>Bot</th><th><button type="button" data-sort="aps">APS</button></th><th><button type="button" data-sort="battles">Battles</button></th><th><button type="button" data-sort="pairings">Pairings</button></th></tr></thead>
+      <thead><tr><th>Rank</th><th>Bot</th><th><button type="button" data-sort="aps" title="Average Percentage Score">APS</button></th><th><button type="button" data-sort="battles">Battles</button></th><th><button type="button" data-sort="pairings">Pairings</button></th></tr></thead>
       <tbody id="leaderboard"></tbody>
     </table>
     <p><a href="https://github.com/robocode-dev/rumble-data/blob/main/CONTRIBUTING.md">Contribute ranked battles</a></p>

@@ -18,9 +18,11 @@ Aggregation reapplies current registrations, bans, bot disqualifications, and ex
 
 ## Ingestion and dashboard operations
 
-A newly labelled result issue normally triggers ingestion immediately. The scheduled fallback runs at 17 and 47 minutes past every UTC hour. Runs are serialized, and each drain processes the complete labelled inbox, commits accepted facts and projections together, publishes receipts, and closes processed issues.
+A newly labelled result issue normally triggers ingestion immediately. The scheduled fallback runs at 17 and 47 minutes past every UTC hour. Result and catalog writers share one non-cancelling concurrency group. Each drain first snapshots any completed UTC month, processes the complete labelled inbox, commits changed accepted facts and projections together, explicitly requests Pages when site data changed, then publishes receipts and closes processed issues.
 
-Catalog synchronization runs at 23 minutes past every UTC hour. Dashboard deployment runs after a push changes `site/`.
+Catalog polling runs at 23 minutes past every UTC hour. If normalized source content is identical, it skips aggregation, commit, and deployment. A changed catalog is regenerated and committed, and its writer explicitly requests the Pages workflow because a push made with the built-in Actions token does not start another push-triggered workflow. Pages also reconciles the current `site/` tree against the latest successful deployment at 41 minutes past each UTC hour and deploys only when they differ.
+
+At the first writer run after a UTC month boundary, `scripts/publication.py` copies current leaderboard and bot-detail JSON into `site/data/snapshots/YYYY-MM/` before accepting or synchronizing new input. Existing snapshots are immutable and pull-request verification rejects modifications or deletions. If writers were inactive across multiple boundaries, each missing month receives the same last published cumulative state. Snapshot creation does not reset current rankings or advance `lastUpdatedAt`.
 
 If GitHub disables scheduled workflows after inactivity, re-enable them. An incoming labelled issue can wake ingestion, but it does not replace routine operational checks.
 

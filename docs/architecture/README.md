@@ -23,20 +23,26 @@ flowchart LR
     extract --> validate["validate.py"]
     validate --> ingest["ingest.py"]
     ingest -->|"content-addressed\nimmutable write"| raw[("results/raw/**\n(git-tracked)")]
-    ingestWF --> aggregate["aggregate.py"]
+    ingestWF --> publish["publication.py\nrollover + changed-data timestamp"]
+    publish --> aggregate["aggregate.py"]
     raw --> aggregate
     rollups[("results/rollups/**\narchive branch")] --> aggregate
     catalogFile[("catalog.json")] --> aggregate
     aggregate --> lb[("leaderboard/**")]
     aggregate --> mm[("matchmaking/**")]
     aggregate --> siteData[("site/data/**")]
+    publish --> snapshots[("site/data/snapshots/**\nimmutable month ends")]
+    publish --> history[("site/data/history.json")]
     aggregate --> clientsJson[("clients.json")]
 
     catalogSrc["external bot catalog\nsource (HTTPS)"] -->|"23 * cron"| syncWF["sync-catalog.yml"]
     syncWF --> syncCat["sync_catalog.py"]
     syncCat --> catalogFile
+    syncWF --> publish
 
-    siteData --> pagesWF["pages.yml\n(on push to site/**)"]
+    siteData --> pagesWF["pages.yml\n(explicit dispatch + reconciliation)"]
+    snapshots --> pagesWF
+    history --> pagesWF
     pagesWF --> pages[("GitHub Pages")]
     pages --> viewer["Dashboard viewer\n(external)"]
 
@@ -50,10 +56,11 @@ flowchart LR
 - **Transport** (`scripts/extract_envelope.py`) — pulls the one required fenced JSON block out of an issue body; owns no state.
 - **Validation** (`scripts/validate.py`) — pure functions checking one record against `engine.json`, `catalog.json`, `clients/*.json`, and `bans.json`; owns no state.
 - **Ingestion** (`scripts/ingest.py`) — the only writer of `results/raw/`; enforces idempotency and immutability.
-- **Aggregation** (`scripts/aggregate.py`) — the only writer of `leaderboard/`, `matchmaking/`, `site/data/`, and `clients.json`; fully regenerates them from tracked inputs every run.
+- **Aggregation** (`scripts/aggregate.py`) — the only writer of current `leaderboard/`, `matchmaking/`, current leaderboard/bot data below `site/data/`, and `clients.json`; fully regenerates them from tracked inputs every run and owns no clock.
+- **Publication** (`scripts/publication.py`) — serializes result and catalog writers, snapshots completed UTC months before new input, and advances public freshness only when current ranking bytes change.
 - **Compaction** (`scripts/compact.py`) — moves aged facts into monthly rollups on a separate `archive` branch checkout, verifying aggregation is unchanged before committing the move.
 - **Catalog sync** (`scripts/sync_catalog.py`) — the only writer of `catalog.json`.
-- **Dashboard** (`site/`) — static HTML/CSS/JS with no build step and no server; reads only generated JSON under `site/data/`.
+- **Dashboard** (`site/`) — static HTML/CSS/JS with no build step and no server; reads current generated JSON and immutable monthly snapshots through `site/data/history.json`.
 - **Shared kernel** (`scripts/common.py`) — canonical JSON, content addressing, and the catalog team-membership contract every other component depends on.
 
 See `CAP-001-ranked-result-pipeline` and `CAP-002-bot-catalog-sync` for behavior inside these boundaries, and `../design/README.md` for the runtime flows connecting them.
@@ -63,13 +70,13 @@ See `CAP-001-ranked-result-pipeline` and `CAP-002-bot-catalog-sync` for behavior
 - **Python standard library only** — no third-party dependency for any script (`README.md`); keeps the fork drill (`G-003`) from depending on package availability.
 - **Git as the database** — accepted facts and generated projections are ordinary tracked files; there is no external datastore, and history is the audit trail.
 - **Content-addressed, immutable facts** — every accepted record's filename is a SHA-256 hash of its own normalized content (`common.content_hash`), which is what makes retries idempotent and edits detectable.
-- **Regenerate, never patch, derived data** — `leaderboard/`, `matchmaking/`, `clients.json`, and `site/data/` are always fully rebuilt from `results/`, `catalog.json`, `clients/`, `bans.json`, and `exclusions.json`; `.github/workflows/verify.yml` fails the build if committed derived data ever drifts from what regeneration produces.
+- **Regenerate current projections, append historical publications** — `leaderboard/`, `matchmaking/`, `clients.json`, and current ranking JSON are fully rebuilt from `results/`, `catalog.json`, `clients/`, `bans.json`, and `exclusions.json`; monthly snapshot paths are append-only records and pull-request verification rejects changes to an existing snapshot.
 - **GitHub Issues as the submission transport, GitHub Actions as the only runtime, GitHub Pages as the only hosting** — no bespoke server or API; see `ADR-001` and `ADR-002`.
 - **A parallel `archive` git branch for compacted history** — keeps `main`'s working tree from growing unbounded while keeping compacted facts in git rather than deleting them.
 
 ## Related decisions
 
-`ADR-001` (immutable, content-addressed facts with disposable projections) and `ADR-002` (GitHub Issues as the submission transport) are the architectural decisions behind this shape; see `../decisions/README.md`.
+`ADR-003` (immutable facts, cumulative current projections, and immutable monthly publication snapshots) and `ADR-002` (GitHub Issues as the submission transport) are the architectural decisions behind this shape; see `../decisions/README.md`.
 
 <!-- clue:index:start -->
 <!-- clue:index:end -->

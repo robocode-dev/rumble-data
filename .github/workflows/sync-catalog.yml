@@ -6,22 +6,48 @@ on:
   workflow_dispatch:
 
 permissions:
+  actions: write
   contents: write
+
+concurrency:
+  group: rumble-publication-writer
+  cancel-in-progress: false
 
 jobs:
   synchronize:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python scripts/sync_catalog.py --root .
-      - run: python scripts/aggregate.py --root .
+      - name: Snapshot completed UTC months before synchronizing the catalog
+        run: python scripts/publication.py --root . --rollover-only
+      - id: catalog
+        name: Synchronize catalog and regenerate only when it changed
+        shell: bash
+        run: |
+          python scripts/sync_catalog.py --root .
+          if git diff --quiet -- catalog.json; then
+            echo 'changed=false' >> "$GITHUB_OUTPUT"
+            echo 'The source catalog is unchanged; skipping aggregation.'
+          else
+            echo 'changed=true' >> "$GITHUB_OUTPUT"
+            python scripts/publication.py --root .
+          fi
       - name: Commit synchronized catalog and projections
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          site_changed=false
+          [ -n "$(git status --porcelain -- site)" ] && site_changed=true
           git add catalog.json leaderboard matchmaking clients.json site/data
-          git diff --cached --quiet || git commit -m 'chore: synchronize Rumble bot catalog and projections'
-          git push
+          if ! git diff --cached --quiet; then
+            git commit -m 'chore: synchronize Rumble bot catalog and projections'
+            git push
+            [ "$site_changed" = false ] || gh workflow run pages.yml --ref main
+          fi

@@ -10,11 +10,13 @@ Most battle contributors should use the Rumble Client rather than create result 
 
 ## When the dashboard updates
 
-A result issue normally starts ingestion as soon as GitHub applies the `result-submission` label. A scheduled fallback runs at 17 and 47 minutes past every UTC hour. Each successful drain commits accepted facts, regenerates the projections, and triggers a Pages deployment when dashboard data changed.
+A result issue normally starts ingestion as soon as GitHub applies the `result-submission` label. A scheduled fallback runs at 17 and 47 minutes past every UTC hour. Each drain regenerates the projections, but it commits and requests a Pages deployment only when accepted facts, current ranking data, or month history changed.
 
-The reviewed bot catalog synchronizes at 23 minutes past every UTC hour. A newly merged bot appears after that synchronization and starts with no ranked samples.
+The reviewed bot catalog is checked at 23 minutes past every UTC hour. Identical source content stops without aggregation, a commit, or a deployment. A newly merged bot or bot version changes the catalog, triggers ranking regeneration and publication, and starts with no ranked samples.
 
-GitHub Actions schedules may run late, so these times describe the automation cadence rather than a delivery guarantee.
+The Pages workflow also checks at 41 minutes past each UTC hour whether the current `site/` tree differs from the latest successful deployment. This reconciliation recovers a missed deployment without republishing an unchanged site. GitHub Actions schedules may run late, so these times describe the automation cadence rather than a delivery guarantee.
+
+The dashboard's “ranking data last updated” value advances only when current leaderboard or bot-detail JSON changes. A workflow run, unchanged regeneration, deployment, or monthly snapshot by itself does not advance it.
 
 ## How results become rankings
 
@@ -22,7 +24,11 @@ Submitted issue bodies are transport, not durable storage. The ingestion workflo
 
 `scripts/aggregate.py` derives the leaderboard, pairing statistics, matchmaking advice, client totals, and dashboard data from repository-tracked inputs. The generated projections are disposable; accepted facts are the source of truth.
 
-The current dashboard ranks each game type by APS, or Average Percentage Score. It also shows how many battles and distinct matchups contribute to each entry.
+The current dashboard ranks each game type by APS, or Average Percentage Score. For each accepted battle, a participant's score share is its `totalScore` divided by the sum of all participants' `totalScore` values; a zero total produces a zero share. Battles are grouped by the exact sorted set of participating bot name-and-version identities. Repeated battles are averaged within each distinct pairing, then APS is 100 times the mean of those pairing averages, so every distinct pairing has equal weight regardless of how many samples it has. Stored APS is rounded to four decimal places and the dashboard displays two.
+
+Only accepted facts matching the current `engine.json` `behaviorVersion` and matchups whose complete participant set consists of currently active, game-type-eligible identities contribute. The live leaderboard contains only catalog entries whose exact name and version are currently `active`. When a new version becomes active, it is a separate identity that starts at APS 0 with no samples; its superseded version disappears, and matchups containing that old version stop affecting every participant's live APS. Entries sort by descending APS with a stable bot-identity tie break.
+
+The live ranking remains cumulative rather than resetting each month. Before the first result or catalog writer proceeds in a new UTC month, it saves the previous current leaderboard and bot details as an immutable month-end snapshot. The dashboard period selector exposes these read-only snapshots; late results affect the current ranking only and never rewrite past months. The first snapshot is created at the first month boundary after this feature is deployed, with no synthetic backfill.
 
 ## Repository map
 
@@ -35,6 +41,8 @@ The current dashboard ranks each game type by APS, or Average Percentage Score. 
 | `catalog.json` | Synchronized copy of the reviewed Rumble bot catalog. |
 | `engine.json` | Pinned game behavior and ranked presets. |
 | `site/` | Static dashboard published through GitHub Pages. |
+| `site/data/history.json` | Current publication freshness and available monthly snapshots. |
+| `site/data/snapshots/YYYY-MM/` | Immutable cumulative month-end leaderboard and bot-detail JSON. |
 | `wellknown/rumble.json` | Canonical repository pointer used by clients. |
 
 `engine.json.clientImage` is optional while no production Rumble Client image is published. When added, it must use an immutable image digest. Ranked compatibility is determined by `behaviorVersion`, not by the presence of an image.
