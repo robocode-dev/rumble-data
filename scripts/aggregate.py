@@ -60,7 +60,10 @@ def facts(root: Path) -> list[dict[str, Any]]:
 
 def active_catalog(root: Path) -> list[dict[str, Any]]:
     """Return active bot versions in stable identity order."""
-    return sorted((bot for bot in read_json(root / "catalog.json").get("bots", []) if bot.get("status") == "active"), key=lambda item: (str(item.get("name")).casefold(), str(item.get("version"))))
+    return sorted(
+        (bot for bot in read_json(root / "catalog.json").get("bots", []) if bot.get("status") == "active"),
+        key=lambda item: (str(item.get("name")).casefold(), str(item.get("name")), str(item.get("version")).casefold(), str(item.get("version"))),
+    )
 
 
 def identity(participant: dict[str, Any]) -> tuple[str, str]:
@@ -106,7 +109,7 @@ def aggregate_game_type(records: list[dict[str, Any]], catalog: list[dict[str, A
             "aps": round((sum(per_pairing) / len(per_pairing) * 100) if per_pairing else 0.0, 4), "battles": sum(len(values) for values in bot_pairings.values()),
             "pairings": len(bot_pairings), "epoch": behavior_version,
         })
-    entries.sort(key=lambda item: (-float(item["aps"]), str(item["bot"]).casefold()))
+    entries.sort(key=lambda item: (-float(item["aps"]), str(item["bot"]).casefold(), str(item["bot"])))
     projection_id = content_hash({"gameType": game_type, "behaviorVersion": behavior_version, "records": relevant, "catalog": catalog})
     leaderboard = {"schemaVersion": 1, "projectionId": projection_id, "gameType": game_type, "behaviorVersion": behavior_version, "entries": entries}
     pairs = [{"bots": [f"{name} {version}" for name, version in pair], "battles": count} for pair, count in sorted(pairing_counts.items())]

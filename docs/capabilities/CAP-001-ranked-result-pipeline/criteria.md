@@ -114,6 +114,7 @@ Test-type: Integration
 Evidence:
 
 - `testRDA006_IntegrationPositive_aps_weights_each_distinct_pairing_equally`
+- `testRDA006_IntegrationPositive_equal_aps_uses_total_identity_order`
 - `testRDA006_IntegrationNegative_live_ranking_excludes_superseded_and_wrong_epoch_results`
 
 ```gherkin

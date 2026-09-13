@@ -395,6 +395,16 @@ class RumbleDataTests(unittest.TestCase):
         self.assertEqual(0.0, identities[("Alpha", "2.0")]["aps"])
         self.assertEqual(0.0, identities[("Bravo", "1.0")]["aps"])
 
+    def testRDA006_IntegrationPositive_equal_aps_uses_total_identity_order(self) -> None:
+        catalog = [
+            {"name": "alpha", "version": "1.0", "status": "active"},
+            {"name": "Alpha", "version": "1.0", "status": "active"},
+        ]
+
+        leaderboard, _, _ = aggregate_game_type([], catalog, "1v1", behavior_version=1)
+
+        self.assertEqual(["Alpha 1.0", "alpha 1.0"], [entry["bot"] for entry in leaderboard["entries"]])
+
     def testRDA007_IntegrationPositive_visible_ranking_change_advances_publication_time(self) -> None:
         self.write("site/data/history.json", {"schemaVersion": 1, "currentMonth": "2026-09", "lastUpdatedAt": "2026-09-01T00:00:00Z", "snapshots": []})
         published_at = datetime(2026, 9, 13, 10, 30, tzinfo=timezone.utc)
