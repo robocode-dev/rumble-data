@@ -11,12 +11,12 @@ ac-prefix: RBC
 
 This capability's criterion ID canonicalizes its test tag the same way `CAP-001`'s do (`RBC004` → `RBC-004`); see `../CAP-001-ranked-result-pipeline/criteria.md` for the evidence-language note.
 
-`RBC-005` carries `@draft` for the same unsupported-Python evidence reason; its positive and negative tests run in `verify.yml`.
+Both criteria carry `@draft` for the same unsupported-Python evidence reason; their positive and negative tests run in `verify.yml`.
 
 The `RBC-001`..`RBC-003` numbers are not used by any current test or corpus artifact — this is a normal gap, not a missing criterion; a future one would mint `RBC-005` next.
 
 ```gherkin
-@RBC-004
+@RBC-004 @draft
 Scenario: Synchronization keeps team membership valid and never advises invalid teams
 Test-type: Integration
   Given a source catalog with individual bots and additive team entries

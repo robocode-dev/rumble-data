@@ -13,10 +13,10 @@ Each test method in `tests/test_rumble_data.py` embeds its criterion ID, declare
 
 `clue validate` auto-classifies test evidence only in Go, JVM, or Cucumber, so it cannot verify these Python references directly; each scenario cites its test methods below as a direct reference instead.
 
-Criteria added by `CH-001` remain tagged `@draft` only because the repository's executable evidence is Python, which the current Cliewen evidence classifier cannot recognize. Their focused positive and negative tests run in `verify.yml`; the tag records the unsupported proof carrier rather than an unimplemented behavior.
+Every criterion remains tagged `@draft` only because the repository's executable evidence is Python, which the current Cliewen evidence classifier cannot recognize. Its focused tests run in `verify.yml`; the tag records the unsupported formal proof carrier rather than an unimplemented behavior.
 
 ```gherkin
-@RDA-001
+@RDA-001 @draft
 Scenario: A valid submission from a registered client becomes an immutable ranked fact
 Test-type: Integration
   Given a battle result from a registered client and client ID, for a supported game type, matching the pinned engine and an active catalog entry
@@ -37,7 +37,7 @@ Evidence (all positive-direction facets of this one criterion):
 - `testRDA001_IntegrationPositive_catalog_sync_admits_published_bot_results` — a bot newly admitted by `CAP-002` can immediately submit results
 
 ```gherkin
-@RDA-002
+@RDA-002 @draft
 Scenario: A structurally invalid record is rejected and never persisted
 Test-type: Integration
   Given a batch containing a record that fails schema, identity, engine-pin, or score-consistency validation
@@ -54,7 +54,7 @@ Evidence (negative direction):
 - `testRDA002_IntegrationNegative_rejects_each_documented_structural_violation` — table-driven coverage of client identity, engine pin, arena dimensions, isTeam, score typing, 1224 rank system, and place-count bounds
 
 ```gherkin
-@RDA-003
+@RDA-003 @draft
 Scenario: Projections stay deterministic and reflect current moderation, independent of when facts were recorded
 Test-type: Integration
   Given accepted facts recorded under registrations, bans, and exclusions that have since changed, and facts that have since been compacted into monthly rollups
@@ -69,7 +69,7 @@ Evidence:
 - `testRDA003_IntegrationPositive_current_bans_and_registration_filter_existing_facts`
 
 ```gherkin
-@RDA-004
+@RDA-004 @draft
 Scenario: The dashboard reads generated projections rather than embedding data of its own
 Test-type: E2E
   Given the published static site
@@ -83,7 +83,7 @@ Evidence:
 - `testRDA004_E2EPositive_dashboard_references_versioned_projection_and_bot_details`
 
 ```gherkin
-@RDA-005
+@RDA-005 @draft
 Scenario: Catalog membership and eligibility gate both validation and matchmaking
 Test-type: Integration
   Given the current active bot catalog, including which entries are individual bots and which are teams
