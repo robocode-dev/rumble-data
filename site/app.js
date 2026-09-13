@@ -4,6 +4,8 @@ const archiveNotice = document.querySelector('#archive-notice');
 const status = document.querySelector('#status');
 const body = document.querySelector('#leaderboard');
 let entries = [];
+let entriesPrefix = 'data';
+let latestLeaderboardRequest = 0;
 let publicationHistory = { lastUpdatedAt: null, snapshots: [] };
 let sortField = 'aps';
 let descending = true;
@@ -21,26 +23,32 @@ function renderEntries() {
   body.replaceChildren();
   [...entries].sort((first, second) => descending ? second[sortField] - first[sortField] : first[sortField] - second[sortField]).forEach((entry, index) => {
     const row = document.createElement('tr');
-    row.innerHTML = `<td>${index + 1}</td><td><a href="${dataPrefix()}/bots/${encodeURIComponent(entry.name)}-${encodeURIComponent(entry.version)}.json">${entry.bot}</a></td><td>${entry.aps.toFixed(2)}</td><td>${entry.battles}</td><td>${entry.pairings}</td>`;
+    row.innerHTML = `<td>${index + 1}</td><td><a href="${entriesPrefix}/bots/${encodeURIComponent(entry.name)}-${encodeURIComponent(entry.version)}.json">${entry.bot}</a></td><td>${entry.aps.toFixed(2)}</td><td>${entry.battles}</td><td>${entry.pairings}</td>`;
     body.append(row);
   });
 }
 
 async function loadLeaderboard() {
+  const request = ++latestLeaderboardRequest;
   const gameType = gameTypeSelect.value;
   const snapshot = selectedSnapshot();
+  const prefix = dataPrefix();
   status.textContent = 'Loading leaderboard…';
   archiveNotice.hidden = !snapshot;
   try {
-    const response = await fetch(`${dataPrefix()}/leaderboard/${gameType}.json`);
+    const response = await fetch(`${prefix}/leaderboard/${gameType}.json`);
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const data = await response.json();
+    // A slower response for an earlier selection must not replace the current one.
+    if (request !== latestLeaderboardRequest) return;
     entries = data.entries;
+    entriesPrefix = prefix;
     renderEntries();
     const updatedAt = snapshot ? snapshot.updatedAt : publicationHistory.lastUpdatedAt;
     const updatedText = updatedAt ? ` · ranking data last updated ${new Date(updatedAt).toLocaleString()}` : '';
     status.textContent = `${data.entries.length} active bots · behavior version ${data.behaviorVersion}${updatedText}`;
   } catch (error) {
+    if (request !== latestLeaderboardRequest) return;
     status.textContent = `The leaderboard is unavailable: ${error.message}`;
   }
 }

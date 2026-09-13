@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from aggregate import aggregate, aggregate_game_type
+from check_snapshots import changed_manifest_entries
 from compact import compact
 from ingest import ingest
 from publication import publish_current, rollover
@@ -363,8 +364,8 @@ class RumbleDataTests(unittest.TestCase):
         page = (ROOT / "site/index.html").read_text(encoding="utf-8")
         script = (ROOT / "site/app.js").read_text(encoding="utf-8")
         self.assertIn("game-type", page)
-        self.assertIn("${dataPrefix()}/leaderboard/${gameType}.json", script)
-        self.assertIn("${dataPrefix()}/bots/", script)
+        self.assertIn("${prefix}/leaderboard/${gameType}.json", script)
+        self.assertIn("${entriesPrefix}/bots/", script)
         self.assertIn("data-sort", page)
         self.assertIn("renderEntries", script)
 
@@ -500,6 +501,22 @@ class RumbleDataTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "immutable"):
             rollover(self.root, datetime(2026, 9, 1, tzinfo=timezone.utc))
 
+    def testUnitPositive_snapshot_check_accepts_additive_manifest_entries(self) -> None:
+        august = {"month": "2026-08", "updatedAt": "2026-08-20T12:00:00Z", "path": "data/snapshots/2026-08"}
+        september = {"month": "2026-09", "updatedAt": "2026-09-20T12:00:00Z", "path": "data/snapshots/2026-09"}
+
+        self.assertEqual([], changed_manifest_entries(None, [august]))
+        self.assertEqual([], changed_manifest_entries([august], [august, september]))
+
+    def testUnitNegative_snapshot_check_rejects_edited_or_removed_manifest_entries(self) -> None:
+        august = {"month": "2026-08", "updatedAt": "2026-08-20T12:00:00Z", "path": "data/snapshots/2026-08"}
+        september = {"month": "2026-09", "updatedAt": "2026-09-20T12:00:00Z", "path": "data/snapshots/2026-09"}
+        edited = {**august, "updatedAt": "2026-08-21T12:00:00Z"}
+
+        self.assertEqual(["site/data/history.json snapshot entry 2026-08"], changed_manifest_entries([august, september], [september]))
+        self.assertEqual(["site/data/history.json snapshot entry 2026-08"], changed_manifest_entries([august], [edited]))
+        self.assertEqual(["site/data/history.json snapshot entry 2026-08"], changed_manifest_entries([august], None))
+
     def testRDA009_E2EPositive_dashboard_selects_current_or_archived_data(self) -> None:
         page = (ROOT / "site/index.html").read_text(encoding="utf-8")
         script = (ROOT / "site/app.js").read_text(encoding="utf-8")
@@ -508,6 +525,7 @@ class RumbleDataTests(unittest.TestCase):
         self.assertIn("data/history.json", script)
         self.assertIn("snapshot.path", script)
         self.assertIn("ranking data last updated", script)
+        self.assertIn("if (request !== latestLeaderboardRequest) return;", script)
 
     def testRDA009_E2ENegative_dashboard_marks_archived_rankings_read_only(self) -> None:
         page = (ROOT / "site/index.html").read_text(encoding="utf-8")
