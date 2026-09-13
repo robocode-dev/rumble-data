@@ -435,6 +435,19 @@ class RumbleDataTests(unittest.TestCase):
         manifest = json.loads((self.root / "site/data/history.json").read_text(encoding="utf-8"))
         self.assertEqual("2026-08-20T12:00:00Z", manifest["lastUpdatedAt"])
 
+    def testRDA007_IntegrationPositive_detects_ranking_regenerated_outside_publication(self) -> None:
+        self.write("site/data/history.json", {"schemaVersion": 1, "currentMonth": "2026-09", "currentDataHash": None, "lastUpdatedAt": "2026-09-01T00:00:00Z", "snapshots": []})
+        publish_current(self.root, datetime(2026, 9, 1, tzinfo=timezone.utc))
+        catalog = json.loads((self.root / "catalog.json").read_text(encoding="utf-8"))
+        catalog["bots"].append({"name": "Delta", "version": "1.0", "platform": "Python", "owner": "delta-owner", "status": "active"})
+        self.write("catalog.json", catalog)
+        aggregate(self.root)
+
+        self.assertTrue(publish_current(self.root, datetime(2026, 9, 13, 12, tzinfo=timezone.utc)))
+
+        manifest = json.loads((self.root / "site/data/history.json").read_text(encoding="utf-8"))
+        self.assertEqual("2026-09-13T12:00:00Z", manifest["lastUpdatedAt"])
+
     def testRDA008_IntegrationPositive_rollover_copies_each_missing_month_byte_for_byte(self) -> None:
         aggregate(self.root)
         self.write("site/data/history.json", {"schemaVersion": 1, "currentMonth": "2026-08", "lastUpdatedAt": "2026-08-20T12:00:00Z", "snapshots": []})

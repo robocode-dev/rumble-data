@@ -131,6 +131,7 @@ Evidence:
 
 - `testRDA007_IntegrationPositive_visible_ranking_change_advances_publication_time`
 - `testRDA007_IntegrationPositive_changed_writers_explicitly_dispatch_pages`
+- `testRDA007_IntegrationPositive_detects_ranking_regenerated_outside_publication`
 - `testRDA007_IntegrationNegative_unchanged_ranking_preserves_publication_time`
 - `testRDA007_IntegrationNegative_snapshot_alone_preserves_publication_time`
 

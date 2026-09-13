@@ -15,6 +15,6 @@ Accepted battle results remain content-addressed immutable facts. The current le
 
 The live ranking is cumulative and does not reset at month boundaries. Before the first serialized writer accepts new input in a new UTC month, it copies the previous current leaderboard and bot details byte for byte into an immutable snapshot for each completed month. Late accepted results can change the current projection but never rewrite a snapshot.
 
-`site/data/history.json` separates operational publication metadata from deterministic aggregation. Its `lastUpdatedAt` changes only when current ranking-visible JSON changes; polling, aggregation with identical output, deployment, and snapshot creation alone do not make the ranking appear fresher.
+`site/data/history.json` separates operational publication metadata from deterministic aggregation. It records a hash of the complete current ranking-visible tree, and its `lastUpdatedAt` changes only when that hash changes; polling, aggregation with identical output, deployment, and snapshot creation alone do not make the ranking appear fresher.
 
 This distinction keeps rankings reproducible while preserving what viewers actually saw at month end. It also constrains every writer to the shared serialization boundary and every future migration to treat existing snapshot paths as append-only records. The system structure and shared rollover flow are described in [the architecture overview](../architecture/README.md) and [the design overview](../design/README.md).

@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -57,11 +58,22 @@ def current_files(root: Path) -> dict[str, bytes]:
     return files
 
 
+def ranking_hash(files: dict[str, bytes]) -> str:
+    """Return a stable hash of the complete current public ranking tree."""
+    digest = hashlib.sha256()
+    for relative, content in sorted(files.items()):
+        digest.update(relative.encode("utf-8"))
+        digest.update(b"\0")
+        digest.update(content)
+        digest.update(b"\0")
+    return digest.hexdigest()
+
+
 def history(root: Path) -> dict[str, Any]:
     """Read publication history or return its initial state."""
     path = root / "site" / "data" / "history.json"
     if not path.exists():
-        return {"schemaVersion": 1, "currentMonth": None, "lastUpdatedAt": None, "snapshots": []}
+        return {"schemaVersion": 1, "currentMonth": None, "currentDataHash": None, "lastUpdatedAt": None, "snapshots": []}
     value = read_json(path)
     if not isinstance(value, dict) or value.get("schemaVersion") != 1 or not isinstance(value.get("snapshots"), list):
         raise ValueError("site/data/history.json has an unsupported schema")
@@ -125,9 +137,16 @@ def publish_current(root: Path, at: datetime) -> bool:
     """Regenerate current projections and timestamp only visible ranking changes."""
     before = current_files(root)
     aggregate(root)
-    changed = current_files(root) != before
+    after = current_files(root)
+    manifest = history(root)
+    after_hash = ranking_hash(after)
+    recorded_hash = manifest.get("currentDataHash")
+    changed = after != before if recorded_hash is None else after_hash != recorded_hash
+    if recorded_hash is None and not changed:
+        manifest["currentDataHash"] = after_hash
+        write_history(root, manifest)
     if changed:
-        manifest = history(root)
+        manifest["currentDataHash"] = after_hash
         manifest["lastUpdatedAt"] = instant_text(at)
         write_history(root, manifest)
     return changed
