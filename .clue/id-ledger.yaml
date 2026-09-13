@@ -22,3 +22,11 @@ events:
     - {id: RDA-003, kind: numeric, state: live, prefix: RDA, component: "3"}
     - {id: RDA-004, kind: numeric, state: live, prefix: RDA, component: "4"}
     - {id: RDA-005, kind: numeric, state: live, prefix: RDA, component: "5"}
+    - {id: CH-001, kind: numeric, state: reserved, prefix: CH, component: "1"}
+    - {id: ADR-003, kind: numeric, state: reserved, prefix: ADR, component: "3"}
+    - {id: TASKS-001, kind: numeric, state: reserved, prefix: TASKS, component: "1"}
+    - {id: OQ-001, kind: numeric, state: reserved, prefix: OQ, component: "1"}
+    - {id: CH-001, kind: numeric, state: live, prefix: CH, component: "1"}
+    - {id: ADR-003, kind: numeric, state: live, prefix: ADR, component: "3"}
+    - {id: TASKS-001, kind: numeric, state: live, prefix: TASKS, component: "1"}
+    - {id: OQ-001, kind: numeric, state: live, prefix: OQ, component: "1"}
