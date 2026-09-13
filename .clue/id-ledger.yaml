@@ -1,0 +1,24 @@
+version: 2
+events:
+    - {id: ADR-001, kind: numeric, state: live, prefix: ADR, component: "1"}
+    - {id: ADR-002, kind: numeric, state: live, prefix: ADR, component: "2"}
+    - {id: C-001, kind: numeric, state: live, prefix: C, component: "1"}
+    - {id: C-002, kind: numeric, state: live, prefix: C, component: "2"}
+    - {id: C-003, kind: numeric, state: live, prefix: C, component: "3"}
+    - {id: C-004, kind: numeric, state: live, prefix: C, component: "4"}
+    - {id: CAP-001, kind: numeric, state: live, prefix: CAP, component: "1"}
+    - {id: CAP-001-criteria, kind: opaque, state: live}
+    - {id: CAP-001-design, kind: opaque, state: live}
+    - {id: CAP-002, kind: numeric, state: live, prefix: CAP, component: "2"}
+    - {id: CAP-002-criteria, kind: opaque, state: live}
+    - {id: CAP-002-design, kind: opaque, state: live}
+    - {id: G-001, kind: numeric, state: live, prefix: G, component: "1"}
+    - {id: G-002, kind: numeric, state: live, prefix: G, component: "2"}
+    - {id: G-003, kind: numeric, state: live, prefix: G, component: "3"}
+    - {id: VIS-001, kind: numeric, state: live, prefix: VIS, component: "1"}
+    - {id: RBC-004, kind: numeric, state: live, prefix: RBC, component: "4"}
+    - {id: RDA-001, kind: numeric, state: live, prefix: RDA, component: "1"}
+    - {id: RDA-002, kind: numeric, state: live, prefix: RDA, component: "2"}
+    - {id: RDA-003, kind: numeric, state: live, prefix: RDA, component: "3"}
+    - {id: RDA-004, kind: numeric, state: live, prefix: RDA, component: "4"}
+    - {id: RDA-005, kind: numeric, state: live, prefix: RDA, component: "5"}
