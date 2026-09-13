@@ -74,7 +74,7 @@ def aggregate_game_type(records: list[dict[str, Any]], catalog: list[dict[str, A
     eligible = {
         (str(bot["name"]), str(bot["version"])): bot
         for bot in catalog
-        if bool(bot.get("teamMembers", [])) is expects_team
+        if bot.get("status") == "active" and bool(bot.get("teamMembers", [])) is expects_team
     }
     relevant = [record for record in records if record.get("gameType") == game_type and record.get("engine", {}).get("behaviorVersion") == behavior_version]
     shares: dict[tuple[str, str], dict[tuple[tuple[str, str], ...], list[float]]] = defaultdict(lambda: defaultdict(list))
@@ -121,6 +121,10 @@ def aggregate(root: Path) -> None:
     engine = read_json(root / "engine.json")
     behavior_version = int(engine["behaviorVersion"])
     records, catalog = facts(root), active_catalog(root)
+    for directory in (root / "leaderboard" / "bots", root / "site" / "data" / "bots"):
+        if directory.exists():
+            for path in directory.glob("*.json"):
+                path.unlink()
     for game_type in sorted(engine["gameTypes"]):
         leaderboard, pairings, needed = aggregate_game_type(records, catalog, game_type, behavior_version)
         write_json(root / "leaderboard" / f"{game_type}.json", leaderboard)

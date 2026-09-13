@@ -4,9 +4,12 @@ on:
   push:
     branches: [main]
     paths: [site/**]
+  schedule:
+    - cron: '41 * * * *'
   workflow_dispatch:
 
 permissions:
+  actions: read
   contents: read
   pages: write
   id-token: write
@@ -23,9 +26,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+        with:
+          fetch-depth: 0
+      - id: reconcile
+        name: Compare the site with the latest successful deployment
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          if [ "$GITHUB_EVENT_NAME" != schedule ]; then
+            echo 'deploy=true' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          deployed=$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/pages.yml/runs?status=success&per_page=1" --jq '.workflow_runs[0].head_sha // empty')
+          if [ -z "$deployed" ] || ! git cat-file -e "$deployed^{commit}" || ! git diff --quiet "$deployed" HEAD -- site; then
+            echo 'deploy=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'deploy=false' >> "$GITHUB_OUTPUT"
+            echo 'The deployed site already matches the current site tree.'
+          fi
+      - if: steps.reconcile.outputs.deploy == 'true'
+        uses: actions/configure-pages@v5
+      - if: steps.reconcile.outputs.deploy == 'true'
+        uses: actions/upload-pages-artifact@v3
         with:
           path: site
       - id: deployment
+        if: steps.reconcile.outputs.deploy == 'true'
         uses: actions/deploy-pages@v4

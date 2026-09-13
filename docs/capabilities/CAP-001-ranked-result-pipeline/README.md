@@ -11,7 +11,7 @@ title: Ranked result pipeline
 
 # CAP-001 — Ranked result pipeline
 
-What the system can do: accept a battle-result batch from a registered client, validate every record independently against the pinned engine and reviewed bot catalog, persist each accepted record once as an immutable, content-addressed fact, and derive the leaderboard, matchmaking advice, and dashboard data from the accepted facts plus current moderation state.
+What the system can do: accept a battle-result batch from a registered client, validate every record independently against the pinned engine and reviewed bot catalog, persist each accepted record once as an immutable, content-addressed fact, derive a cumulative active-version leaderboard from accepted facts plus current moderation state, and publish current rankings with immutable cumulative month-end snapshots.
 
 This is the capability `G-001` (a trustworthy, auditable leaderboard) and `G-002` (low-toil automated operation) both depend on: it is the whole path from `scripts/extract_envelope.py` and `scripts/validate.py` through `scripts/ingest.py`, `scripts/aggregate.py`, and `scripts/compact.py` to `leaderboard/`, `matchmaking/`, `clients.json`, and `site/data/`.
 

@@ -11,7 +11,7 @@ title: Bot catalog synchronization
 
 # CAP-002 — Bot catalog synchronization
 
-What the system can do: keep a local, read-only copy of the reviewed Rumble bot catalog (`catalog.json`) synchronized from its declared external HTTPS source, normalizing and validating team membership so that only bots and teams eligible for ranked play can ever reach `CAP-001`'s validation and matchmaking.
+What the system can do: check a reviewed external Rumble bot catalog hourly, update the local read-only copy only when normalized content changes, and immediately publish the active bot and version set without doing ranking or deployment work for an identical poll.
 
 This capability exists so `CAP-001` never has to trust unvalidated team data: `scripts/sync_catalog.py` is the sole writer of `catalog.json`, and `scripts/common.py::normalized_catalog_bots` is the shared team-membership contract both this capability and `CAP-001` rely on.
 

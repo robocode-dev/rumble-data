@@ -38,12 +38,18 @@ Idempotency: retaining state is checked by `battleId` before insertion. An ident
 Projections are always fully regenerated from repository-tracked inputs, never incrementally updated — this is what keeps `AC-RDA-003` true (identical output whether facts come from `results/raw` or archived `results/rollups`, and always reflecting only currently-registered, unbanned, non-excluded, non-disqualified data):
 
 1. Load every raw fact and rollup record; filter to those whose submitting account is currently registered for that client ID and not banned, whose `battleId` is not in `exclusions.json`, and whose participants are not disqualified.
-2. For each configured game type, compute each eligible bot's APS (mean, across its distinct pairings, of the mean per-pairing score share) and battle/pairing counts, and matchmaking advice (pairings below `TARGET_SAMPLES_PER_PAIRING`, tagged `new-bot` at zero samples or `under-sampled` otherwise) — team pairs that would share a member (`CAP-002`) are never proposed.
+2. For each configured game type and the current behavior version, select exact catalog identities whose status is `active` and whose team shape matches the game type. For each battle, divide a participant's `totalScore` by the total of every participant's score, using zero when that total is zero. Group shares by the exact sorted participant identity set, average repeated samples within each set, then set APS to 100 times the unweighted mean of those pairing averages. Store four decimal places, sort by descending APS and stable case-folded identity, and give an active entry with no samples APS zero. Compute matchmaking advice for pairs below `TARGET_SAMPLES_PER_PAIRING`, tagged `new-bot` at zero samples or `under-sampled` otherwise; team pairs that share a member (`CAP-002`) are never proposed.
 3. Write `leaderboard/<gameType>.json`, `leaderboard/bots/<name>-<version>.json`, `matchmaking/pairings-<gameType>.json`, `matchmaking/matches_needed-<gameType>.json`, mirrored copies of the leaderboard and bot-detail files under `site/data/`, and `clients.json` (battle totals per client ID).
 
 Every projection carries a `projectionId` — a content hash of the game type, behavior version, contributing records, and catalog — so a consumer can tell whether two projections were derived from the same inputs.
 
 `scripts/compact.py` moves facts older than three full months into monthly rollups on a separate `archive` branch checkout, but only after confirming aggregation output is byte-identical before and after the move; any mismatch rolls the move back entirely (`AC-RDA-003`).
+
+## Publication and rollover (`scripts/publication.py`)
+
+Aggregation deliberately owns no clock. `publication.py` compares ranking-visible `site/data/leaderboard/*.json` and `site/data/bots/*.json` bytes before and after regeneration and advances `site/data/history.json:lastUpdatedAt` only when those bytes change.
+
+The result and catalog workflows share the `rumble-publication-writer` concurrency group. Before either reads new external input, `rollover` checks `currentMonth`. On the first run in a later UTC month it copies current leaderboard and bot-detail bytes to `site/data/snapshots/<completed-month>/`, adds the immutable manifest entry, and advances the month cursor. Multiple missed months copy the same last published state. Existing destination content must match byte for byte or rollover fails.
 
 ## Ordering guarantee
 
@@ -51,4 +57,4 @@ Every projection carries a `projectionId` — a content hash of the game type, b
 
 ## Dashboard (`site/`)
 
-The static site has no server component: `site/app.js` fetches `data/leaderboard/${gameType}.json` and `data/bots/...json` directly and renders/sorts entries client-side (`AC-RDA-004`). `.github/workflows/pages.yml` redeploys whenever a push changes anything under `site/`.
+The static site has no server component. `site/app.js` first reads `data/history.json`, then fetches the current `data/leaderboard/${gameType}.json` and bot details or the same paths below the selected snapshot prefix. It labels archived periods read-only and shows the selected ranking's update time. A changed writer commit explicitly dispatches `.github/workflows/pages.yml`; an hourly comparison with the last successful Pages workflow run repairs a missed deployment without deploying an identical `site/` tree.

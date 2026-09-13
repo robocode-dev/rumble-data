@@ -48,10 +48,15 @@ def synchronized_catalog(catalog: dict[str, Any], fetch: Fetch = fetch_source) -
     }
 
 
-def sync(root: Path, fetch: Fetch = fetch_source) -> None:
-    """Refresh catalog.json from its declared generated source."""
+def sync(root: Path, fetch: Fetch = fetch_source) -> bool:
+    """Refresh catalog.json and report whether its normalized content changed."""
     catalog_path = root / "catalog.json"
-    write_json(catalog_path, synchronized_catalog(read_json(catalog_path), fetch))
+    current = read_json(catalog_path)
+    synchronized = synchronized_catalog(current, fetch)
+    if synchronized == current:
+        return False
+    write_json(catalog_path, synchronized)
+    return True
 
 
 def main() -> int:
@@ -60,11 +65,11 @@ def main() -> int:
     parser.add_argument("--root", type=Path, required=True)
     arguments = parser.parse_args()
     try:
-        sync(arguments.root.resolve())
+        changed = sync(arguments.root.resolve())
     except (OSError, ValueError) as error:
         print(f"catalog synchronization failed: {error}")
         return 1
-    print("synchronized catalog")
+    print("synchronized catalog" if changed else "catalog unchanged")
     return 0
 
 
