@@ -11,4 +11,6 @@ Each capability folder holds three files, updated together in the same change th
 A whole capability whose extracted criteria are not ready may stay `status: draft` with the gap stated, but a single unfinished criterion uses `@draft` without deactivating proven siblings — honesty at the narrowest level over artificial green.
 
 <!-- clue:index:start -->
+- [CAP-001-ranked-result-pipeline/](CAP-001-ranked-result-pipeline/README.md)
+- [CAP-002-bot-catalog-sync/](CAP-002-bot-catalog-sync/README.md)
 <!-- clue:index:end -->

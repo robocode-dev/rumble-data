@@ -10,4 +10,7 @@ A rule leaves `agent` by gaining a real check or by being declared — never by 
 
 <!-- clue:index:start -->
 - [C-001 — Markdown prose is never hard-wrapped](C-001-no-hard-wrapped-markdown.md) · `machine` — One line per paragraph and per list item; wrapping is the reader's IDE concern.
+- [C-002 — CI is the only writer of accepted facts and generated projections on main](C-002-ci-only-writer-boundary.md) · `partial` — Clients submit only through issues; humans change policy or source only through pull requests.
+- [C-003 — Public source and documentation must be enough to recover ingestion and the dashboard, with no private dependencies](C-003-fork-recoverability.md) · `human` — A fork of this repository, with only its own workflows and Pages enabled, must be able to run aggregation and reproduce ingestion and the dashboard without personal credentials or external services.
+- [C-004 — Accepted raw facts and rollups are never edited or deleted](C-004-accepted-facts-are-immutable.md) · `agent` — Once a result is accepted under `results/raw/` (or archived into `results/rollups/`), no pull request or workflow may edit or delete it.
 <!-- clue:index:end -->
