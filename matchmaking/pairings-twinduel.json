@@ -1,6 +1,14 @@
 {
   "gameType": "twinduel",
-  "pairings": [],
-  "projectionId": "483d859b40882117e865c6d19e5035e4ffa4e6258cc53fb684345dc03759c374",
+  "pairings": [
+    {
+      "battles": 1,
+      "bots": [
+        "CornersCrazy 1.0.0",
+        "OrbitVector 1.0.0"
+      ]
+    }
+  ],
+  "projectionId": "b563c9e66da2e6353195b0616e47b0d80e419e8aa75ed669a5c5e02440f513d1",
   "schemaVersion": 1
 }
