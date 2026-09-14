@@ -40,3 +40,5 @@ events:
     - {id: RDA-008, kind: numeric, state: live, prefix: RDA, component: "8"}
     - {id: RDA-009, kind: numeric, state: live, prefix: RDA, component: "9"}
     - {id: RBC-005, kind: numeric, state: live, prefix: RBC, component: "5"}
+    - {id: G-004, kind: numeric, state: reserved, prefix: G, component: "4"}
+    - {id: G-004, kind: numeric, state: live, prefix: G, component: "4"}
