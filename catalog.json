@@ -1,34 +1,6 @@
 {
   "bots": [
     {
-      "addedAt": "2026-08-02",
-      "authors": [
-        "Tank Royale Rumble maintainers"
-      ],
-      "name": "Orbit",
-      "owner": "flemming-n-larsen",
-      "path": "bots/python/Orbit",
-      "platform": "Python",
-      "sourceHash": "sha256:86b63e60f231c8f736ec7dc7867c93966a59a63bb3409326516879236555cf36",
-      "status": "superseded",
-      "teamMembers": [],
-      "version": "1.0.2"
-    },
-    {
-      "addedAt": "2026-08-30",
-      "authors": [
-        "Tank Royale Rumble maintainers"
-      ],
-      "name": "Vector",
-      "owner": "flemming-n-larsen",
-      "path": "bots/python/Vector",
-      "platform": "Python",
-      "sourceHash": "sha256:2704786593814706f62968f21432411ecf7da2569dcd4eb3310a956c9f259429",
-      "status": "superseded",
-      "teamMembers": [],
-      "version": "1.0.0"
-    },
-    {
       "addedAt": "2026-09-04",
       "authors": [
         "Mathew Nelson",
@@ -38,7 +10,7 @@
       "owner": "flemming-n-larsen",
       "path": "bots/java/Corners",
       "platform": "JVM",
-      "sourceHash": "sha256:404ca740fec5bb93fe5b19fd9dcc6b138a9c5aa8d876513159258ae72aeb91ec",
+      "sourceHash": "sha256:36968e64ee7480a57a53bcf6a9ee4d988fa817e5e105707fe1bec7f95a3f6386",
       "status": "active",
       "teamMembers": [],
       "version": "1.0.0"
@@ -53,7 +25,7 @@
       "owner": "flemming-n-larsen",
       "path": "bots/java/Crazy",
       "platform": "JVM",
-      "sourceHash": "sha256:bc813c792d71e227c5993fb26acfff036da5f46d56d0381ca443a8706041a156",
+      "sourceHash": "sha256:55870953c538098dd18a26f09c1d71da8dd939c41b06346e62744ed507cf26c2",
       "status": "active",
       "teamMembers": [],
       "version": "1.0.0"
@@ -67,10 +39,10 @@
       "owner": "flemming-n-larsen",
       "path": "bots/python/Orbit",
       "platform": "Python",
-      "sourceHash": "sha256:8b68aac7974a794a06596cf167d2342f4bdf8501094fe29a514696cd1037f8f8",
+      "sourceHash": "sha256:dba6d8d7c1c134b7e40eef5152c12b361932d411cd0438c7e2c3891da474f691",
       "status": "active",
       "teamMembers": [],
-      "version": "1.0.3"
+      "version": "1.0.0"
     },
     {
       "addedAt": "2026-09-04",
@@ -82,7 +54,7 @@
       "owner": "flemming-n-larsen",
       "path": "bots/java/SpinBot",
       "platform": "JVM",
-      "sourceHash": "sha256:5a346701b5d65c11d5e691ea9d272da33bce5eca8c67d252c0db710faba9a695",
+      "sourceHash": "sha256:85a01374fc4e76846bfcb6d17ea017ce2c386337f107068878a420a1c71de6c4",
       "status": "active",
       "teamMembers": [],
       "version": "1.0.0"
@@ -96,14 +68,14 @@
       "owner": "flemming-n-larsen",
       "path": "bots/python/Vector",
       "platform": "Python",
-      "sourceHash": "sha256:dc72d552863a57faf11ce9fee2ee6f03893fba56045fecef565de1467a10df08",
+      "sourceHash": "sha256:b446df5e8541fa7928f9f104167e97dc51fed2419d138ca64df9e8af7bea72b7",
       "status": "active",
       "teamMembers": [],
-      "version": "1.1.1"
+      "version": "1.0.0"
     }
   ],
   "schemaVersion": 1,
   "source": "https://raw.githubusercontent.com/robocode-dev/rumble-bots/main/bots/index.json",
-  "sourceCommit": "c043c771776170de8129d4ef2e36736d791b6115",
-  "sourceGeneratedAt": "2026-09-14T20:35:22Z"
+  "sourceCommit": "bea4c666fb7529b83bb4c27be8f1f1fa57ad5d46",
+  "sourceGeneratedAt": "2026-09-14T20:58:31Z"
 }
