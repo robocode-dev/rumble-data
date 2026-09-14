@@ -1,7 +1,16 @@
 {
   "gameType": "twinduel",
-  "priorityPairs": [],
-  "projectionId": "bfae7c6068b52568a71b27f65e731bd3c414e8a98524f645d24ebf284b1c2070",
+  "priorityPairs": [
+    {
+      "bots": [
+        "CornersCrazy 1.0.0",
+        "OrbitVector 1.0.0"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    }
+  ],
+  "projectionId": "483d859b40882117e865c6d19e5035e4ffa4e6258cc53fb684345dc03759c374",
   "schemaVersion": 1,
   "targetSamplesPerPairing": 6
 }

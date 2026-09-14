@@ -16,6 +16,23 @@
       "version": "1.0.0"
     },
     {
+      "addedAt": "2026-09-14",
+      "authors": [
+        "Flemming N. Larsen"
+      ],
+      "name": "CornersCrazy",
+      "owner": "flemming-n-larsen",
+      "path": "bots/java/CornersCrazy",
+      "platform": "JVM",
+      "sourceHash": "sha256:788a5fad8ce1b7859a38fa24f2693bc119f5482e392e5088272ca62f10463482",
+      "status": "active",
+      "teamMembers": [
+        "Corners 1.0.0",
+        "Crazy 1.0.0"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "addedAt": "2026-09-04",
       "authors": [
         "Mathew Nelson",
@@ -42,6 +59,23 @@
       "sourceHash": "sha256:dba6d8d7c1c134b7e40eef5152c12b361932d411cd0438c7e2c3891da474f691",
       "status": "active",
       "teamMembers": [],
+      "version": "1.0.0"
+    },
+    {
+      "addedAt": "2026-09-14",
+      "authors": [
+        "Flemming N. Larsen"
+      ],
+      "name": "OrbitVector",
+      "owner": "flemming-n-larsen",
+      "path": "bots/python/OrbitVector",
+      "platform": "Python",
+      "sourceHash": "sha256:42561780f49540eb3b15f17a930877020c84b7bfc4b24338a06e2298b4e98dc8",
+      "status": "active",
+      "teamMembers": [
+        "Orbit 1.0.0",
+        "Vector 1.0.0"
+      ],
       "version": "1.0.0"
     },
     {
@@ -76,6 +110,6 @@
   ],
   "schemaVersion": 1,
   "source": "https://raw.githubusercontent.com/robocode-dev/rumble-bots/main/bots/index.json",
-  "sourceCommit": "bea4c666fb7529b83bb4c27be8f1f1fa57ad5d46",
-  "sourceGeneratedAt": "2026-09-14T20:58:31Z"
+  "sourceCommit": "1ff341b59f0b73db858f153dff17f002a0256413",
+  "sourceGeneratedAt": "2026-09-14T21:19:28Z"
 }
