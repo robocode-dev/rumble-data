@@ -22,8 +22,8 @@
         "Corners 1.0.0",
         "SpinBot 1.0.0"
       ],
-      "have": 0,
-      "reason": "new-bot"
+      "have": 1,
+      "reason": "under-sampled"
     },
     {
       "bots": [
@@ -82,7 +82,7 @@
       "reason": "new-bot"
     }
   ],
-  "projectionId": "d889127ef3451278db4cb5f3833180d93d329c017c6661c135ad9470a49ae3aa",
+  "projectionId": "21de702b783d2e9c3be8423e695aa3a2b111fdc4f1aa3ee8614ff935c99fb376",
   "schemaVersion": 1,
   "targetSamplesPerPairing": 6
 }

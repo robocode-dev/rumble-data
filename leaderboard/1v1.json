@@ -2,13 +2,24 @@
   "behaviorVersion": 1,
   "entries": [
     {
-      "aps": 0.0,
-      "battles": 0,
+      "aps": 95.8822,
+      "battles": 1,
+      "bot": "SpinBot 1.0.0",
+      "epoch": 1,
+      "name": "SpinBot",
+      "owner": "flemming-n-larsen",
+      "pairings": 1,
+      "platform": "JVM",
+      "version": "1.0.0"
+    },
+    {
+      "aps": 4.1178,
+      "battles": 1,
       "bot": "Corners 1.0.0",
       "epoch": 1,
       "name": "Corners",
       "owner": "flemming-n-larsen",
-      "pairings": 0,
+      "pairings": 1,
       "platform": "JVM",
       "version": "1.0.0"
     },
@@ -37,17 +48,6 @@
     {
       "aps": 0.0,
       "battles": 0,
-      "bot": "SpinBot 1.0.0",
-      "epoch": 1,
-      "name": "SpinBot",
-      "owner": "flemming-n-larsen",
-      "pairings": 0,
-      "platform": "JVM",
-      "version": "1.0.0"
-    },
-    {
-      "aps": 0.0,
-      "battles": 0,
       "bot": "Vector 1.0.0",
       "epoch": 1,
       "name": "Vector",
@@ -58,6 +58,6 @@
     }
   ],
   "gameType": "1v1",
-  "projectionId": "d889127ef3451278db4cb5f3833180d93d329c017c6661c135ad9470a49ae3aa",
+  "projectionId": "21de702b783d2e9c3be8423e695aa3a2b111fdc4f1aa3ee8614ff935c99fb376",
   "schemaVersion": 1
 }

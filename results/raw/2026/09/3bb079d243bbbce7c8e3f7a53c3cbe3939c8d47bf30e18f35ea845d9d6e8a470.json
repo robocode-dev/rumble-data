@@ -1,0 +1,53 @@
+{
+  "arenaHeight": 600,
+  "arenaWidth": 800,
+  "battleId": "ec74473e-ad39-4f3f-9c26-95c7df70b675",
+  "client": {
+    "id": "flemming-rumble-01",
+    "version": "development"
+  },
+  "completedAt": "2026-09-14T21:01:09.066681706Z",
+  "engine": {
+    "behaviorVersion": 1
+  },
+  "gameType": "1v1",
+  "participants": [
+    {
+      "bulletDamage": 3153,
+      "bulletKillBonus": 631,
+      "firstPlaces": 35,
+      "isTeam": false,
+      "lastSurvivorBonus": 350,
+      "name": "SpinBot",
+      "ramDamage": 7,
+      "ramKillBonus": 0,
+      "rank": 1,
+      "secondPlaces": 0,
+      "survival": 1750,
+      "thirdPlaces": 0,
+      "totalScore": 5891,
+      "version": "1.0.0"
+    },
+    {
+      "bulletDamage": 252,
+      "bulletKillBonus": 0,
+      "firstPlaces": 0,
+      "isTeam": false,
+      "lastSurvivorBonus": 0,
+      "name": "Corners",
+      "ramDamage": 1,
+      "ramKillBonus": 0,
+      "rank": 2,
+      "secondPlaces": 35,
+      "survival": 0,
+      "thirdPlaces": 0,
+      "totalScore": 253,
+      "version": "1.0.0"
+    }
+  ],
+  "payloadHash": "f06fb3855b9060274f162ff86ac699baa22bfd024c547f164dafb4dc557d7c20",
+  "replayHash": "sha256:f67d83ba292be9a88f8b04219cf8d25be6f962958e25a9dd6c62c7433dcf6d2c",
+  "rounds": 35,
+  "selectionSeed": 2622080431256325453,
+  "submittedBy": "flemming-n-larsen"
+}
