@@ -26,13 +26,13 @@
     {
       "aps": 0.0,
       "battles": 0,
-      "bot": "Orbit 1.0.3",
+      "bot": "Orbit 1.0.0",
       "epoch": 1,
       "name": "Orbit",
       "owner": "flemming-n-larsen",
       "pairings": 0,
       "platform": "Python",
-      "version": "1.0.3"
+      "version": "1.0.0"
     },
     {
       "aps": 0.0,
@@ -48,16 +48,16 @@
     {
       "aps": 0.0,
       "battles": 0,
-      "bot": "Vector 1.1.1",
+      "bot": "Vector 1.0.0",
       "epoch": 1,
       "name": "Vector",
       "owner": "flemming-n-larsen",
       "pairings": 0,
       "platform": "Python",
-      "version": "1.1.1"
+      "version": "1.0.0"
     }
   ],
   "gameType": "1v1",
-  "projectionId": "ac5f143aca124b1ec18b059698918e4f6f3f0a217b6361e4c261a15c09cc3ce8",
+  "projectionId": "d889127ef3451278db4cb5f3833180d93d329c017c6661c135ad9470a49ae3aa",
   "schemaVersion": 1
 }

@@ -12,7 +12,7 @@
     {
       "bots": [
         "Corners 1.0.0",
-        "Orbit 1.0.3"
+        "Orbit 1.0.0"
       ],
       "have": 0,
       "reason": "new-bot"
@@ -28,7 +28,7 @@
     {
       "bots": [
         "Corners 1.0.0",
-        "Vector 1.1.1"
+        "Vector 1.0.0"
       ],
       "have": 0,
       "reason": "new-bot"
@@ -36,7 +36,7 @@
     {
       "bots": [
         "Crazy 1.0.0",
-        "Orbit 1.0.3"
+        "Orbit 1.0.0"
       ],
       "have": 0,
       "reason": "new-bot"
@@ -52,14 +52,14 @@
     {
       "bots": [
         "Crazy 1.0.0",
-        "Vector 1.1.1"
+        "Vector 1.0.0"
       ],
       "have": 0,
       "reason": "new-bot"
     },
     {
       "bots": [
-        "Orbit 1.0.3",
+        "Orbit 1.0.0",
         "SpinBot 1.0.0"
       ],
       "have": 0,
@@ -67,8 +67,8 @@
     },
     {
       "bots": [
-        "Orbit 1.0.3",
-        "Vector 1.1.1"
+        "Orbit 1.0.0",
+        "Vector 1.0.0"
       ],
       "have": 0,
       "reason": "new-bot"
@@ -76,13 +76,13 @@
     {
       "bots": [
         "SpinBot 1.0.0",
-        "Vector 1.1.1"
+        "Vector 1.0.0"
       ],
       "have": 0,
       "reason": "new-bot"
     }
   ],
-  "projectionId": "ac5f143aca124b1ec18b059698918e4f6f3f0a217b6361e4c261a15c09cc3ce8",
+  "projectionId": "d889127ef3451278db4cb5f3833180d93d329c017c6661c135ad9470a49ae3aa",
   "schemaVersion": 1,
   "targetSamplesPerPairing": 6
 }
