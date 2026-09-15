@@ -1,16 +1,16 @@
 {
   "entry": {
-    "aps": 0.0,
-    "battles": 0,
+    "aps": 13.7267,
+    "battles": 1,
     "bot": "Crazy 1.0.0",
     "epoch": 1,
     "name": "Crazy",
     "owner": "flemming-n-larsen",
-    "pairings": 0,
+    "pairings": 1,
     "platform": "JVM",
     "version": "1.0.0"
   },
   "gameType": "melee",
-  "projectionId": "907650b5015aa5ca8a9cf5f4a1de98da68424cce37700ae535287274967a9b73",
+  "projectionId": "81716848690e72f59459d338e469c747b8e03bdb6433808c5fbec839d0cf1561",
   "schemaVersion": 1
 }
