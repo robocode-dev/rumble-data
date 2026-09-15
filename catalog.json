@@ -48,6 +48,21 @@
       "version": "1.0.0"
     },
     {
+      "addedAt": "2026-09-15",
+      "authors": [
+        "Mathew Nelson",
+        "Flemming N. Larsen"
+      ],
+      "name": "Fire",
+      "owner": "flemming-n-larsen",
+      "path": "bots/java/Fire",
+      "platform": "JVM",
+      "sourceHash": "sha256:cc989cdd80b9579e4747dbd384bd151fb01f0d35ae5f0d8749d8856aa5e8ac23",
+      "status": "active",
+      "teamMembers": [],
+      "version": "1.0.0"
+    },
+    {
       "addedAt": "2026-09-06",
       "authors": [
         "Flemming N. Larsen"
@@ -79,6 +94,21 @@
       "version": "1.0.0"
     },
     {
+      "addedAt": "2026-09-15",
+      "authors": [
+        "Mathew Nelson",
+        "Flemming N. Larsen"
+      ],
+      "name": "RamFire",
+      "owner": "flemming-n-larsen",
+      "path": "bots/java/RamFire",
+      "platform": "JVM",
+      "sourceHash": "sha256:960b6c9ce918ed3c182dd886ce5722cb4af975af05610a767d768d5c87b2460a",
+      "status": "active",
+      "teamMembers": [],
+      "version": "1.0.0"
+    },
+    {
       "addedAt": "2026-09-04",
       "authors": [
         "Mathew Nelson",
@@ -89,6 +119,36 @@
       "path": "bots/java/SpinBot",
       "platform": "JVM",
       "sourceHash": "sha256:85a01374fc4e76846bfcb6d17ea017ce2c386337f107068878a420a1c71de6c4",
+      "status": "active",
+      "teamMembers": [],
+      "version": "1.0.0"
+    },
+    {
+      "addedAt": "2026-09-15",
+      "authors": [
+        "Mathew Nelson",
+        "Flemming N. Larsen"
+      ],
+      "name": "Target",
+      "owner": "flemming-n-larsen",
+      "path": "bots/java/Target",
+      "platform": "JVM",
+      "sourceHash": "sha256:200e9b0d5fd07c7655c54acb5a222d3a5117f27ccef6aa50cd26ac259bcbbaaa",
+      "status": "active",
+      "teamMembers": [],
+      "version": "1.0.0"
+    },
+    {
+      "addedAt": "2026-09-15",
+      "authors": [
+        "Mathew Nelson",
+        "Flemming N. Larsen"
+      ],
+      "name": "TrackFire",
+      "owner": "flemming-n-larsen",
+      "path": "bots/java/TrackFire",
+      "platform": "JVM",
+      "sourceHash": "sha256:5a1ff23e2a41ddcab5313e2ffc0b94e8735e99f8b851efb6c608eb80c5e8139c",
       "status": "active",
       "teamMembers": [],
       "version": "1.0.0"
@@ -106,10 +166,25 @@
       "status": "active",
       "teamMembers": [],
       "version": "1.0.0"
+    },
+    {
+      "addedAt": "2026-09-15",
+      "authors": [
+        "Mathew Nelson",
+        "Flemming N. Larsen"
+      ],
+      "name": "Walls",
+      "owner": "flemming-n-larsen",
+      "path": "bots/java/Walls",
+      "platform": "JVM",
+      "sourceHash": "sha256:b076809867c84a087be6062ebbe8d278be2d37a97617dee3199228fc1669397e",
+      "status": "active",
+      "teamMembers": [],
+      "version": "1.0.0"
     }
   ],
   "schemaVersion": 1,
   "source": "https://raw.githubusercontent.com/robocode-dev/rumble-bots/main/bots/index.json",
-  "sourceCommit": "1ff341b59f0b73db858f153dff17f002a0256413",
-  "sourceGeneratedAt": "2026-09-14T21:19:28Z"
+  "sourceCommit": "a0b1cd155625b4d8831a517e1bf635305557007b",
+  "sourceGeneratedAt": "2026-09-15T14:10:43Z"
 }
