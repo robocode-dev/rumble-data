@@ -1,16 +1,16 @@
 {
   "entry": {
-    "aps": 12.2738,
-    "battles": 1,
+    "aps": 10.9039,
+    "battles": 2,
     "bot": "RamFire 1.0.0",
     "epoch": 1,
     "name": "RamFire",
     "owner": "flemming-n-larsen",
-    "pairings": 1,
+    "pairings": 2,
     "platform": "JVM",
     "version": "1.0.0"
   },
   "gameType": "melee",
-  "projectionId": "488b3a3d72b3676309c324ddae154430abb33f1e1bdb8512d381ef1d8bf2b7dd",
+  "projectionId": "ce8ce961b921333bc89dc3edb41d7b78d0bb0491a26154aa38b2fb74299ae819",
   "schemaVersion": 1
 }

@@ -1,0 +1,53 @@
+{
+  "arenaHeight": 600,
+  "arenaWidth": 800,
+  "battleId": "ba34615c-d481-4518-8a17-877580da0832",
+  "client": {
+    "id": "flemming-rumble-01",
+    "version": "development"
+  },
+  "completedAt": "2026-09-29T19:17:34.536075754Z",
+  "engine": {
+    "behaviorVersion": 1
+  },
+  "gameType": "1v1",
+  "participants": [
+    {
+      "bulletDamage": 337,
+      "bulletKillBonus": 6,
+      "firstPlaces": 26,
+      "isTeam": false,
+      "lastSurvivorBonus": 260,
+      "name": "Crazy",
+      "ramDamage": 67,
+      "ramKillBonus": 0,
+      "rank": 1,
+      "secondPlaces": 9,
+      "survival": 1300,
+      "thirdPlaces": 0,
+      "totalScore": 1971,
+      "version": "1.0.0"
+    },
+    {
+      "bulletDamage": 344,
+      "bulletKillBonus": 8,
+      "firstPlaces": 9,
+      "isTeam": false,
+      "lastSurvivorBonus": 90,
+      "name": "Vector",
+      "ramDamage": 86,
+      "ramKillBonus": 0,
+      "rank": 2,
+      "secondPlaces": 26,
+      "survival": 450,
+      "thirdPlaces": 0,
+      "totalScore": 979,
+      "version": "1.0.0"
+    }
+  ],
+  "payloadHash": "56920a7d7e30b7abb504f62f40c0fa1ed0d809a34de9787d6e4b002519e09e6b",
+  "replayHash": "sha256:9914e1619ea835d9ed7d8d3e9851ed4a31af8132cc72d5ef857b8ec328697742",
+  "rounds": 35,
+  "selectionSeed": -7380329926407663730,
+  "submittedBy": "flemming-n-larsen"
+}

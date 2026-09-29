@@ -6,7 +6,7 @@
         "Corners 1.0.0",
         "Crazy 1.0.0"
       ],
-      "have": 1,
+      "have": 3,
       "reason": "under-sampled"
     },
     {
@@ -14,7 +14,7 @@
         "Corners 1.0.0",
         "Fire 1.0.0"
       ],
-      "have": 1,
+      "have": 3,
       "reason": "under-sampled"
     },
     {
@@ -22,7 +22,7 @@
         "Corners 1.0.0",
         "Orbit 1.0.0"
       ],
-      "have": 1,
+      "have": 3,
       "reason": "under-sampled"
     },
     {
@@ -38,15 +38,15 @@
         "Corners 1.0.0",
         "Retcon 0.2.0"
       ],
-      "have": 0,
-      "reason": "new-bot"
+      "have": 2,
+      "reason": "under-sampled"
     },
     {
       "bots": [
         "Corners 1.0.0",
         "SpinBot 1.0.0"
       ],
-      "have": 1,
+      "have": 3,
       "reason": "under-sampled"
     },
     {
@@ -54,7 +54,7 @@
         "Corners 1.0.0",
         "Target 1.0.0"
       ],
-      "have": 1,
+      "have": 3,
       "reason": "under-sampled"
     },
     {
@@ -62,7 +62,7 @@
         "Corners 1.0.0",
         "TrackFire 1.0.0"
       ],
-      "have": 1,
+      "have": 3,
       "reason": "under-sampled"
     },
     {
@@ -70,7 +70,7 @@
         "Corners 1.0.0",
         "Vector 1.0.0"
       ],
-      "have": 1,
+      "have": 3,
       "reason": "under-sampled"
     },
     {
@@ -78,7 +78,7 @@
         "Corners 1.0.0",
         "Walls 1.0.0"
       ],
-      "have": 1,
+      "have": 3,
       "reason": "under-sampled"
     },
     {
@@ -86,7 +86,7 @@
         "Crazy 1.0.0",
         "Fire 1.0.0"
       ],
-      "have": 1,
+      "have": 4,
       "reason": "under-sampled"
     },
     {
@@ -94,7 +94,7 @@
         "Crazy 1.0.0",
         "Orbit 1.0.0"
       ],
-      "have": 1,
+      "have": 4,
       "reason": "under-sampled"
     },
     {
@@ -102,7 +102,7 @@
         "Crazy 1.0.0",
         "RamFire 1.0.0"
       ],
-      "have": 1,
+      "have": 2,
       "reason": "under-sampled"
     },
     {
@@ -110,15 +110,15 @@
         "Crazy 1.0.0",
         "Retcon 0.2.0"
       ],
-      "have": 0,
-      "reason": "new-bot"
+      "have": 3,
+      "reason": "under-sampled"
     },
     {
       "bots": [
         "Crazy 1.0.0",
         "SpinBot 1.0.0"
       ],
-      "have": 1,
+      "have": 4,
       "reason": "under-sampled"
     },
     {
@@ -126,7 +126,7 @@
         "Crazy 1.0.0",
         "Target 1.0.0"
       ],
-      "have": 1,
+      "have": 4,
       "reason": "under-sampled"
     },
     {
@@ -134,7 +134,7 @@
         "Crazy 1.0.0",
         "TrackFire 1.0.0"
       ],
-      "have": 1,
+      "have": 4,
       "reason": "under-sampled"
     },
     {
@@ -142,7 +142,7 @@
         "Crazy 1.0.0",
         "Vector 1.0.0"
       ],
-      "have": 1,
+      "have": 4,
       "reason": "under-sampled"
     },
     {
@@ -150,7 +150,7 @@
         "Crazy 1.0.0",
         "Walls 1.0.0"
       ],
-      "have": 1,
+      "have": 4,
       "reason": "under-sampled"
     },
     {
@@ -158,7 +158,7 @@
         "Fire 1.0.0",
         "Orbit 1.0.0"
       ],
-      "have": 1,
+      "have": 4,
       "reason": "under-sampled"
     },
     {
@@ -166,7 +166,7 @@
         "Fire 1.0.0",
         "RamFire 1.0.0"
       ],
-      "have": 1,
+      "have": 2,
       "reason": "under-sampled"
     },
     {
@@ -174,15 +174,15 @@
         "Fire 1.0.0",
         "Retcon 0.2.0"
       ],
-      "have": 0,
-      "reason": "new-bot"
+      "have": 3,
+      "reason": "under-sampled"
     },
     {
       "bots": [
         "Fire 1.0.0",
         "SpinBot 1.0.0"
       ],
-      "have": 1,
+      "have": 4,
       "reason": "under-sampled"
     },
     {
@@ -190,7 +190,7 @@
         "Fire 1.0.0",
         "Target 1.0.0"
       ],
-      "have": 1,
+      "have": 4,
       "reason": "under-sampled"
     },
     {
@@ -198,7 +198,7 @@
         "Fire 1.0.0",
         "TrackFire 1.0.0"
       ],
-      "have": 1,
+      "have": 4,
       "reason": "under-sampled"
     },
     {
@@ -206,7 +206,7 @@
         "Fire 1.0.0",
         "Vector 1.0.0"
       ],
-      "have": 1,
+      "have": 4,
       "reason": "under-sampled"
     },
     {
@@ -214,7 +214,7 @@
         "Fire 1.0.0",
         "Walls 1.0.0"
       ],
-      "have": 1,
+      "have": 4,
       "reason": "under-sampled"
     },
     {
@@ -222,7 +222,7 @@
         "Orbit 1.0.0",
         "RamFire 1.0.0"
       ],
-      "have": 1,
+      "have": 2,
       "reason": "under-sampled"
     },
     {
@@ -230,15 +230,15 @@
         "Orbit 1.0.0",
         "Retcon 0.2.0"
       ],
-      "have": 0,
-      "reason": "new-bot"
+      "have": 3,
+      "reason": "under-sampled"
     },
     {
       "bots": [
         "Orbit 1.0.0",
         "SpinBot 1.0.0"
       ],
-      "have": 1,
+      "have": 4,
       "reason": "under-sampled"
     },
     {
@@ -246,7 +246,7 @@
         "Orbit 1.0.0",
         "Target 1.0.0"
       ],
-      "have": 1,
+      "have": 4,
       "reason": "under-sampled"
     },
     {
@@ -254,7 +254,7 @@
         "Orbit 1.0.0",
         "TrackFire 1.0.0"
       ],
-      "have": 1,
+      "have": 4,
       "reason": "under-sampled"
     },
     {
@@ -262,7 +262,7 @@
         "Orbit 1.0.0",
         "Vector 1.0.0"
       ],
-      "have": 1,
+      "have": 4,
       "reason": "under-sampled"
     },
     {
@@ -270,7 +270,7 @@
         "Orbit 1.0.0",
         "Walls 1.0.0"
       ],
-      "have": 1,
+      "have": 4,
       "reason": "under-sampled"
     },
     {
@@ -278,15 +278,15 @@
         "RamFire 1.0.0",
         "Retcon 0.2.0"
       ],
-      "have": 0,
-      "reason": "new-bot"
+      "have": 1,
+      "reason": "under-sampled"
     },
     {
       "bots": [
         "RamFire 1.0.0",
         "SpinBot 1.0.0"
       ],
-      "have": 1,
+      "have": 2,
       "reason": "under-sampled"
     },
     {
@@ -294,7 +294,7 @@
         "RamFire 1.0.0",
         "Target 1.0.0"
       ],
-      "have": 1,
+      "have": 2,
       "reason": "under-sampled"
     },
     {
@@ -302,7 +302,7 @@
         "RamFire 1.0.0",
         "TrackFire 1.0.0"
       ],
-      "have": 1,
+      "have": 2,
       "reason": "under-sampled"
     },
     {
@@ -310,7 +310,7 @@
         "RamFire 1.0.0",
         "Vector 1.0.0"
       ],
-      "have": 1,
+      "have": 2,
       "reason": "under-sampled"
     },
     {
@@ -318,7 +318,7 @@
         "RamFire 1.0.0",
         "Walls 1.0.0"
       ],
-      "have": 1,
+      "have": 2,
       "reason": "under-sampled"
     },
     {
@@ -326,47 +326,47 @@
         "Retcon 0.2.0",
         "SpinBot 1.0.0"
       ],
-      "have": 0,
-      "reason": "new-bot"
+      "have": 3,
+      "reason": "under-sampled"
     },
     {
       "bots": [
         "Retcon 0.2.0",
         "Target 1.0.0"
       ],
-      "have": 0,
-      "reason": "new-bot"
+      "have": 3,
+      "reason": "under-sampled"
     },
     {
       "bots": [
         "Retcon 0.2.0",
         "TrackFire 1.0.0"
       ],
-      "have": 0,
-      "reason": "new-bot"
+      "have": 3,
+      "reason": "under-sampled"
     },
     {
       "bots": [
         "Retcon 0.2.0",
         "Vector 1.0.0"
       ],
-      "have": 0,
-      "reason": "new-bot"
+      "have": 3,
+      "reason": "under-sampled"
     },
     {
       "bots": [
         "Retcon 0.2.0",
         "Walls 1.0.0"
       ],
-      "have": 0,
-      "reason": "new-bot"
+      "have": 3,
+      "reason": "under-sampled"
     },
     {
       "bots": [
         "SpinBot 1.0.0",
         "Target 1.0.0"
       ],
-      "have": 1,
+      "have": 4,
       "reason": "under-sampled"
     },
     {
@@ -374,7 +374,7 @@
         "SpinBot 1.0.0",
         "TrackFire 1.0.0"
       ],
-      "have": 1,
+      "have": 4,
       "reason": "under-sampled"
     },
     {
@@ -382,7 +382,7 @@
         "SpinBot 1.0.0",
         "Vector 1.0.0"
       ],
-      "have": 1,
+      "have": 4,
       "reason": "under-sampled"
     },
     {
@@ -390,7 +390,7 @@
         "SpinBot 1.0.0",
         "Walls 1.0.0"
       ],
-      "have": 1,
+      "have": 4,
       "reason": "under-sampled"
     },
     {
@@ -398,7 +398,7 @@
         "Target 1.0.0",
         "TrackFire 1.0.0"
       ],
-      "have": 1,
+      "have": 4,
       "reason": "under-sampled"
     },
     {
@@ -406,7 +406,7 @@
         "Target 1.0.0",
         "Vector 1.0.0"
       ],
-      "have": 1,
+      "have": 4,
       "reason": "under-sampled"
     },
     {
@@ -414,7 +414,7 @@
         "Target 1.0.0",
         "Walls 1.0.0"
       ],
-      "have": 1,
+      "have": 4,
       "reason": "under-sampled"
     },
     {
@@ -422,7 +422,7 @@
         "TrackFire 1.0.0",
         "Vector 1.0.0"
       ],
-      "have": 1,
+      "have": 4,
       "reason": "under-sampled"
     },
     {
@@ -430,7 +430,7 @@
         "TrackFire 1.0.0",
         "Walls 1.0.0"
       ],
-      "have": 1,
+      "have": 4,
       "reason": "under-sampled"
     },
     {
@@ -438,11 +438,11 @@
         "Vector 1.0.0",
         "Walls 1.0.0"
       ],
-      "have": 1,
+      "have": 4,
       "reason": "under-sampled"
     }
   ],
-  "projectionId": "488b3a3d72b3676309c324ddae154430abb33f1e1bdb8512d381ef1d8bf2b7dd",
+  "projectionId": "ce8ce961b921333bc89dc3edb41d7b78d0bb0491a26154aa38b2fb74299ae819",
   "schemaVersion": 1,
   "targetSamplesPerPairing": 6
 }

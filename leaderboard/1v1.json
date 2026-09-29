@@ -2,11 +2,33 @@
   "behaviorVersion": 1,
   "entries": [
     {
-      "aps": 95.611,
-      "battles": 2,
+      "aps": 100.0,
+      "battles": 1,
+      "bot": "Walls 1.0.0",
+      "epoch": 1,
+      "name": "Walls",
+      "owner": "flemming-n-larsen",
+      "pairings": 1,
+      "platform": "JVM",
+      "version": "1.0.0"
+    },
+    {
+      "aps": 97.8055,
+      "battles": 3,
       "bot": "SpinBot 1.0.0",
       "epoch": 1,
       "name": "SpinBot",
+      "owner": "flemming-n-larsen",
+      "pairings": 2,
+      "platform": "JVM",
+      "version": "1.0.0"
+    },
+    {
+      "aps": 66.8136,
+      "battles": 1,
+      "bot": "Crazy 1.0.0",
+      "epoch": 1,
+      "name": "Crazy",
       "owner": "flemming-n-larsen",
       "pairings": 1,
       "platform": "JVM",
@@ -24,6 +46,17 @@
       "version": "1.0.0"
     },
     {
+      "aps": 56.5295,
+      "battles": 5,
+      "bot": "Corners 1.0.0",
+      "epoch": 1,
+      "name": "Corners",
+      "owner": "flemming-n-larsen",
+      "pairings": 4,
+      "platform": "JVM",
+      "version": "1.0.0"
+    },
+    {
       "aps": 54.4513,
       "battles": 1,
       "bot": "Target 1.0.0",
@@ -35,46 +68,24 @@
       "version": "1.0.0"
     },
     {
-      "aps": 48.7937,
-      "battles": 4,
-      "bot": "Corners 1.0.0",
-      "epoch": 1,
-      "name": "Corners",
-      "owner": "flemming-n-larsen",
-      "pairings": 3,
-      "platform": "JVM",
-      "version": "1.0.0"
-    },
-    {
-      "aps": 45.5487,
-      "battles": 1,
+      "aps": 32.9994,
+      "battles": 3,
       "bot": "Vector 1.0.0",
       "epoch": 1,
       "name": "Vector",
       "owner": "flemming-n-larsen",
-      "pairings": 1,
+      "pairings": 3,
       "platform": "Python",
       "version": "1.0.0"
     },
     {
       "aps": 0.0,
-      "battles": 0,
-      "bot": "Crazy 1.0.0",
-      "epoch": 1,
-      "name": "Crazy",
-      "owner": "flemming-n-larsen",
-      "pairings": 0,
-      "platform": "JVM",
-      "version": "1.0.0"
-    },
-    {
-      "aps": 0.0,
-      "battles": 1,
+      "battles": 3,
       "bot": "Orbit 1.0.0",
       "epoch": 1,
       "name": "Orbit",
       "owner": "flemming-n-larsen",
-      "pairings": 1,
+      "pairings": 3,
       "platform": "Python",
       "version": "1.0.0"
     },
@@ -110,20 +121,9 @@
       "pairings": 0,
       "platform": "JVM",
       "version": "1.0.0"
-    },
-    {
-      "aps": 0.0,
-      "battles": 0,
-      "bot": "Walls 1.0.0",
-      "epoch": 1,
-      "name": "Walls",
-      "owner": "flemming-n-larsen",
-      "pairings": 0,
-      "platform": "JVM",
-      "version": "1.0.0"
     }
   ],
   "gameType": "1v1",
-  "projectionId": "19b18a4e12ddf485721c2cab0b2a0545b33439de13a54830b758e7267ed8afce",
+  "projectionId": "97670bb685453c2377d5baf05c95fcae3b65484d1f52c736ede4cc93b0b0e8f6",
   "schemaVersion": 1
 }

@@ -1,7 +1,7 @@
 {
   "entry": {
-    "aps": 15.5303,
-    "battles": 3,
+    "aps": 15.6168,
+    "battles": 4,
     "bot": "OrbitVector 1.0.0",
     "epoch": 1,
     "name": "OrbitVector",
@@ -11,6 +11,6 @@
     "version": "1.0.0"
   },
   "gameType": "twinduel",
-  "projectionId": "64c5355496b8f963564cffc79ca464b83bad48b97cc84d29f3ad97e3a21479e5",
+  "projectionId": "78fee3e216965ab722c500368c53505d0d1b64cdb40f88de0ec527e1c835dce0",
   "schemaVersion": 1
 }

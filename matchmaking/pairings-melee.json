@@ -15,8 +15,38 @@
         "Vector 1.0.0",
         "Walls 1.0.0"
       ]
+    },
+    {
+      "battles": 2,
+      "bots": [
+        "Corners 1.0.0",
+        "Crazy 1.0.0",
+        "Fire 1.0.0",
+        "Orbit 1.0.0",
+        "Retcon 0.2.0",
+        "SpinBot 1.0.0",
+        "Target 1.0.0",
+        "TrackFire 1.0.0",
+        "Vector 1.0.0",
+        "Walls 1.0.0"
+      ]
+    },
+    {
+      "battles": 1,
+      "bots": [
+        "Crazy 1.0.0",
+        "Fire 1.0.0",
+        "Orbit 1.0.0",
+        "RamFire 1.0.0",
+        "Retcon 0.2.0",
+        "SpinBot 1.0.0",
+        "Target 1.0.0",
+        "TrackFire 1.0.0",
+        "Vector 1.0.0",
+        "Walls 1.0.0"
+      ]
     }
   ],
-  "projectionId": "488b3a3d72b3676309c324ddae154430abb33f1e1bdb8512d381ef1d8bf2b7dd",
+  "projectionId": "ce8ce961b921333bc89dc3edb41d7b78d0bb0491a26154aa38b2fb74299ae819",
   "schemaVersion": 1
 }

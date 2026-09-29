@@ -25,11 +25,39 @@
     {
       "battles": 1,
       "bots": [
+        "Corners 1.0.0",
+        "Vector 1.0.0"
+      ]
+    },
+    {
+      "battles": 1,
+      "bots": [
+        "Crazy 1.0.0",
+        "Vector 1.0.0"
+      ]
+    },
+    {
+      "battles": 1,
+      "bots": [
+        "Orbit 1.0.0",
+        "SpinBot 1.0.0"
+      ]
+    },
+    {
+      "battles": 1,
+      "bots": [
+        "Orbit 1.0.0",
+        "Walls 1.0.0"
+      ]
+    },
+    {
+      "battles": 1,
+      "bots": [
         "Target 1.0.0",
         "Vector 1.0.0"
       ]
     }
   ],
-  "projectionId": "19b18a4e12ddf485721c2cab0b2a0545b33439de13a54830b758e7267ed8afce",
+  "projectionId": "97670bb685453c2377d5baf05c95fcae3b65484d1f52c736ede4cc93b0b0e8f6",
   "schemaVersion": 1
 }

@@ -1,0 +1,53 @@
+{
+  "arenaHeight": 800,
+  "arenaWidth": 800,
+  "battleId": "4c2e2174-7af0-4786-94c4-dbffec2860b8",
+  "client": {
+    "id": "flemming-rumble-01",
+    "version": "development"
+  },
+  "completedAt": "2026-09-29T19:13:19.736877341Z",
+  "engine": {
+    "behaviorVersion": 1
+  },
+  "gameType": "twinduel",
+  "participants": [
+    {
+      "bulletDamage": 14293,
+      "bulletKillBonus": 1447,
+      "firstPlaces": 75,
+      "isTeam": true,
+      "lastSurvivorBonus": 60,
+      "name": "RetconTwins",
+      "ramDamage": 3728,
+      "ramKillBonus": 247,
+      "rank": 1,
+      "secondPlaces": 75,
+      "survival": 14950,
+      "thirdPlaces": 0,
+      "totalScore": 34725,
+      "version": "0.2.0"
+    },
+    {
+      "bulletDamage": 272,
+      "bulletKillBonus": 0,
+      "firstPlaces": 0,
+      "isTeam": true,
+      "lastSurvivorBonus": 0,
+      "name": "OrbitVector",
+      "ramDamage": 190,
+      "ramKillBonus": 0,
+      "rank": 2,
+      "secondPlaces": 0,
+      "survival": 3900,
+      "thirdPlaces": 75,
+      "totalScore": 4362,
+      "version": "1.0.0"
+    }
+  ],
+  "payloadHash": "19c2e24def51c9252956050d0965ff18800df20803d6b62934ff3277db97cd58",
+  "replayHash": "sha256:274991ec3701e82b3e8e2132377900bb96216cd9913fafa1933a6fe6be9ffa3a",
+  "rounds": 75,
+  "selectionSeed": -7192410827283805083,
+  "submittedBy": "flemming-n-larsen"
+}
