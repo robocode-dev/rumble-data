@@ -16,6 +16,13 @@
       ]
     },
     {
+      "battles": 7,
+      "bots": [
+        "Corners 1.0.0",
+        "Retcon 0.2.0"
+      ]
+    },
+    {
       "battles": 2,
       "bots": [
         "Corners 1.0.0",
@@ -30,10 +37,31 @@
       ]
     },
     {
+      "battles": 5,
+      "bots": [
+        "Crazy 1.0.0",
+        "Retcon 0.2.0"
+      ]
+    },
+    {
       "battles": 1,
       "bots": [
         "Crazy 1.0.0",
         "Vector 1.0.0"
+      ]
+    },
+    {
+      "battles": 6,
+      "bots": [
+        "Fire 1.0.0",
+        "Retcon 0.2.0"
+      ]
+    },
+    {
+      "battles": 3,
+      "bots": [
+        "Orbit 1.0.0",
+        "Retcon 0.2.0"
       ]
     },
     {
@@ -51,6 +79,48 @@
       ]
     },
     {
+      "battles": 5,
+      "bots": [
+        "RamFire 1.0.0",
+        "Retcon 0.2.0"
+      ]
+    },
+    {
+      "battles": 8,
+      "bots": [
+        "Retcon 0.2.0",
+        "SpinBot 1.0.0"
+      ]
+    },
+    {
+      "battles": 3,
+      "bots": [
+        "Retcon 0.2.0",
+        "Target 1.0.0"
+      ]
+    },
+    {
+      "battles": 5,
+      "bots": [
+        "Retcon 0.2.0",
+        "TrackFire 1.0.0"
+      ]
+    },
+    {
+      "battles": 11,
+      "bots": [
+        "Retcon 0.2.0",
+        "Vector 1.0.0"
+      ]
+    },
+    {
+      "battles": 7,
+      "bots": [
+        "Retcon 0.2.0",
+        "Walls 1.0.0"
+      ]
+    },
+    {
       "battles": 1,
       "bots": [
         "Target 1.0.0",
@@ -58,6 +128,6 @@
       ]
     }
   ],
-  "projectionId": "97670bb685453c2377d5baf05c95fcae3b65484d1f52c736ede4cc93b0b0e8f6",
+  "projectionId": "4272edaa8df1ea2539f0ee09798969ec4c9cb4805e3cb07161f8dbda57a5ab99",
   "schemaVersion": 1
 }

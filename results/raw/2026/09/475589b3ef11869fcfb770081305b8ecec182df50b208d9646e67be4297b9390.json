@@ -1,0 +1,53 @@
+{
+  "arenaHeight": 600,
+  "arenaWidth": 800,
+  "battleId": "e9e818b9-79cd-44ca-b919-ffde4b911f1b",
+  "client": {
+    "id": "flemming-rumble-01",
+    "version": "development"
+  },
+  "completedAt": "2026-09-29T19:27:43.389140476Z",
+  "engine": {
+    "behaviorVersion": 1
+  },
+  "gameType": "1v1",
+  "participants": [
+    {
+      "bulletDamage": 3102,
+      "bulletKillBonus": 620,
+      "firstPlaces": 35,
+      "isTeam": false,
+      "lastSurvivorBonus": 350,
+      "name": "Retcon",
+      "ramDamage": 0,
+      "ramKillBonus": 0,
+      "rank": 1,
+      "secondPlaces": 0,
+      "survival": 1750,
+      "thirdPlaces": 0,
+      "totalScore": 5823,
+      "version": "0.2.0"
+    },
+    {
+      "bulletDamage": 16,
+      "bulletKillBonus": 0,
+      "firstPlaces": 0,
+      "isTeam": false,
+      "lastSurvivorBonus": 0,
+      "name": "TrackFire",
+      "ramDamage": 0,
+      "ramKillBonus": 0,
+      "rank": 2,
+      "secondPlaces": 35,
+      "survival": 0,
+      "thirdPlaces": 0,
+      "totalScore": 16,
+      "version": "1.0.0"
+    }
+  ],
+  "payloadHash": "cf2299531596bf8ac89641d6cd325d53df9e8e1e5bf5481886ce7f499143fcb0",
+  "replayHash": "sha256:f6bdffe684fc7a06c9cc12ddb5d6ea94f430e4cf10dd4014a05f93d176c21aa2",
+  "rounds": 35,
+  "selectionSeed": -650219152544938348,
+  "submittedBy": "flemming-n-larsen"
+}
