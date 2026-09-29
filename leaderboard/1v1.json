@@ -70,6 +70,17 @@
     {
       "aps": 0.0,
       "battles": 0,
+      "bot": "Retcon 0.2.0",
+      "epoch": 1,
+      "name": "Retcon",
+      "owner": "flemming-n-larsen",
+      "pairings": 0,
+      "platform": "JVM",
+      "version": "0.2.0"
+    },
+    {
+      "aps": 0.0,
+      "battles": 0,
       "bot": "Target 1.0.0",
       "epoch": 1,
       "name": "Target",
@@ -113,6 +124,6 @@
     }
   ],
   "gameType": "1v1",
-  "projectionId": "8383297566f95b5162d4c344d7220be37ed74f228db5e30e0ee95fdaf53e62bc",
+  "projectionId": "be865e7b9e7f70e67f0d9135c4a6325835a6ff49cc1b98d7534844f1ba750e74",
   "schemaVersion": 1
 }

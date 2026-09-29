@@ -36,6 +36,14 @@
     {
       "bots": [
         "Corners 1.0.0",
+        "Retcon 0.2.0"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "Corners 1.0.0",
         "SpinBot 1.0.0"
       ],
       "have": 1,
@@ -100,6 +108,14 @@
     {
       "bots": [
         "Crazy 1.0.0",
+        "Retcon 0.2.0"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "Crazy 1.0.0",
         "SpinBot 1.0.0"
       ],
       "have": 1,
@@ -156,6 +172,14 @@
     {
       "bots": [
         "Fire 1.0.0",
+        "Retcon 0.2.0"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "Fire 1.0.0",
         "SpinBot 1.0.0"
       ],
       "have": 1,
@@ -204,6 +228,14 @@
     {
       "bots": [
         "Orbit 1.0.0",
+        "Retcon 0.2.0"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "Orbit 1.0.0",
         "SpinBot 1.0.0"
       ],
       "have": 1,
@@ -244,6 +276,14 @@
     {
       "bots": [
         "RamFire 1.0.0",
+        "Retcon 0.2.0"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "RamFire 1.0.0",
         "SpinBot 1.0.0"
       ],
       "have": 1,
@@ -280,6 +320,46 @@
       ],
       "have": 1,
       "reason": "under-sampled"
+    },
+    {
+      "bots": [
+        "Retcon 0.2.0",
+        "SpinBot 1.0.0"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "Retcon 0.2.0",
+        "Target 1.0.0"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "Retcon 0.2.0",
+        "TrackFire 1.0.0"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "Retcon 0.2.0",
+        "Vector 1.0.0"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "Retcon 0.2.0",
+        "Walls 1.0.0"
+      ],
+      "have": 0,
+      "reason": "new-bot"
     },
     {
       "bots": [
@@ -362,7 +442,7 @@
       "reason": "under-sampled"
     }
   ],
-  "projectionId": "81716848690e72f59459d338e469c747b8e03bdb6433808c5fbec839d0cf1561",
+  "projectionId": "488b3a3d72b3676309c324ddae154430abb33f1e1bdb8512d381ef1d8bf2b7dd",
   "schemaVersion": 1,
   "targetSamplesPerPairing": 6
 }

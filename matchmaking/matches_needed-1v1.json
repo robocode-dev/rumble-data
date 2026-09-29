@@ -36,6 +36,14 @@
     {
       "bots": [
         "Corners 1.0.0",
+        "Retcon 0.2.0"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "Corners 1.0.0",
         "SpinBot 1.0.0"
       ],
       "have": 1,
@@ -100,6 +108,14 @@
     {
       "bots": [
         "Crazy 1.0.0",
+        "Retcon 0.2.0"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "Crazy 1.0.0",
         "SpinBot 1.0.0"
       ],
       "have": 0,
@@ -156,6 +172,14 @@
     {
       "bots": [
         "Fire 1.0.0",
+        "Retcon 0.2.0"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "Fire 1.0.0",
         "SpinBot 1.0.0"
       ],
       "have": 0,
@@ -204,6 +228,14 @@
     {
       "bots": [
         "Orbit 1.0.0",
+        "Retcon 0.2.0"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "Orbit 1.0.0",
         "SpinBot 1.0.0"
       ],
       "have": 0,
@@ -244,6 +276,14 @@
     {
       "bots": [
         "RamFire 1.0.0",
+        "Retcon 0.2.0"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "RamFire 1.0.0",
         "SpinBot 1.0.0"
       ],
       "have": 0,
@@ -276,6 +316,46 @@
     {
       "bots": [
         "RamFire 1.0.0",
+        "Walls 1.0.0"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "Retcon 0.2.0",
+        "SpinBot 1.0.0"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "Retcon 0.2.0",
+        "Target 1.0.0"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "Retcon 0.2.0",
+        "TrackFire 1.0.0"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "Retcon 0.2.0",
+        "Vector 1.0.0"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "Retcon 0.2.0",
         "Walls 1.0.0"
       ],
       "have": 0,
@@ -362,7 +442,7 @@
       "reason": "new-bot"
     }
   ],
-  "projectionId": "8383297566f95b5162d4c344d7220be37ed74f228db5e30e0ee95fdaf53e62bc",
+  "projectionId": "be865e7b9e7f70e67f0d9135c4a6325835a6ff49cc1b98d7534844f1ba750e74",
   "schemaVersion": 1,
   "targetSamplesPerPairing": 6
 }

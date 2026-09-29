@@ -109,6 +109,37 @@
       "version": "1.0.0"
     },
     {
+      "addedAt": "2026-09-29",
+      "authors": [
+        "Flemming N. Larsen"
+      ],
+      "name": "Retcon",
+      "owner": "flemming-n-larsen",
+      "path": "bots/java/Retcon",
+      "platform": "JVM",
+      "sourceHash": "sha256:5f7dfaaedefc39bd93d86440a2996342583d57b75b861942dc1e1899b7164bb2",
+      "status": "active",
+      "teamMembers": [],
+      "version": "0.2.0"
+    },
+    {
+      "addedAt": "2026-09-29",
+      "authors": [
+        "Flemming N. Larsen"
+      ],
+      "name": "RetconTwins",
+      "owner": "flemming-n-larsen",
+      "path": "bots/java/RetconTwins",
+      "platform": "JVM",
+      "sourceHash": "sha256:add8e7a7e6575dca127cfb573f8f281373f016a3036fc29b08ac91f58a6ad998",
+      "status": "active",
+      "teamMembers": [
+        "Retcon 0.2.0",
+        "Retcon 0.2.0"
+      ],
+      "version": "0.2.0"
+    },
+    {
       "addedAt": "2026-09-04",
       "authors": [
         "Mathew Nelson",
@@ -185,6 +216,6 @@
   ],
   "schemaVersion": 1,
   "source": "https://raw.githubusercontent.com/robocode-dev/rumble-bots/main/bots/index.json",
-  "sourceCommit": "a0b1cd155625b4d8831a517e1bf635305557007b",
-  "sourceGeneratedAt": "2026-09-15T14:10:43Z"
+  "sourceCommit": "aeb34602096ed93ed7252b8d7adb01a54148a0d8",
+  "sourceGeneratedAt": "2026-09-29T18:11:19Z"
 }
