@@ -2,40 +2,40 @@
   "behaviorVersion": 1,
   "entries": [
     {
-      "aps": 79.7531,
-      "battles": 2,
-      "bot": "CornersCrazy 1.0.0",
-      "epoch": 1,
-      "name": "CornersCrazy",
-      "owner": "flemming-n-larsen",
-      "pairings": 1,
-      "platform": "JVM",
-      "version": "1.0.0"
-    },
-    {
-      "aps": 20.2469,
-      "battles": 2,
-      "bot": "OrbitVector 1.0.0",
-      "epoch": 1,
-      "name": "OrbitVector",
-      "owner": "flemming-n-larsen",
-      "pairings": 1,
-      "platform": "Python",
-      "version": "1.0.0"
-    },
-    {
-      "aps": 0.0,
-      "battles": 0,
+      "aps": 86.338,
+      "battles": 3,
       "bot": "RetconTwins 0.2.0",
       "epoch": 1,
       "name": "RetconTwins",
       "owner": "flemming-n-larsen",
-      "pairings": 0,
+      "pairings": 2,
       "platform": "JVM",
       "version": "0.2.0"
+    },
+    {
+      "aps": 48.1317,
+      "battles": 4,
+      "bot": "CornersCrazy 1.0.0",
+      "epoch": 1,
+      "name": "CornersCrazy",
+      "owner": "flemming-n-larsen",
+      "pairings": 2,
+      "platform": "JVM",
+      "version": "1.0.0"
+    },
+    {
+      "aps": 15.5303,
+      "battles": 3,
+      "bot": "OrbitVector 1.0.0",
+      "epoch": 1,
+      "name": "OrbitVector",
+      "owner": "flemming-n-larsen",
+      "pairings": 2,
+      "platform": "Python",
+      "version": "1.0.0"
     }
   ],
   "gameType": "twinduel",
-  "projectionId": "435b6bfdc3130068416734ada6712da205dc9840b3c6485c4ed93c2a84522de3",
+  "projectionId": "64c5355496b8f963564cffc79ca464b83bad48b97cc84d29f3ad97e3a21479e5",
   "schemaVersion": 1
 }

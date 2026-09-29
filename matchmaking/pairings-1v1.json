@@ -5,10 +5,31 @@
       "battles": 1,
       "bots": [
         "Corners 1.0.0",
+        "Fire 1.0.0"
+      ]
+    },
+    {
+      "battles": 1,
+      "bots": [
+        "Corners 1.0.0",
+        "Orbit 1.0.0"
+      ]
+    },
+    {
+      "battles": 2,
+      "bots": [
+        "Corners 1.0.0",
         "SpinBot 1.0.0"
+      ]
+    },
+    {
+      "battles": 1,
+      "bots": [
+        "Target 1.0.0",
+        "Vector 1.0.0"
       ]
     }
   ],
-  "projectionId": "be865e7b9e7f70e67f0d9135c4a6325835a6ff49cc1b98d7534844f1ba750e74",
+  "projectionId": "19b18a4e12ddf485721c2cab0b2a0545b33439de13a54830b758e7267ed8afce",
   "schemaVersion": 1
 }

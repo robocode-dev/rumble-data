@@ -14,19 +14,19 @@
         "CornersCrazy 1.0.0",
         "RetconTwins 0.2.0"
       ],
-      "have": 0,
-      "reason": "new-bot"
+      "have": 2,
+      "reason": "under-sampled"
     },
     {
       "bots": [
         "OrbitVector 1.0.0",
         "RetconTwins 0.2.0"
       ],
-      "have": 0,
-      "reason": "new-bot"
+      "have": 1,
+      "reason": "under-sampled"
     }
   ],
-  "projectionId": "435b6bfdc3130068416734ada6712da205dc9840b3c6485c4ed93c2a84522de3",
+  "projectionId": "64c5355496b8f963564cffc79ca464b83bad48b97cc84d29f3ad97e3a21479e5",
   "schemaVersion": 1,
   "targetSamplesPerPairing": 6
 }
