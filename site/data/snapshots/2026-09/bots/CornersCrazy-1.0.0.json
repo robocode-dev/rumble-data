@@ -1,0 +1,16 @@
+{
+  "entry": {
+    "aps": 48.2156,
+    "battles": 6,
+    "bot": "CornersCrazy 1.0.0",
+    "epoch": 1,
+    "name": "CornersCrazy",
+    "owner": "flemming-n-larsen",
+    "pairings": 2,
+    "platform": "JVM",
+    "version": "1.0.0"
+  },
+  "gameType": "twinduel",
+  "projectionId": "78fee3e216965ab722c500368c53505d0d1b64cdb40f88de0ec527e1c835dce0",
+  "schemaVersion": 1
+}

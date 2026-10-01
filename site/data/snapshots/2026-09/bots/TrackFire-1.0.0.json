@@ -1,0 +1,16 @@
+{
+  "entry": {
+    "aps": 9.2173,
+    "battles": 4,
+    "bot": "TrackFire 1.0.0",
+    "epoch": 1,
+    "name": "TrackFire",
+    "owner": "flemming-n-larsen",
+    "pairings": 3,
+    "platform": "JVM",
+    "version": "1.0.0"
+  },
+  "gameType": "melee",
+  "projectionId": "ce8ce961b921333bc89dc3edb41d7b78d0bb0491a26154aa38b2fb74299ae819",
+  "schemaVersion": 1
+}

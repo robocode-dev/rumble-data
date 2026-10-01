@@ -1,0 +1,129 @@
+{
+  "behaviorVersion": 1,
+  "entries": [
+    {
+      "aps": 28.2587,
+      "battles": 3,
+      "bot": "Retcon 0.2.0",
+      "epoch": 1,
+      "name": "Retcon",
+      "owner": "flemming-n-larsen",
+      "pairings": 2,
+      "platform": "JVM",
+      "version": "0.2.0"
+    },
+    {
+      "aps": 15.6836,
+      "battles": 4,
+      "bot": "SpinBot 1.0.0",
+      "epoch": 1,
+      "name": "SpinBot",
+      "owner": "flemming-n-larsen",
+      "pairings": 3,
+      "platform": "JVM",
+      "version": "1.0.0"
+    },
+    {
+      "aps": 12.0397,
+      "battles": 4,
+      "bot": "Crazy 1.0.0",
+      "epoch": 1,
+      "name": "Crazy",
+      "owner": "flemming-n-larsen",
+      "pairings": 3,
+      "platform": "JVM",
+      "version": "1.0.0"
+    },
+    {
+      "aps": 11.8503,
+      "battles": 4,
+      "bot": "Walls 1.0.0",
+      "epoch": 1,
+      "name": "Walls",
+      "owner": "flemming-n-larsen",
+      "pairings": 3,
+      "platform": "JVM",
+      "version": "1.0.0"
+    },
+    {
+      "aps": 10.9039,
+      "battles": 2,
+      "bot": "RamFire 1.0.0",
+      "epoch": 1,
+      "name": "RamFire",
+      "owner": "flemming-n-larsen",
+      "pairings": 2,
+      "platform": "JVM",
+      "version": "1.0.0"
+    },
+    {
+      "aps": 9.2173,
+      "battles": 4,
+      "bot": "TrackFire 1.0.0",
+      "epoch": 1,
+      "name": "TrackFire",
+      "owner": "flemming-n-larsen",
+      "pairings": 3,
+      "platform": "JVM",
+      "version": "1.0.0"
+    },
+    {
+      "aps": 7.851,
+      "battles": 4,
+      "bot": "Vector 1.0.0",
+      "epoch": 1,
+      "name": "Vector",
+      "owner": "flemming-n-larsen",
+      "pairings": 3,
+      "platform": "Python",
+      "version": "1.0.0"
+    },
+    {
+      "aps": 7.411,
+      "battles": 4,
+      "bot": "Fire 1.0.0",
+      "epoch": 1,
+      "name": "Fire",
+      "owner": "flemming-n-larsen",
+      "pairings": 3,
+      "platform": "JVM",
+      "version": "1.0.0"
+    },
+    {
+      "aps": 5.693,
+      "battles": 3,
+      "bot": "Corners 1.0.0",
+      "epoch": 1,
+      "name": "Corners",
+      "owner": "flemming-n-larsen",
+      "pairings": 2,
+      "platform": "JVM",
+      "version": "1.0.0"
+    },
+    {
+      "aps": 3.9891,
+      "battles": 4,
+      "bot": "Target 1.0.0",
+      "epoch": 1,
+      "name": "Target",
+      "owner": "flemming-n-larsen",
+      "pairings": 3,
+      "platform": "JVM",
+      "version": "1.0.0"
+    },
+    {
+      "aps": 2.0542,
+      "battles": 4,
+      "bot": "Orbit 1.0.0",
+      "epoch": 1,
+      "name": "Orbit",
+      "owner": "flemming-n-larsen",
+      "pairings": 3,
+      "platform": "Python",
+      "version": "1.0.0"
+    }
+  ],
+  "gameType": "melee",
+  "projectionId": "ce8ce961b921333bc89dc3edb41d7b78d0bb0491a26154aa38b2fb74299ae819",
+  "schemaVersion": 1
+}

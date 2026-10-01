@@ -1,0 +1,16 @@
+{
+  "entry": {
+    "aps": 28.2587,
+    "battles": 3,
+    "bot": "Retcon 0.2.0",
+    "epoch": 1,
+    "name": "Retcon",
+    "owner": "flemming-n-larsen",
+    "pairings": 2,
+    "platform": "JVM",
+    "version": "0.2.0"
+  },
+  "gameType": "melee",
+  "projectionId": "ce8ce961b921333bc89dc3edb41d7b78d0bb0491a26154aa38b2fb74299ae819",
+  "schemaVersion": 1
+}

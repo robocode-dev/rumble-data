@@ -1,7 +1,13 @@
 {
   "currentDataHash": "a1b0cdca4611422d86838f34fe26a59932508a32feacb91c8c3d3b4d1bafb726",
-  "currentMonth": "2026-09",
+  "currentMonth": "2026-10",
   "lastUpdatedAt": "2026-09-29T19:35:42Z",
   "schemaVersion": 1,
-  "snapshots": []
+  "snapshots": [
+    {
+      "month": "2026-09",
+      "path": "data/snapshots/2026-09",
+      "updatedAt": "2026-09-29T19:35:42Z"
+    }
+  ]
 }
