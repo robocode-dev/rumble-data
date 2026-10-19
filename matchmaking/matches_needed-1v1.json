@@ -36,6 +36,14 @@
     {
       "bots": [
         "Corners 1.0.0",
+        "RumbleTestScout 1.0.1"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "Corners 1.0.0",
         "SpinBot 1.0.0"
       ],
       "have": 2,
@@ -108,6 +116,14 @@
     {
       "bots": [
         "Crazy 1.0.0",
+        "RumbleTestScout 1.0.1"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "Crazy 1.0.0",
         "SpinBot 1.0.0"
       ],
       "have": 0,
@@ -164,6 +180,14 @@
     {
       "bots": [
         "Fire 1.0.0",
+        "RumbleTestScout 1.0.1"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "Fire 1.0.0",
         "SpinBot 1.0.0"
       ],
       "have": 0,
@@ -220,6 +244,14 @@
     {
       "bots": [
         "Orbit 1.0.0",
+        "RumbleTestScout 1.0.1"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "Orbit 1.0.0",
         "SpinBot 1.0.0"
       ],
       "have": 1,
@@ -268,6 +300,14 @@
     {
       "bots": [
         "RamFire 1.0.0",
+        "RumbleTestScout 1.0.1"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "RamFire 1.0.0",
         "SpinBot 1.0.0"
       ],
       "have": 0,
@@ -308,6 +348,14 @@
     {
       "bots": [
         "Retcon 0.2.0",
+        "RumbleTestScout 1.0.1"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "Retcon 0.2.0",
         "Target 1.0.0"
       ],
       "have": 3,
@@ -320,6 +368,46 @@
       ],
       "have": 5,
       "reason": "under-sampled"
+    },
+    {
+      "bots": [
+        "RumbleTestScout 1.0.1",
+        "SpinBot 1.0.0"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "RumbleTestScout 1.0.1",
+        "Target 1.0.0"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "RumbleTestScout 1.0.1",
+        "TrackFire 1.0.0"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "RumbleTestScout 1.0.1",
+        "Vector 1.0.0"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "RumbleTestScout 1.0.1",
+        "Walls 1.0.0"
+      ],
+      "have": 0,
+      "reason": "new-bot"
     },
     {
       "bots": [
@@ -402,7 +490,7 @@
       "reason": "new-bot"
     }
   ],
-  "projectionId": "281f8d602f204d5e536f06929c57ebaed285207829bfbdb39b756d393ce9a758",
+  "projectionId": "928a9baba3d1ea94230e8850cd523b31b4b60c4dc3f567e9dde5888907dfabd1",
   "schemaVersion": 1,
   "targetSamplesPerPairing": 6
 }
