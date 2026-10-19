@@ -35,6 +35,17 @@
       "version": "1.0.0"
     },
     {
+      "aps": 49.8483,
+      "battles": 7,
+      "bot": "Crazy 1.0.0",
+      "epoch": 1,
+      "name": "Crazy",
+      "owner": "flemming-n-larsen",
+      "pairings": 3,
+      "platform": "JVM",
+      "version": "1.0.0"
+    },
+    {
       "aps": 45.7611,
       "battles": 12,
       "bot": "Corners 1.0.0",
@@ -46,28 +57,6 @@
       "version": "1.0.0"
     },
     {
-      "aps": 34.7656,
-      "battles": 6,
-      "bot": "Crazy 1.0.0",
-      "epoch": 1,
-      "name": "Crazy",
-      "owner": "flemming-n-larsen",
-      "pairings": 2,
-      "platform": "JVM",
-      "version": "1.0.0"
-    },
-    {
-      "aps": 29.4665,
-      "battles": 7,
-      "bot": "Fire 1.0.0",
-      "epoch": 1,
-      "name": "Fire",
-      "owner": "flemming-n-larsen",
-      "pairings": 2,
-      "platform": "JVM",
-      "version": "1.0.0"
-    },
-    {
       "aps": 27.3828,
       "battles": 4,
       "bot": "Target 1.0.0",
@@ -75,6 +64,17 @@
       "name": "Target",
       "owner": "flemming-n-larsen",
       "pairings": 2,
+      "platform": "JVM",
+      "version": "1.0.0"
+    },
+    {
+      "aps": 26.3065,
+      "battles": 8,
+      "bot": "Fire 1.0.0",
+      "epoch": 1,
+      "name": "Fire",
+      "owner": "flemming-n-larsen",
+      "pairings": 3,
       "platform": "JVM",
       "version": "1.0.0"
     },
@@ -124,6 +124,6 @@
     }
   ],
   "gameType": "1v1",
-  "projectionId": "4272edaa8df1ea2539f0ee09798969ec4c9cb4805e3cb07161f8dbda57a5ab99",
+  "projectionId": "281f8d602f204d5e536f06929c57ebaed285207829bfbdb39b756d393ce9a758",
   "schemaVersion": 1
 }

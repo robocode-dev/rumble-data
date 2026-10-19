@@ -78,8 +78,8 @@
         "Crazy 1.0.0",
         "Fire 1.0.0"
       ],
-      "have": 0,
-      "reason": "new-bot"
+      "have": 1,
+      "reason": "under-sampled"
     },
     {
       "bots": [
@@ -402,7 +402,7 @@
       "reason": "new-bot"
     }
   ],
-  "projectionId": "4272edaa8df1ea2539f0ee09798969ec4c9cb4805e3cb07161f8dbda57a5ab99",
+  "projectionId": "281f8d602f204d5e536f06929c57ebaed285207829bfbdb39b756d393ce9a758",
   "schemaVersion": 1,
   "targetSamplesPerPairing": 6
 }

@@ -1,0 +1,53 @@
+{
+  "arenaHeight": 600,
+  "arenaWidth": 800,
+  "battleId": "36561530-ee47-4b7e-9e31-db19c308fc1a",
+  "client": {
+    "id": "robocode-rumble-test-01",
+    "version": "development"
+  },
+  "completedAt": "2026-10-19T17:20:20.429087859Z",
+  "engine": {
+    "behaviorVersion": 1
+  },
+  "gameType": "1v1",
+  "participants": [
+    {
+      "bulletDamage": 2562,
+      "bulletKillBonus": 398,
+      "firstPlaces": 28,
+      "isTeam": false,
+      "lastSurvivorBonus": 280,
+      "name": "Crazy",
+      "ramDamage": 79,
+      "ramKillBonus": 0,
+      "rank": 1,
+      "secondPlaces": 7,
+      "survival": 1400,
+      "thirdPlaces": 0,
+      "totalScore": 4720,
+      "version": "1.0.0"
+    },
+    {
+      "bulletDamage": 725,
+      "bulletKillBonus": 20,
+      "firstPlaces": 7,
+      "isTeam": false,
+      "lastSurvivorBonus": 70,
+      "name": "Fire",
+      "ramDamage": 13,
+      "ramKillBonus": 0,
+      "rank": 2,
+      "secondPlaces": 28,
+      "survival": 350,
+      "thirdPlaces": 0,
+      "totalScore": 1179,
+      "version": "1.0.0"
+    }
+  ],
+  "payloadHash": "e6bcc6b532b549916503cf58fa9796e93aad2cab14eac24fe011e04455052169",
+  "replayHash": "sha256:76cee1461e005488ac76459fe8aab09a24ab0f36b991d8190c3ece78fac3e1e9",
+  "rounds": 35,
+  "selectionSeed": 5888892092719975281,
+  "submittedBy": "robocode-rumble-test"
+}

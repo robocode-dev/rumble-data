@@ -3,6 +3,10 @@
     {
       "battles": 83,
       "clientId": "flemming-rumble-01"
+    },
+    {
+      "battles": 1,
+      "clientId": "robocode-rumble-test-01"
     }
   ],
   "schemaVersion": 1
