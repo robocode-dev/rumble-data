@@ -1,3 +1,8 @@
+---
+type: index
+title: Design
+---
+
 # Design
 
 > Capability-local detail lives in `CAP-001`/`CAP-002`'s `design.md`; this page covers only what crosses capability and workflow boundaries.

@@ -1,3 +1,8 @@
+---
+type: index
+title: Architecture
+---
+
 # Architecture
 
 > Capability-local design lives in `CAP-001`/`CAP-002`; this page covers only system-wide structure.
