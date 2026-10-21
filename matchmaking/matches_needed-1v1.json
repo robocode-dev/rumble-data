@@ -36,7 +36,7 @@
     {
       "bots": [
         "Corners 1.0.0",
-        "RumbleTestScout 1.0.1"
+        "RumbleTestScout 1.0.2"
       ],
       "have": 0,
       "reason": "new-bot"
@@ -116,7 +116,7 @@
     {
       "bots": [
         "Crazy 1.0.0",
-        "RumbleTestScout 1.0.1"
+        "RumbleTestScout 1.0.2"
       ],
       "have": 0,
       "reason": "new-bot"
@@ -180,7 +180,7 @@
     {
       "bots": [
         "Fire 1.0.0",
-        "RumbleTestScout 1.0.1"
+        "RumbleTestScout 1.0.2"
       ],
       "have": 0,
       "reason": "new-bot"
@@ -244,7 +244,7 @@
     {
       "bots": [
         "Orbit 1.0.0",
-        "RumbleTestScout 1.0.1"
+        "RumbleTestScout 1.0.2"
       ],
       "have": 0,
       "reason": "new-bot"
@@ -300,7 +300,7 @@
     {
       "bots": [
         "RamFire 1.0.0",
-        "RumbleTestScout 1.0.1"
+        "RumbleTestScout 1.0.2"
       ],
       "have": 0,
       "reason": "new-bot"
@@ -348,7 +348,7 @@
     {
       "bots": [
         "Retcon 0.2.0",
-        "RumbleTestScout 1.0.1"
+        "RumbleTestScout 1.0.2"
       ],
       "have": 0,
       "reason": "new-bot"
@@ -371,7 +371,7 @@
     },
     {
       "bots": [
-        "RumbleTestScout 1.0.1",
+        "RumbleTestScout 1.0.2",
         "SpinBot 1.0.0"
       ],
       "have": 0,
@@ -379,7 +379,7 @@
     },
     {
       "bots": [
-        "RumbleTestScout 1.0.1",
+        "RumbleTestScout 1.0.2",
         "Target 1.0.0"
       ],
       "have": 0,
@@ -387,7 +387,7 @@
     },
     {
       "bots": [
-        "RumbleTestScout 1.0.1",
+        "RumbleTestScout 1.0.2",
         "TrackFire 1.0.0"
       ],
       "have": 0,
@@ -395,7 +395,7 @@
     },
     {
       "bots": [
-        "RumbleTestScout 1.0.1",
+        "RumbleTestScout 1.0.2",
         "Vector 1.0.0"
       ],
       "have": 0,
@@ -403,7 +403,7 @@
     },
     {
       "bots": [
-        "RumbleTestScout 1.0.1",
+        "RumbleTestScout 1.0.2",
         "Walls 1.0.0"
       ],
       "have": 0,
@@ -490,7 +490,7 @@
       "reason": "new-bot"
     }
   ],
-  "projectionId": "928a9baba3d1ea94230e8850cd523b31b4b60c4dc3f567e9dde5888907dfabd1",
+  "projectionId": "9c4db43dabd971a6ed980ff48964de2515264c64cab518a8b2966618bbb4036d",
   "schemaVersion": 1,
   "targetSamplesPerPairing": 6
 }

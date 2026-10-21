@@ -2,15 +2,15 @@
   "entry": {
     "aps": 0.0,
     "battles": 0,
-    "bot": "RumbleTestScout 1.0.1",
+    "bot": "RumbleTestScout 1.0.2",
     "epoch": 1,
     "name": "RumbleTestScout",
     "owner": "robocode-rumble-test",
     "pairings": 0,
     "platform": "JVM",
-    "version": "1.0.1"
+    "version": "1.0.2"
   },
   "gameType": "melee",
-  "projectionId": "9eb334b7ea75fd6959c24792f388e86aa3f0a6c2c4d206ddcdd295f96cb0c8ce",
+  "projectionId": "c4e9c68e709ec2269f2e4b3429985c1248a61ea43dd06ddd6249c9f4b46c358e",
   "schemaVersion": 1
 }
