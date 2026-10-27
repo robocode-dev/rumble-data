@@ -125,6 +125,17 @@
     {
       "aps": 0.0,
       "battles": 0,
+      "bot": "RumbleOnboardingScout 1.0.0",
+      "epoch": 1,
+      "name": "RumbleOnboardingScout",
+      "owner": "robocode-rumble-test",
+      "pairings": 0,
+      "platform": "JVM",
+      "version": "1.0.0"
+    },
+    {
+      "aps": 0.0,
+      "battles": 0,
       "bot": "RumbleTestScout 1.0.2",
       "epoch": 1,
       "name": "RumbleTestScout",
@@ -135,6 +146,6 @@
     }
   ],
   "gameType": "1v1",
-  "projectionId": "9c4db43dabd971a6ed980ff48964de2515264c64cab518a8b2966618bbb4036d",
+  "projectionId": "d30e23c7349bec00b7c635feaef4b84cfae683399cd05ef7a47f949ade2039bf",
   "schemaVersion": 1
 }

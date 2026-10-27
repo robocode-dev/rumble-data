@@ -44,6 +44,14 @@
     {
       "bots": [
         "Corners 1.0.0",
+        "RumbleOnboardingScout 1.0.0"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "Corners 1.0.0",
         "RumbleTestScout 1.0.2"
       ],
       "have": 0,
@@ -124,6 +132,14 @@
     {
       "bots": [
         "Crazy 1.0.0",
+        "RumbleOnboardingScout 1.0.0"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "Crazy 1.0.0",
         "RumbleTestScout 1.0.2"
       ],
       "have": 0,
@@ -196,6 +212,14 @@
     {
       "bots": [
         "Fire 1.0.0",
+        "RumbleOnboardingScout 1.0.0"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "Fire 1.0.0",
         "RumbleTestScout 1.0.2"
       ],
       "have": 0,
@@ -260,6 +284,14 @@
     {
       "bots": [
         "Orbit 1.0.0",
+        "RumbleOnboardingScout 1.0.0"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "Orbit 1.0.0",
         "RumbleTestScout 1.0.2"
       ],
       "have": 0,
@@ -316,6 +348,14 @@
     {
       "bots": [
         "RamFire 1.0.0",
+        "RumbleOnboardingScout 1.0.0"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "RamFire 1.0.0",
         "RumbleTestScout 1.0.2"
       ],
       "have": 0,
@@ -364,6 +404,14 @@
     {
       "bots": [
         "Retcon 0.2.0",
+        "RumbleOnboardingScout 1.0.0"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "Retcon 0.2.0",
         "RumbleTestScout 1.0.2"
       ],
       "have": 0,
@@ -408,6 +456,54 @@
       ],
       "have": 3,
       "reason": "under-sampled"
+    },
+    {
+      "bots": [
+        "RumbleOnboardingScout 1.0.0",
+        "RumbleTestScout 1.0.2"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "RumbleOnboardingScout 1.0.0",
+        "SpinBot 1.0.0"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "RumbleOnboardingScout 1.0.0",
+        "Target 1.0.0"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "RumbleOnboardingScout 1.0.0",
+        "TrackFire 1.0.0"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "RumbleOnboardingScout 1.0.0",
+        "Vector 1.0.0"
+      ],
+      "have": 0,
+      "reason": "new-bot"
+    },
+    {
+      "bots": [
+        "RumbleOnboardingScout 1.0.0",
+        "Walls 1.0.0"
+      ],
+      "have": 0,
+      "reason": "new-bot"
     },
     {
       "bots": [
@@ -530,7 +626,7 @@
       "reason": "under-sampled"
     }
   ],
-  "projectionId": "c4e9c68e709ec2269f2e4b3429985c1248a61ea43dd06ddd6249c9f4b46c358e",
+  "projectionId": "1d8bcfffd7d03f3126c6528232501a1d03bd26e087731561fc0b4528aeaae503",
   "schemaVersion": 1,
   "targetSamplesPerPairing": 6
 }
