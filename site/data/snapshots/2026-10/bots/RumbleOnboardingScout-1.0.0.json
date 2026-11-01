@@ -1,0 +1,16 @@
+{
+  "entry": {
+    "aps": 0.0,
+    "battles": 0,
+    "bot": "RumbleOnboardingScout 1.0.0",
+    "epoch": 1,
+    "name": "RumbleOnboardingScout",
+    "owner": "robocode-rumble-test",
+    "pairings": 0,
+    "platform": "JVM",
+    "version": "1.0.0"
+  },
+  "gameType": "melee",
+  "projectionId": "1d8bcfffd7d03f3126c6528232501a1d03bd26e087731561fc0b4528aeaae503",
+  "schemaVersion": 1
+}

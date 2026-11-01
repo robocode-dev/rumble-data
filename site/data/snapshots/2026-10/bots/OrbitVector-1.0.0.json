@@ -1,0 +1,16 @@
+{
+  "entry": {
+    "aps": 15.6168,
+    "battles": 4,
+    "bot": "OrbitVector 1.0.0",
+    "epoch": 1,
+    "name": "OrbitVector",
+    "owner": "flemming-n-larsen",
+    "pairings": 2,
+    "platform": "Python",
+    "version": "1.0.0"
+  },
+  "gameType": "twinduel",
+  "projectionId": "5b3c5eb86221321e080b9dae664fe17a588fa662669f84b3c1655d26b4a3e5cf",
+  "schemaVersion": 1
+}
