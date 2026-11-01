@@ -1,0 +1,4 @@
+# Requests review (and therefore sends a notification) from the moderators when a pull request changes these files.
+/clients/ @robocode-dev/rumble-moderators
+/bans.json @robocode-dev/rumble-moderators
+/exclusions.json @robocode-dev/rumble-moderators

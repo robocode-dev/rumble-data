@@ -1,3 +1,5 @@
+<!-- Registering a battle client? Do not fill in this maintainer template. Open https://github.com/robocode-dev/rumble-data/compare?expand=1&template=client-registration.md instead, or replace this whole description with the checklist from .github/PULL_REQUEST_TEMPLATE/client-registration.md. -->
+
 ## Acceptance brief
 
 <!-- Delete this entire section and every Cliewen-specific section below for simple work. Simple means the accepted contract remains unchanged. -->

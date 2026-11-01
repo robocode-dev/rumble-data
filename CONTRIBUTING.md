@@ -4,7 +4,7 @@ Battle contributors should register once, then let the Rumble Client create and 
 
 ## Register a client
 
-Open a pull request that adds `clients/<your-github-account>.json`:
+Fork this repository and open a pull request that adds `clients/<your-github-account>.json`. When you open the pull request, use the [client registration description](https://github.com/robocode-dev/rumble-data/compare?expand=1&template=client-registration.md) (the same address with `?template=client-registration.md` added). GitHub offers no menu for choosing a template and otherwise fills in a long maintainer checklist that does not apply to a registration.
 
 ```json
 {
@@ -14,7 +14,7 @@ Open a pull request that adds `clients/<your-github-account>.json`:
 }
 ```
 
-The filename and `account` must match the submitting GitHub account. `clientIds` must be a non-empty list of stable identifiers you control. A moderator reviews the registration before results from that account and client ID can be accepted.
+The filename and `account` must match the submitting GitHub account. `clientIds` must be a non-empty list of stable identifiers you control. A moderator reviews the registration before results from that account and client ID can be accepted. As a first-time contributor, the automated checks on your pull request do not start by themselves: GitHub holds them until a moderator approves the run, so a pull request that shows no finished checks is waiting for a moderator, not broken.
 
 ## Result submission contract
 
