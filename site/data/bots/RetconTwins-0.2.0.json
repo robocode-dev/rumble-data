@@ -1,16 +1,16 @@
 {
   "entry": {
-    "aps": 86.1676,
-    "battles": 6,
+    "aps": 83.3219,
+    "battles": 4,
     "bot": "RetconTwins 0.2.0",
     "epoch": 1,
     "name": "RetconTwins",
     "owner": "flemming-n-larsen",
-    "pairings": 2,
+    "pairings": 1,
     "platform": "JVM",
     "version": "0.2.0"
   },
   "gameType": "twinduel",
-  "projectionId": "5b3c5eb86221321e080b9dae664fe17a588fa662669f84b3c1655d26b4a3e5cf",
+  "projectionId": "f6d7abae1a036035e5a6ef5786802bf36ddea18385a6778e7cf451296147c94b",
   "schemaVersion": 1
 }

@@ -9,13 +9,6 @@
       ]
     },
     {
-      "battles": 1,
-      "bots": [
-        "Corners 1.0.0",
-        "Orbit 1.0.0"
-      ]
-    },
-    {
       "battles": 7,
       "bots": [
         "Corners 1.0.0",
@@ -27,13 +20,6 @@
       "bots": [
         "Corners 1.0.0",
         "SpinBot 1.0.0"
-      ]
-    },
-    {
-      "battles": 1,
-      "bots": [
-        "Corners 1.0.0",
-        "Vector 1.0.0"
       ]
     },
     {
@@ -51,38 +37,10 @@
       ]
     },
     {
-      "battles": 1,
-      "bots": [
-        "Crazy 1.0.0",
-        "Vector 1.0.0"
-      ]
-    },
-    {
       "battles": 6,
       "bots": [
         "Fire 1.0.0",
         "Retcon 0.2.0"
-      ]
-    },
-    {
-      "battles": 3,
-      "bots": [
-        "Orbit 1.0.0",
-        "Retcon 0.2.0"
-      ]
-    },
-    {
-      "battles": 1,
-      "bots": [
-        "Orbit 1.0.0",
-        "SpinBot 1.0.0"
-      ]
-    },
-    {
-      "battles": 1,
-      "bots": [
-        "Orbit 1.0.0",
-        "Walls 1.0.0"
       ]
     },
     {
@@ -114,27 +72,13 @@
       ]
     },
     {
-      "battles": 11,
-      "bots": [
-        "Retcon 0.2.0",
-        "Vector 1.0.0"
-      ]
-    },
-    {
       "battles": 7,
       "bots": [
         "Retcon 0.2.0",
         "Walls 1.0.0"
       ]
-    },
-    {
-      "battles": 1,
-      "bots": [
-        "Target 1.0.0",
-        "Vector 1.0.0"
-      ]
     }
   ],
-  "projectionId": "d30e23c7349bec00b7c635feaef4b84cfae683399cd05ef7a47f949ade2039bf",
+  "projectionId": "6b9b2d82543745f5953685e1bca073f3608eef9f9fab601427431139189397a1",
   "schemaVersion": 1
 }

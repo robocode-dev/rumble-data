@@ -1,6 +1,79 @@
 {
   "bots": [
     {
+      "addedAt": "2026-09-06",
+      "authors": [
+        "Flemming N. Larsen"
+      ],
+      "name": "Orbit",
+      "owner": "flemming-n-larsen",
+      "path": "bots/python/Orbit",
+      "platform": "Python",
+      "sourceHash": "sha256:dba6d8d7c1c134b7e40eef5152c12b361932d411cd0438c7e2c3891da474f691",
+      "status": "retired",
+      "teamMembers": [],
+      "version": "1.0.0"
+    },
+    {
+      "addedAt": "2026-09-14",
+      "authors": [
+        "Flemming N. Larsen"
+      ],
+      "name": "OrbitVector",
+      "owner": "flemming-n-larsen",
+      "path": "bots/python/OrbitVector",
+      "platform": "Python",
+      "sourceHash": "sha256:42561780f49540eb3b15f17a930877020c84b7bfc4b24338a06e2298b4e98dc8",
+      "status": "retired",
+      "teamMembers": [
+        "Orbit 1.0.0",
+        "Vector 1.0.0"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "addedAt": "2026-10-27",
+      "authors": [
+        "Flemming N. Larsen"
+      ],
+      "name": "RumbleOnboardingScout",
+      "owner": "robocode-rumble-test",
+      "path": "bots/java/RumbleOnboardingScout",
+      "platform": "JVM",
+      "sourceHash": "sha256:bfed7912342e24e4d3871e8b0015608aa4a3d9959042240353db39860978ca59",
+      "status": "retired",
+      "teamMembers": [],
+      "version": "1.0.0"
+    },
+    {
+      "addedAt": "2026-10-21",
+      "authors": [
+        "robocode-rumble-test"
+      ],
+      "name": "RumbleTestScout",
+      "owner": "robocode-rumble-test",
+      "path": "bots/java/RumbleTestScout",
+      "platform": "JVM",
+      "sourceHash": "sha256:b02fe3fd3cbe64756cb54ba3ea8995b4a248777a41c4fc3d445a436a210d0ec8",
+      "status": "retired",
+      "teamMembers": [],
+      "version": "1.0.2"
+    },
+    {
+      "addedAt": "2026-09-06",
+      "authors": [
+        "Flemming N. Larsen"
+      ],
+      "name": "Vector",
+      "owner": "flemming-n-larsen",
+      "path": "bots/python/Vector",
+      "platform": "Python",
+      "sourceHash": "sha256:b446df5e8541fa7928f9f104167e97dc51fed2419d138ca64df9e8af7bea72b7",
+      "status": "retired",
+      "teamMembers": [],
+      "version": "1.0.0"
+    },
+    {
       "addedAt": "2026-09-04",
       "authors": [
         "Mathew Nelson",
@@ -63,35 +136,18 @@
       "version": "1.0.0"
     },
     {
-      "addedAt": "2026-09-06",
+      "addedAt": "2026-11-15",
       "authors": [
-        "Flemming N. Larsen"
+        "saka2279"
       ],
-      "name": "Orbit",
-      "owner": "flemming-n-larsen",
-      "path": "bots/python/Orbit",
+      "name": "MizumoriBot",
+      "owner": "saka2279",
+      "path": "bots/python/MizumoriBot",
       "platform": "Python",
-      "sourceHash": "sha256:dba6d8d7c1c134b7e40eef5152c12b361932d411cd0438c7e2c3891da474f691",
+      "sourceHash": "sha256:baaf333269e5f3b4df8184eaed06ab9eee984f643dc2e96e0a2faf7b54b78937",
       "status": "active",
       "teamMembers": [],
-      "version": "1.0.0"
-    },
-    {
-      "addedAt": "2026-09-14",
-      "authors": [
-        "Flemming N. Larsen"
-      ],
-      "name": "OrbitVector",
-      "owner": "flemming-n-larsen",
-      "path": "bots/python/OrbitVector",
-      "platform": "Python",
-      "sourceHash": "sha256:42561780f49540eb3b15f17a930877020c84b7bfc4b24338a06e2298b4e98dc8",
-      "status": "active",
-      "teamMembers": [
-        "Orbit 1.0.0",
-        "Vector 1.0.0"
-      ],
-      "version": "1.0.0"
+      "version": "0.6.0-rc1"
     },
     {
       "addedAt": "2026-09-15",
@@ -140,34 +196,6 @@
       "version": "0.2.0"
     },
     {
-      "addedAt": "2026-10-27",
-      "authors": [
-        "Flemming N. Larsen"
-      ],
-      "name": "RumbleOnboardingScout",
-      "owner": "robocode-rumble-test",
-      "path": "bots/java/RumbleOnboardingScout",
-      "platform": "JVM",
-      "sourceHash": "sha256:bfed7912342e24e4d3871e8b0015608aa4a3d9959042240353db39860978ca59",
-      "status": "active",
-      "teamMembers": [],
-      "version": "1.0.0"
-    },
-    {
-      "addedAt": "2026-10-21",
-      "authors": [
-        "robocode-rumble-test"
-      ],
-      "name": "RumbleTestScout",
-      "owner": "robocode-rumble-test",
-      "path": "bots/java/RumbleTestScout",
-      "platform": "JVM",
-      "sourceHash": "sha256:b02fe3fd3cbe64756cb54ba3ea8995b4a248777a41c4fc3d445a436a210d0ec8",
-      "status": "active",
-      "teamMembers": [],
-      "version": "1.0.2"
-    },
-    {
       "addedAt": "2026-09-04",
       "authors": [
         "Mathew Nelson",
@@ -213,20 +241,6 @@
       "version": "1.0.0"
     },
     {
-      "addedAt": "2026-09-06",
-      "authors": [
-        "Flemming N. Larsen"
-      ],
-      "name": "Vector",
-      "owner": "flemming-n-larsen",
-      "path": "bots/python/Vector",
-      "platform": "Python",
-      "sourceHash": "sha256:b446df5e8541fa7928f9f104167e97dc51fed2419d138ca64df9e8af7bea72b7",
-      "status": "active",
-      "teamMembers": [],
-      "version": "1.0.0"
-    },
-    {
       "addedAt": "2026-09-15",
       "authors": [
         "Mathew Nelson",
@@ -244,6 +258,6 @@
   ],
   "schemaVersion": 1,
   "source": "https://raw.githubusercontent.com/robocode-dev/rumble-bots/main/bots/index.json",
-  "sourceCommit": "05c4ecfd6c67ec33e10afa85aa0bc9b81df20416",
-  "sourceGeneratedAt": "2026-10-27T18:30:49Z"
+  "sourceCommit": "976bd78813df15bd6ab7e3682e1c46ad848dbb99",
+  "sourceGeneratedAt": "2026-11-15T22:14:22Z"
 }

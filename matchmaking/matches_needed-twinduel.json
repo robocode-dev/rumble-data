@@ -4,29 +4,13 @@
     {
       "bots": [
         "CornersCrazy 1.0.0",
-        "OrbitVector 1.0.0"
-      ],
-      "have": 2,
-      "reason": "under-sampled"
-    },
-    {
-      "bots": [
-        "CornersCrazy 1.0.0",
         "RetconTwins 0.2.0"
       ],
       "have": 4,
       "reason": "under-sampled"
-    },
-    {
-      "bots": [
-        "OrbitVector 1.0.0",
-        "RetconTwins 0.2.0"
-      ],
-      "have": 2,
-      "reason": "under-sampled"
     }
   ],
-  "projectionId": "5b3c5eb86221321e080b9dae664fe17a588fa662669f84b3c1655d26b4a3e5cf",
+  "projectionId": "f6d7abae1a036035e5a6ef5786802bf36ddea18385a6778e7cf451296147c94b",
   "schemaVersion": 1,
   "targetSamplesPerPairing": 6
 }

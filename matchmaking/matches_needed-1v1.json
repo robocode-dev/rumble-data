@@ -20,31 +20,15 @@
     {
       "bots": [
         "Corners 1.0.0",
-        "Orbit 1.0.0"
+        "MizumoriBot 0.6.0-rc1"
       ],
-      "have": 1,
-      "reason": "under-sampled"
+      "have": 0,
+      "reason": "new-bot"
     },
     {
       "bots": [
         "Corners 1.0.0",
         "RamFire 1.0.0"
-      ],
-      "have": 0,
-      "reason": "new-bot"
-    },
-    {
-      "bots": [
-        "Corners 1.0.0",
-        "RumbleOnboardingScout 1.0.0"
-      ],
-      "have": 0,
-      "reason": "new-bot"
-    },
-    {
-      "bots": [
-        "Corners 1.0.0",
-        "RumbleTestScout 1.0.2"
       ],
       "have": 0,
       "reason": "new-bot"
@@ -76,14 +60,6 @@
     {
       "bots": [
         "Corners 1.0.0",
-        "Vector 1.0.0"
-      ],
-      "have": 1,
-      "reason": "under-sampled"
-    },
-    {
-      "bots": [
-        "Corners 1.0.0",
         "Walls 1.0.0"
       ],
       "have": 0,
@@ -100,7 +76,7 @@
     {
       "bots": [
         "Crazy 1.0.0",
-        "Orbit 1.0.0"
+        "MizumoriBot 0.6.0-rc1"
       ],
       "have": 0,
       "reason": "new-bot"
@@ -124,22 +100,6 @@
     {
       "bots": [
         "Crazy 1.0.0",
-        "RumbleOnboardingScout 1.0.0"
-      ],
-      "have": 0,
-      "reason": "new-bot"
-    },
-    {
-      "bots": [
-        "Crazy 1.0.0",
-        "RumbleTestScout 1.0.2"
-      ],
-      "have": 0,
-      "reason": "new-bot"
-    },
-    {
-      "bots": [
-        "Crazy 1.0.0",
         "SpinBot 1.0.0"
       ],
       "have": 0,
@@ -164,14 +124,6 @@
     {
       "bots": [
         "Crazy 1.0.0",
-        "Vector 1.0.0"
-      ],
-      "have": 1,
-      "reason": "under-sampled"
-    },
-    {
-      "bots": [
-        "Crazy 1.0.0",
         "Walls 1.0.0"
       ],
       "have": 0,
@@ -180,7 +132,7 @@
     {
       "bots": [
         "Fire 1.0.0",
-        "Orbit 1.0.0"
+        "MizumoriBot 0.6.0-rc1"
       ],
       "have": 0,
       "reason": "new-bot"
@@ -189,22 +141,6 @@
       "bots": [
         "Fire 1.0.0",
         "RamFire 1.0.0"
-      ],
-      "have": 0,
-      "reason": "new-bot"
-    },
-    {
-      "bots": [
-        "Fire 1.0.0",
-        "RumbleOnboardingScout 1.0.0"
-      ],
-      "have": 0,
-      "reason": "new-bot"
-    },
-    {
-      "bots": [
-        "Fire 1.0.0",
-        "RumbleTestScout 1.0.2"
       ],
       "have": 0,
       "reason": "new-bot"
@@ -236,14 +172,6 @@
     {
       "bots": [
         "Fire 1.0.0",
-        "Vector 1.0.0"
-      ],
-      "have": 0,
-      "reason": "new-bot"
-    },
-    {
-      "bots": [
-        "Fire 1.0.0",
         "Walls 1.0.0"
       ],
       "have": 0,
@@ -251,7 +179,7 @@
     },
     {
       "bots": [
-        "Orbit 1.0.0",
+        "MizumoriBot 0.6.0-rc1",
         "RamFire 1.0.0"
       ],
       "have": 0,
@@ -259,39 +187,23 @@
     },
     {
       "bots": [
-        "Orbit 1.0.0",
+        "MizumoriBot 0.6.0-rc1",
         "Retcon 0.2.0"
       ],
-      "have": 3,
-      "reason": "under-sampled"
-    },
-    {
-      "bots": [
-        "Orbit 1.0.0",
-        "RumbleOnboardingScout 1.0.0"
-      ],
       "have": 0,
       "reason": "new-bot"
     },
     {
       "bots": [
-        "Orbit 1.0.0",
-        "RumbleTestScout 1.0.2"
-      ],
-      "have": 0,
-      "reason": "new-bot"
-    },
-    {
-      "bots": [
-        "Orbit 1.0.0",
+        "MizumoriBot 0.6.0-rc1",
         "SpinBot 1.0.0"
       ],
-      "have": 1,
-      "reason": "under-sampled"
+      "have": 0,
+      "reason": "new-bot"
     },
     {
       "bots": [
-        "Orbit 1.0.0",
+        "MizumoriBot 0.6.0-rc1",
         "Target 1.0.0"
       ],
       "have": 0,
@@ -299,7 +211,7 @@
     },
     {
       "bots": [
-        "Orbit 1.0.0",
+        "MizumoriBot 0.6.0-rc1",
         "TrackFire 1.0.0"
       ],
       "have": 0,
@@ -307,19 +219,11 @@
     },
     {
       "bots": [
-        "Orbit 1.0.0",
-        "Vector 1.0.0"
+        "MizumoriBot 0.6.0-rc1",
+        "Walls 1.0.0"
       ],
       "have": 0,
       "reason": "new-bot"
-    },
-    {
-      "bots": [
-        "Orbit 1.0.0",
-        "Walls 1.0.0"
-      ],
-      "have": 1,
-      "reason": "under-sampled"
     },
     {
       "bots": [
@@ -332,22 +236,6 @@
     {
       "bots": [
         "RamFire 1.0.0",
-        "RumbleOnboardingScout 1.0.0"
-      ],
-      "have": 0,
-      "reason": "new-bot"
-    },
-    {
-      "bots": [
-        "RamFire 1.0.0",
-        "RumbleTestScout 1.0.2"
-      ],
-      "have": 0,
-      "reason": "new-bot"
-    },
-    {
-      "bots": [
-        "RamFire 1.0.0",
         "SpinBot 1.0.0"
       ],
       "have": 0,
@@ -372,31 +260,7 @@
     {
       "bots": [
         "RamFire 1.0.0",
-        "Vector 1.0.0"
-      ],
-      "have": 0,
-      "reason": "new-bot"
-    },
-    {
-      "bots": [
-        "RamFire 1.0.0",
         "Walls 1.0.0"
-      ],
-      "have": 0,
-      "reason": "new-bot"
-    },
-    {
-      "bots": [
-        "Retcon 0.2.0",
-        "RumbleOnboardingScout 1.0.0"
-      ],
-      "have": 0,
-      "reason": "new-bot"
-    },
-    {
-      "bots": [
-        "Retcon 0.2.0",
-        "RumbleTestScout 1.0.2"
       ],
       "have": 0,
       "reason": "new-bot"
@@ -419,94 +283,6 @@
     },
     {
       "bots": [
-        "RumbleOnboardingScout 1.0.0",
-        "RumbleTestScout 1.0.2"
-      ],
-      "have": 0,
-      "reason": "new-bot"
-    },
-    {
-      "bots": [
-        "RumbleOnboardingScout 1.0.0",
-        "SpinBot 1.0.0"
-      ],
-      "have": 0,
-      "reason": "new-bot"
-    },
-    {
-      "bots": [
-        "RumbleOnboardingScout 1.0.0",
-        "Target 1.0.0"
-      ],
-      "have": 0,
-      "reason": "new-bot"
-    },
-    {
-      "bots": [
-        "RumbleOnboardingScout 1.0.0",
-        "TrackFire 1.0.0"
-      ],
-      "have": 0,
-      "reason": "new-bot"
-    },
-    {
-      "bots": [
-        "RumbleOnboardingScout 1.0.0",
-        "Vector 1.0.0"
-      ],
-      "have": 0,
-      "reason": "new-bot"
-    },
-    {
-      "bots": [
-        "RumbleOnboardingScout 1.0.0",
-        "Walls 1.0.0"
-      ],
-      "have": 0,
-      "reason": "new-bot"
-    },
-    {
-      "bots": [
-        "RumbleTestScout 1.0.2",
-        "SpinBot 1.0.0"
-      ],
-      "have": 0,
-      "reason": "new-bot"
-    },
-    {
-      "bots": [
-        "RumbleTestScout 1.0.2",
-        "Target 1.0.0"
-      ],
-      "have": 0,
-      "reason": "new-bot"
-    },
-    {
-      "bots": [
-        "RumbleTestScout 1.0.2",
-        "TrackFire 1.0.0"
-      ],
-      "have": 0,
-      "reason": "new-bot"
-    },
-    {
-      "bots": [
-        "RumbleTestScout 1.0.2",
-        "Vector 1.0.0"
-      ],
-      "have": 0,
-      "reason": "new-bot"
-    },
-    {
-      "bots": [
-        "RumbleTestScout 1.0.2",
-        "Walls 1.0.0"
-      ],
-      "have": 0,
-      "reason": "new-bot"
-    },
-    {
-      "bots": [
         "SpinBot 1.0.0",
         "Target 1.0.0"
       ],
@@ -517,14 +293,6 @@
       "bots": [
         "SpinBot 1.0.0",
         "TrackFire 1.0.0"
-      ],
-      "have": 0,
-      "reason": "new-bot"
-    },
-    {
-      "bots": [
-        "SpinBot 1.0.0",
-        "Vector 1.0.0"
       ],
       "have": 0,
       "reason": "new-bot"
@@ -544,14 +312,6 @@
       ],
       "have": 0,
       "reason": "new-bot"
-    },
-    {
-      "bots": [
-        "Target 1.0.0",
-        "Vector 1.0.0"
-      ],
-      "have": 1,
-      "reason": "under-sampled"
     },
     {
       "bots": [
@@ -564,29 +324,13 @@
     {
       "bots": [
         "TrackFire 1.0.0",
-        "Vector 1.0.0"
-      ],
-      "have": 0,
-      "reason": "new-bot"
-    },
-    {
-      "bots": [
-        "TrackFire 1.0.0",
-        "Walls 1.0.0"
-      ],
-      "have": 0,
-      "reason": "new-bot"
-    },
-    {
-      "bots": [
-        "Vector 1.0.0",
         "Walls 1.0.0"
       ],
       "have": 0,
       "reason": "new-bot"
     }
   ],
-  "projectionId": "d30e23c7349bec00b7c635feaef4b84cfae683399cd05ef7a47f949ade2039bf",
+  "projectionId": "6b9b2d82543745f5953685e1bca073f3608eef9f9fab601427431139189397a1",
   "schemaVersion": 1,
   "targetSamplesPerPairing": 6
 }
