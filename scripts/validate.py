@@ -11,7 +11,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
-from common import TEAM_SIZE, content_hash, normalized_catalog_bots, read_json
+from common import TEAM_SIZE, content_hash, declares_game_type, normalized_catalog_bots, read_json
 
 SCHEMA_VERSION = 1
 INT32_MIN = -(2**31)
@@ -183,6 +183,7 @@ def validate_result(root: Path, record: Any, *, account: str, client_ids: set[st
         require(type(participant.get("isTeam")) is bool and participant["isTeam"] is expected_is_team, f"isTeam must be {str(expected_is_team).lower()} for `{game_type}`")
         catalog_is_team = bool(known_bots[identity]["teamMembers"])
         require(catalog_is_team is expected_is_team, f"catalog identity `{name} {version}` is not eligible for `{game_type}`")
+        require(declares_game_type(known_bots[identity], game_type), f"catalog identity `{name} {version}` does not declare `{game_type}`")
         if expected_is_team:
             members = set(known_bots[identity]["teamMembers"])
             require(not team_member_identities.intersection(members), "TwinDuel teams must not share a catalog member")

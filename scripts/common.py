@@ -46,8 +46,27 @@ def team_size(game_type: str) -> int:
     return size
 
 
+TEAM_GAME_TYPE = "twinduel"
+
+
+def is_kind_for(entry: dict[str, Any], game_type: str) -> bool:
+    """Return whether a catalog entry's kind (team or individual bot) matches the game type."""
+    return bool(entry.get("teamMembers")) is (team_size(game_type) > 1)
+
+
+def declares_game_type(entry: dict[str, Any], game_type: str) -> bool:
+    """Return whether a catalog entry declares the game type; an entry without `gameTypes` declares every one."""
+    declared = entry.get("gameTypes")
+    return declared is None or game_type in declared
+
+
+def plays_game_type(entry: dict[str, Any], game_type: str) -> bool:
+    """Return whether a catalog entry enters a game type's ranking: its kind matches and it declares the type."""
+    return is_kind_for(entry, game_type) and declares_game_type(entry, game_type)
+
+
 def normalized_catalog_bots(value: Any) -> list[dict[str, Any]]:
-    """Return catalog entries with validated additive team membership."""
+    """Return catalog entries with validated additive team membership and game types."""
     if not isinstance(value, list):
         raise ValueError("catalog bots must be a list")
     bots: list[dict[str, Any]] = []
@@ -57,6 +76,9 @@ def normalized_catalog_bots(value: Any) -> list[dict[str, Any]]:
         team_members = entry.get("teamMembers", [])
         if not isinstance(team_members, list) or len(team_members) not in (0, 2) or not all(isinstance(member, str) and member for member in team_members):
             raise ValueError("catalog teamMembers must be empty or contain exactly two identities")
+        game_types = entry.get("gameTypes")
+        if game_types is not None and (not isinstance(game_types, list) or not game_types or not all(isinstance(game_type, str) and game_type for game_type in game_types)):
+            raise ValueError("catalog gameTypes must be a non-empty list of game type names")
         bots.append(entry | {"teamMembers": list(team_members)})
 
     active: dict[str, dict[str, Any]] = {}
@@ -74,4 +96,6 @@ def normalized_catalog_bots(value: Any) -> list[dict[str, Any]]:
                 raise ValueError(f"unknown or inactive team member `{member_identity}`")
             if member["teamMembers"]:
                 raise ValueError(f"team member `{member_identity}` cannot be another team")
+            if not declares_game_type(member, TEAM_GAME_TYPE):
+                raise ValueError(f"team member `{member_identity}` does not declare `{TEAM_GAME_TYPE}`")
     return bots

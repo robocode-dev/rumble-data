@@ -40,7 +40,7 @@ The same workflow also runs on a `17,47 * * * *` cron and on manual dispatch, dr
 
 ### 3. Catalog synchronization
 
-A separate `23 * * * *` cron fetches the external catalog source and normalizes and validates team membership (`CAP-002`). If normalized content is unchanged, the workflow skips aggregation, commit, and deployment. If it changed, the workflow writes `catalog.json` and immediately regenerates every projection in the same run, so a newly eligible bot's zero-sample ranking and a superseded bot's disappearance land in one commit.
+A separate `23 * * * *` cron fetches the external catalog source and normalizes and validates team membership and declared game types (`CAP-002`). An entry ranks only in the game types it declares, or in every game type of its kind when it declares none (`AC-RDA-005`). If normalized content is unchanged, the workflow skips aggregation, commit, and deployment. If it changed, the workflow writes `catalog.json` and immediately regenerates every projection in the same run, so a newly eligible bot's zero-sample ranking and a superseded bot's disappearance land in one commit.
 
 ### 4. Moderation (reapply, never rewrite)
 

@@ -14,6 +14,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 from aggregate import aggregate, aggregate_game_type
 from check_snapshots import changed_manifest_entries
+from common import normalized_catalog_bots
 from compact import compact
 from ingest import ingest
 from publication import publish_current, rollover
@@ -295,6 +296,73 @@ class RumbleDataTests(unittest.TestCase):
         self.write("catalog.json", {"schemaVersion": 1, "bots": catalog})
         with self.assertRaisesRegex(ValidationError, "unknown or inactive team member"):
             ingest(self.root, self.envelope(), account="alice")
+
+    def use_duel_and_melee_engine(self) -> None:
+        self.write("engine.json", {"schemaVersion": 1, "behaviorVersion": 1, "gameTypes": {
+            "1v1": {"rounds": 35, "battlefield": [800, 600], "participants": 2},
+            "melee": {"rounds": 35, "battlefield": [800, 600], "participants": 2},
+        }})
+
+    def catalog_with_game_types(self, **declared: list[str]) -> list[dict]:
+        catalog = json.loads((self.root / "catalog.json").read_text(encoding="utf-8"))["bots"]
+        for entry in catalog:
+            if entry["name"] in declared:
+                entry["gameTypes"] = declared[entry["name"]]
+        self.write("catalog.json", {"schemaVersion": 1, "bots": catalog})
+        return catalog
+
+    def testRDA005_IntegrationPositive_declared_game_types_scope_leaderboards_and_advice(self) -> None:
+        self.use_duel_and_melee_engine()
+        catalog = self.catalog_with_game_types(Alpha=["1v1", "melee", "twinduel"], Charlie=["1v1"])
+
+        _, _, duel_needed = aggregate_game_type([], catalog, "1v1", behavior_version=1)
+        melee_board, _, melee_needed = aggregate_game_type([], catalog, "melee", behavior_version=1)
+
+        self.assertEqual({"Alpha 1.0", "Bravo 1.0", "Charlie 1.0"}, {bot for pair in duel_needed["priorityPairs"] for bot in pair["bots"]})
+        # Charlie declares only 1v1; Bravo declares nothing and so plays every individual game type.
+        self.assertEqual({"Alpha 1.0", "Bravo 1.0"}, {bot for pair in melee_needed["priorityPairs"] for bot in pair["bots"]})
+        self.assertEqual(["Alpha 1.0", "Bravo 1.0"], sorted(entry["bot"] for entry in melee_board["entries"]))
+
+    def testRDA005_IntegrationNegative_rejects_a_bot_that_does_not_declare_the_game_type(self) -> None:
+        self.use_duel_and_melee_engine()
+        self.catalog_with_game_types(Bravo=["1v1"])
+        duel = self.envelope()["results"][0]
+        melee = self.envelope(battle_id="a290f1ee-6c54-4b01-90e6-d701748f0851")["results"][0] | {"gameType": "melee"}
+
+        outcomes = ingest(self.root, {**self.envelope(), "results": [duel, melee]}, account="alice")
+
+        self.assertIsNotNone(outcomes[0].accepted)
+        self.assertIsNone(outcomes[1].accepted)
+        self.assertIn("catalog identity `Bravo 1.0` does not declare `melee`", outcomes[1].error)
+
+    def testRDA005_IntegrationPositive_stored_facts_outside_a_bots_game_types_no_longer_rank(self) -> None:
+        self.use_duel_and_melee_engine()
+        melee = self.envelope()["results"][0] | {"gameType": "melee"}
+        self.assertIsNotNone(ingest(self.root, {**self.envelope(), "results": [melee]}, account="alice")[0].accepted)
+
+        self.catalog_with_game_types(Bravo=["1v1"])  # the bot narrows its game types after the fact was accepted
+        aggregate(self.root)
+
+        board = json.loads((self.root / "leaderboard/melee.json").read_text(encoding="utf-8"))
+        self.assertNotIn("Bravo", [entry["name"] for entry in board["entries"]])
+        self.assertEqual(0, sum(entry["battles"] for entry in board["entries"]))
+
+    def testUnitNegative_catalog_game_types_must_be_a_list_of_names(self) -> None:
+        for value in ("melee", [], [""], [1]):
+            with self.subTest(value=value), self.assertRaisesRegex(ValueError, "gameTypes"):
+                normalized_catalog_bots([{"name": "Alpha", "version": "1.0", "status": "active", "gameTypes": value}])
+
+    def testRBC004_IntegrationNegative_catalog_sync_rejects_team_member_without_twinduel(self) -> None:
+        team = {"name": "Alpha Team", "version": "1.0", "status": "active", "teamMembers": ["Alpha 1.0", "Bravo 1.0"], "gameTypes": ["twinduel"]}
+        bravo = {"name": "Bravo", "version": "1.0", "status": "active"}
+        for alpha_types, accepted in ((["1v1", "twinduel"], True), (["1v1", "melee"], False)):
+            alpha = {"name": "Alpha", "version": "1.0", "status": "active", "gameTypes": alpha_types}
+            with self.subTest(alpha_types=alpha_types):
+                if accepted:
+                    self.assertEqual(3, len(normalized_catalog_bots([alpha, bravo, team])))
+                else:
+                    with self.assertRaisesRegex(ValueError, "team member `Alpha 1.0` does not declare `twinduel`"):
+                        normalized_catalog_bots([alpha, bravo, team])
 
     def testRBC004_IntegrationNegative_teams_sharing_a_member_are_never_advised(self) -> None:
         catalog = json.loads((self.root / "catalog.json").read_text(encoding="utf-8"))["bots"]

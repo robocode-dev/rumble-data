@@ -9,7 +9,7 @@ from itertools import combinations
 from pathlib import Path
 from typing import Any
 
-from common import content_hash, read_json, repository_files, team_size, write_json
+from common import content_hash, plays_game_type, read_json, repository_files, team_size, write_json
 
 TARGET_SAMPLES_PER_PAIRING = 6
 
@@ -77,7 +77,7 @@ def aggregate_game_type(records: list[dict[str, Any]], catalog: list[dict[str, A
     eligible = {
         (str(bot["name"]), str(bot["version"])): bot
         for bot in catalog
-        if bot.get("status") == "active" and bool(bot.get("teamMembers", [])) is expects_team
+        if bot.get("status") == "active" and plays_game_type(bot, game_type)
     }
     relevant = [
         record

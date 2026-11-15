@@ -86,19 +86,24 @@ Evidence:
 @RDA-005 @draft
 Scenario: Catalog membership and eligibility gate both validation and matchmaking
 Test-type: Integration
-  Given the current active bot catalog, including which entries are individual bots and which are teams
+  Given the current active bot catalog, including which entries are individual bots and which are teams, and the game types each entry declares
   When results are validated and projections are regenerated
   Then only catalog-eligible bots and teams can be accepted for their matching game type
-  And matchmaking advice is scoped to exactly the currently eligible bots and teams
+  And an entry that declares game types is eligible only for those it declares, while an entry without declared game types is eligible for every game type of its kind
+  And leaderboards and matchmaking advice are scoped to exactly the currently eligible bots and teams
 ```
 
 Evidence (positive):
 
 - `testRDA005_IntegrationPositive_catalog_membership_controls_result_validation_and_matchmaking`
+- `testRDA005_IntegrationPositive_declared_game_types_scope_leaderboards_and_advice` — a bot that declares only 1v1 is advised and ranked in 1v1 but not melee, and a bot without declared game types stays in both
+- `testRDA005_IntegrationPositive_stored_facts_outside_a_bots_game_types_no_longer_rank` — an accepted melee fact stops ranking once a participant no longer declares melee
 
 Evidence (negative):
 
 - `testRDA005_IntegrationNegative_rejects_ineligible_or_overlapping_team_entries` — an individual entered as a team, a team entered as an individual, and two teams sharing a member are each rejected; an unknown or inactive team member fails engine-pin validation outright
+- `testRDA005_IntegrationNegative_rejects_a_bot_that_does_not_declare_the_game_type` — a melee result with a bot that declares only 1v1 is rejected while its 1v1 result is accepted
+- `testUnitNegative_catalog_game_types_must_be_a_list_of_names` — a malformed `gameTypes` value fails catalog normalization
 
 ```gherkin
 @RDA-006 @draft
