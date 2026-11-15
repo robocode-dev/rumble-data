@@ -20,14 +20,6 @@
     {
       "bots": [
         "Corners 1.0.0",
-        "MizumoriBot 0.6.0-rc1"
-      ],
-      "have": 0,
-      "reason": "new-bot"
-    },
-    {
-      "bots": [
-        "Corners 1.0.0",
         "RamFire 1.0.0"
       ],
       "have": 0,
@@ -84,14 +76,6 @@
     {
       "bots": [
         "Crazy 1.0.0",
-        "MizumoriBot 0.6.0-rc1"
-      ],
-      "have": 0,
-      "reason": "new-bot"
-    },
-    {
-      "bots": [
-        "Crazy 1.0.0",
         "RamFire 1.0.0"
       ],
       "have": 0,
@@ -140,14 +124,6 @@
     {
       "bots": [
         "Fire 1.0.0",
-        "MizumoriBot 0.6.0-rc1"
-      ],
-      "have": 0,
-      "reason": "new-bot"
-    },
-    {
-      "bots": [
-        "Fire 1.0.0",
         "RamFire 1.0.0"
       ],
       "have": 0,
@@ -188,54 +164,6 @@
     {
       "bots": [
         "Fire 1.0.0",
-        "Walls 1.0.0"
-      ],
-      "have": 0,
-      "reason": "new-bot"
-    },
-    {
-      "bots": [
-        "MizumoriBot 0.6.0-rc1",
-        "RamFire 1.0.0"
-      ],
-      "have": 0,
-      "reason": "new-bot"
-    },
-    {
-      "bots": [
-        "MizumoriBot 0.6.0-rc1",
-        "Retcon 0.2.0"
-      ],
-      "have": 0,
-      "reason": "new-bot"
-    },
-    {
-      "bots": [
-        "MizumoriBot 0.6.0-rc1",
-        "SpinBot 1.0.0"
-      ],
-      "have": 0,
-      "reason": "new-bot"
-    },
-    {
-      "bots": [
-        "MizumoriBot 0.6.0-rc1",
-        "Target 1.0.0"
-      ],
-      "have": 0,
-      "reason": "new-bot"
-    },
-    {
-      "bots": [
-        "MizumoriBot 0.6.0-rc1",
-        "TrackFire 1.0.0"
-      ],
-      "have": 0,
-      "reason": "new-bot"
-    },
-    {
-      "bots": [
-        "MizumoriBot 0.6.0-rc1",
         "Walls 1.0.0"
       ],
       "have": 0,
@@ -362,7 +290,7 @@
       "reason": "new-bot"
     }
   ],
-  "projectionId": "4aa8e1bc1c1180e287117f35f87fc140aba3d4dcf40163c0acfa2c124d20aeda",
+  "projectionId": "95e02131fb20369d5c322c3a4abc42a4cd65b11772b833e035514e1bafa97273",
   "schemaVersion": 1,
   "targetSamplesPerPairing": 6
 }

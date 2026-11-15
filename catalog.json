@@ -79,6 +79,11 @@
         "Mathew Nelson",
         "Flemming N. Larsen"
       ],
+      "gameTypes": [
+        "1v1",
+        "melee",
+        "twinduel"
+      ],
       "name": "Corners",
       "owner": "flemming-n-larsen",
       "path": "bots/java/Corners",
@@ -92,6 +97,9 @@
       "addedAt": "2026-09-14",
       "authors": [
         "Flemming N. Larsen"
+      ],
+      "gameTypes": [
+        "twinduel"
       ],
       "name": "CornersCrazy",
       "owner": "flemming-n-larsen",
@@ -111,6 +119,11 @@
         "Mathew Nelson",
         "Flemming N. Larsen"
       ],
+      "gameTypes": [
+        "1v1",
+        "melee",
+        "twinduel"
+      ],
       "name": "Crazy",
       "owner": "flemming-n-larsen",
       "path": "bots/java/Crazy",
@@ -126,6 +139,11 @@
         "Mathew Nelson",
         "Flemming N. Larsen"
       ],
+      "gameTypes": [
+        "1v1",
+        "melee",
+        "twinduel"
+      ],
       "name": "Fire",
       "owner": "flemming-n-larsen",
       "path": "bots/java/Fire",
@@ -139,6 +157,9 @@
       "addedAt": "2026-11-15",
       "authors": [
         "saka2279"
+      ],
+      "gameTypes": [
+        "1v1"
       ],
       "name": "MizumoriBot",
       "owner": "saka2279",
@@ -155,6 +176,11 @@
         "Mathew Nelson",
         "Flemming N. Larsen"
       ],
+      "gameTypes": [
+        "1v1",
+        "melee",
+        "twinduel"
+      ],
       "name": "RamFire",
       "owner": "flemming-n-larsen",
       "path": "bots/java/RamFire",
@@ -169,6 +195,11 @@
       "authors": [
         "Flemming N. Larsen"
       ],
+      "gameTypes": [
+        "1v1",
+        "melee",
+        "twinduel"
+      ],
       "name": "Retcon",
       "owner": "flemming-n-larsen",
       "path": "bots/java/Retcon",
@@ -182,6 +213,9 @@
       "addedAt": "2026-09-29",
       "authors": [
         "Flemming N. Larsen"
+      ],
+      "gameTypes": [
+        "twinduel"
       ],
       "name": "RetconTwins",
       "owner": "flemming-n-larsen",
@@ -201,6 +235,11 @@
         "Mathew Nelson",
         "Flemming N. Larsen"
       ],
+      "gameTypes": [
+        "1v1",
+        "melee",
+        "twinduel"
+      ],
       "name": "SpinBot",
       "owner": "flemming-n-larsen",
       "path": "bots/java/SpinBot",
@@ -215,6 +254,11 @@
       "authors": [
         "Mathew Nelson",
         "Flemming N. Larsen"
+      ],
+      "gameTypes": [
+        "1v1",
+        "melee",
+        "twinduel"
       ],
       "name": "Target",
       "owner": "flemming-n-larsen",
@@ -231,6 +275,11 @@
         "Mathew Nelson",
         "Flemming N. Larsen"
       ],
+      "gameTypes": [
+        "1v1",
+        "melee",
+        "twinduel"
+      ],
       "name": "TrackFire",
       "owner": "flemming-n-larsen",
       "path": "bots/java/TrackFire",
@@ -246,6 +295,11 @@
         "Mathew Nelson",
         "Flemming N. Larsen"
       ],
+      "gameTypes": [
+        "1v1",
+        "melee",
+        "twinduel"
+      ],
       "name": "Walls",
       "owner": "flemming-n-larsen",
       "path": "bots/java/Walls",
@@ -258,6 +312,6 @@
   ],
   "schemaVersion": 1,
   "source": "https://raw.githubusercontent.com/robocode-dev/rumble-bots/main/bots/index.json",
-  "sourceCommit": "976bd78813df15bd6ab7e3682e1c46ad848dbb99",
-  "sourceGeneratedAt": "2026-11-15T22:14:22Z"
+  "sourceCommit": "ed1652b200f656d74938b5dada9953d131d5950c",
+  "sourceGeneratedAt": "2026-11-15T22:52:10Z"
 }
