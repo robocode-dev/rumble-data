@@ -22,8 +22,8 @@
         "Corners 1.0.0",
         "MizumoriBot 0.6.0-rc1"
       ],
-      "have": 0,
-      "reason": "new-bot"
+      "have": 2,
+      "reason": "under-sampled"
     },
     {
       "bots": [
@@ -78,8 +78,8 @@
         "Crazy 1.0.0",
         "MizumoriBot 0.6.0-rc1"
       ],
-      "have": 0,
-      "reason": "new-bot"
+      "have": 1,
+      "reason": "under-sampled"
     },
     {
       "bots": [
@@ -134,8 +134,8 @@
         "Fire 1.0.0",
         "MizumoriBot 0.6.0-rc1"
       ],
-      "have": 0,
-      "reason": "new-bot"
+      "have": 1,
+      "reason": "under-sampled"
     },
     {
       "bots": [
@@ -182,48 +182,48 @@
         "MizumoriBot 0.6.0-rc1",
         "RamFire 1.0.0"
       ],
-      "have": 0,
-      "reason": "new-bot"
+      "have": 5,
+      "reason": "under-sampled"
     },
     {
       "bots": [
         "MizumoriBot 0.6.0-rc1",
         "Retcon 0.2.0"
       ],
-      "have": 0,
-      "reason": "new-bot"
+      "have": 2,
+      "reason": "under-sampled"
     },
     {
       "bots": [
         "MizumoriBot 0.6.0-rc1",
         "SpinBot 1.0.0"
       ],
-      "have": 0,
-      "reason": "new-bot"
+      "have": 2,
+      "reason": "under-sampled"
     },
     {
       "bots": [
         "MizumoriBot 0.6.0-rc1",
         "Target 1.0.0"
       ],
-      "have": 0,
-      "reason": "new-bot"
+      "have": 2,
+      "reason": "under-sampled"
     },
     {
       "bots": [
         "MizumoriBot 0.6.0-rc1",
         "TrackFire 1.0.0"
       ],
-      "have": 0,
-      "reason": "new-bot"
+      "have": 5,
+      "reason": "under-sampled"
     },
     {
       "bots": [
         "MizumoriBot 0.6.0-rc1",
         "Walls 1.0.0"
       ],
-      "have": 0,
-      "reason": "new-bot"
+      "have": 2,
+      "reason": "under-sampled"
     },
     {
       "bots": [
@@ -330,7 +330,7 @@
       "reason": "new-bot"
     }
   ],
-  "projectionId": "1d4141f6d3805873bcc73fc09cf36e8e8f93568b808cdaff6a95a940d19509aa",
+  "projectionId": "203ba85f6e5109af309e99c3f29026b738b28f7be714ad78edede5ee8636e6d1",
   "schemaVersion": 1,
   "targetSamplesPerPairing": 6
 }

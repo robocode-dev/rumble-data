@@ -1,0 +1,53 @@
+{
+  "arenaHeight": 600,
+  "arenaWidth": 800,
+  "battleId": "27df95d3-ddef-455e-870e-efb9f1a77fb7",
+  "client": {
+    "id": "flemming-rumble-01",
+    "version": "development"
+  },
+  "completedAt": "2026-11-16T21:52:39.362568340Z",
+  "engine": {
+    "behaviorVersion": 1
+  },
+  "gameType": "1v1",
+  "participants": [
+    {
+      "bulletDamage": 3472,
+      "bulletKillBonus": 708,
+      "firstPlaces": 35,
+      "isTeam": false,
+      "lastSurvivorBonus": 350,
+      "name": "MizumoriBot",
+      "ramDamage": 139,
+      "ramKillBonus": 0,
+      "rank": 1,
+      "secondPlaces": 0,
+      "survival": 1750,
+      "thirdPlaces": 0,
+      "totalScore": 6419,
+      "version": "0.6.0-rc1"
+    },
+    {
+      "bulletDamage": 112,
+      "bulletKillBonus": 0,
+      "firstPlaces": 0,
+      "isTeam": false,
+      "lastSurvivorBonus": 0,
+      "name": "RamFire",
+      "ramDamage": 49,
+      "ramKillBonus": 0,
+      "rank": 2,
+      "secondPlaces": 35,
+      "survival": 0,
+      "thirdPlaces": 0,
+      "totalScore": 161,
+      "version": "1.0.0"
+    }
+  ],
+  "payloadHash": "a86fbd1f249ac2e3ae4723ff28c062ee784810e5f9ba23b3e5fb18b237dbdf0f",
+  "replayHash": "sha256:dbf254371a3e9b87eef235f0cca8526714085f341f77c97d07f6e77964ff206c",
+  "rounds": 35,
+  "selectionSeed": 2828212500057507958,
+  "submittedBy": "flemming-n-larsen"
+}

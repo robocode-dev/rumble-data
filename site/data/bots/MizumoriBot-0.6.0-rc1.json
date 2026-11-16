@@ -1,16 +1,16 @@
 {
   "entry": {
-    "aps": 0.0,
-    "battles": 0,
+    "aps": 98.4856,
+    "battles": 22,
     "bot": "MizumoriBot 0.6.0-rc1",
     "epoch": 1,
     "name": "MizumoriBot",
     "owner": "saka2279",
-    "pairings": 0,
+    "pairings": 9,
     "platform": "Python",
     "version": "0.6.0-rc1"
   },
   "gameType": "1v1",
-  "projectionId": "1d4141f6d3805873bcc73fc09cf36e8e8f93568b808cdaff6a95a940d19509aa",
+  "projectionId": "203ba85f6e5109af309e99c3f29026b738b28f7be714ad78edede5ee8636e6d1",
   "schemaVersion": 1
 }
